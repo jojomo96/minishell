@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:18:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/03/04 18:25:42 by flfische          #+#    #+#             */
+/*   Updated: 2024/03/07 15:47:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-/* INCLUDES */
-# include "../libft/libft.h"
-
-# define HELLO "Hello, World!"
-
-#endif
+/**
+ * @brief converts a lower-case letter to the corresponding upper-case letter
+ * @param c character to convert
+ * @return the corresponding upper-case letter if c is a lower-case letter,
+ * 	c otherwise
+ */
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
+}

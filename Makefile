@@ -6,12 +6,13 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/25 18:20:48 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/26 01:24:26 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ofast
+CFLAGS = -Wall -Wextra -Werror
+MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
 SRC_DIRS := srcs
@@ -38,11 +39,16 @@ INCLUDES += -I$(LIBFT_DIR)
 # RULES
 all: ascii $(NAME)
 
-$(NAME): $(OFILES) $(HEADER)
-#$(NAME): $(LIBFT) $(OFILES) $(HEADER)
+$(NAME): $(LIBFT) $(OFILES) $(HEADER)
 	@echo "$(YELLOW)Compiling $(NAME)...$(NC)"
-	@$(CC) $(CFLAGS) -o $@ $(OFILES)
-#	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS)
+	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS)
+	@if [ -f $(NAME) ]; then \
+		echo "$(GREEN)$(NAME) compiled successfully!$(NC)"; \
+		echo "$(CYAN)Run with ./$(NAME)$(NC)"; \
+		echo "----------------------------------------"; \
+	else \
+		echo "$(RED)$(NAME) failed to compile$(NC)"; \
+	fi
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling $<...$(NC)"
@@ -54,19 +60,17 @@ $(OBJ_DIR):
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
-	if [ ! -d $(LIBFT_DIR) ]; then mkdir -p $(LIBFT_DIR); fi
-	@git submodule update --init --recursive
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
 	@echo "$(RED)Removing object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
-#	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@echo "$(RED)Removing binary files...$(NC)"
 	@rm -f $(NAME)
-#	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
@@ -80,6 +84,7 @@ RED = \033[0;31m
 YELLOW = \033[0;33m
 NC = \033[0m
 CYAN = \033[0;36m
+GREEN = \033[0;32m
 
 # decoration:
 ascii:

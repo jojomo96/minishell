@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:18:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/03/06 16:44:47 by flfische          #+#    #+#             */
+/*   Updated: 2024/03/26 10:36:52 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../libft.h"
 
-/* INCLUDES */
-# include "../libft/libft.h"
+/**
+ * @brief applies the function f to each character of the string s
+ * and passes its index as first argument
+ * @param s string to iterate over
+ * @param f function to apply to each character
+ */
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int	i;
 
-# define HELLO "Hello, World!"
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+}

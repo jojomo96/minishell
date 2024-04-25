@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:18:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/03/21 18:10:22 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 00:59:10 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
+# include "../libft.h"
+# include <limits.h>
 
-# define HELLO "Hello, World!"
+# ifndef GNL_BUFFER_SIZE
+#  define GNL_BUFFER_SIZE 100
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 32767
+# endif
+
+char	*get_next_line(int fd);
 
 #endif
