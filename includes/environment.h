@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 17:22:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 17:21:31 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 18:17:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
-# include "builtins.h"
-# include "environment.h"
-# include "utils.h"
-# include <stdio.h>
+# include "minishell.h"
 
-# define HELLO "Hello, World!"
+int		ft_env_index(char **env, char *key);
+int		ft_env_add(char ***env, char *key, char *val);
+int		ft_env_change(char ***env, char *key, char *val);
+char	*ft_env_create_entry(char *key, char *val);
+int		ft_env_remove(char ***env, char *key);
 
 #endif

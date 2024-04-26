@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/26 15:49:39 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/26 18:35:39 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
-SRC_DIRS := srcs srcs/builtins
+SRC_DIRS := srcs srcs/builtins srcs/utils srcs/env
 OBJ_DIR := obj
 INC_DIR := includes
 
@@ -27,6 +27,17 @@ CFILES := \
 
 # BUILTINS
 CFILES += ft_pwd.c ft_env.c
+
+# ENVIRONMENT
+CFILES += ft_env_index.c \
+			ft_env_add.c \
+			ft_env_change.c \
+			ft_env_create_entry.c \
+			ft_env_remove.c \
+
+# UTILS
+CFILES += ft_strarr_cpy.c \
+			ft_strarr_free.c
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 HEADER := $(INC_DIR)/minishell.h

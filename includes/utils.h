@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 17:22:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 17:03:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef UTILS_H
+# define UTILS_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
-# include "builtins.h"
-# include "environment.h"
-# include "utils.h"
-# include <stdio.h>
+# include "minishell.h"
 
-# define HELLO "Hello, World!"
+char	**ft_strarr_cpy(char **arr);
+void	ft_strarr_free(char **arr);
 
 #endif
