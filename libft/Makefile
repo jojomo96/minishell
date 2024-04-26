@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 10:49:23 by flfische          #+#    #+#              #
-#    Updated: 2024/04/26 01:15:25 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/26 10:02:21 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,21 +100,6 @@ PUT_FILES := \
 				ft_putintarr_fd.c
 
 GNL_FILES := get_next_line.c 
-
-PRINTF_FILES := \
-				ft_printf.c \
-				ft_parse_format.c \
-				ft_print_char.c \
-				ft_print_string.c \
-				ft_print_decnum.c \
-				ft_print_num_nopre.c \
-				ft_print_pointer.c \
-				ft_print_unsigned.c \
-				ft_print_hex.c \
-				ft_print_percent.c \
-				ft_utils.c \
-				ft_putnbr_base.c \
-				ft_put_utils.c
 
 DLIST_SRCS := \
 				ft_dlist_edit.c \

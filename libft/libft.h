@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 17:47:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:16:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/26 10:02:41 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 /* INCLUDES */
 # include "ft_dlist/ft_dlist.h"
-# include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 # include <errno.h>
 # include <stdlib.h>
