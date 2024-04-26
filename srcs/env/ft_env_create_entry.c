@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarr_cpy.c                                    :+:      :+:    :+:   */
+/*   ft_env_create_entry.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 16:12:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 18:36:53 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 17:41:47 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 18:29:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Creates a deep copy of a string array.
- * @param arr The string array to copy.
- * @return The copied string array on success, NULL on error.
+ * @brief Creates an entry for the environment.
+ * @param key The key of the entry.
+ * @param val The value of the entry.
+ * @return The entry on success, NULL on error.
  */
-char	**ft_strarr_cpy(char **arr)
+char	*ft_env_create_entry(char *key, char *val)
 {
+	char	*entry;
 	int		i;
-	char	**cpy;
 
 	i = 0;
-	while (arr[i])
-		i++;
-	cpy = ft_calloc(i + 1, sizeof(char *));
-	if (!cpy)
+	entry = malloc(ft_strlen(key) + ft_strlen(val) + 2);
+	if (!entry)
 		return (NULL);
-	i = 0;
-	while (arr[i])
-	{
-		cpy[i] = ft_strdup(arr[i]);
-		if (!cpy[i])
-		{
-			ft_strarr_free(cpy);
-			return (NULL);
-		}
-		i++;
-	}
-	cpy[i] = NULL;
-	return (cpy);
+	while (*key)
+		entry[i++] = *key++;
+	entry[i++] = '=';
+	while (*val)
+		entry[i++] = *val++;
+	entry[i] = '\0';
+	return (entry);
 }

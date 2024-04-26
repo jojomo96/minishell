@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarr_cpy.c                                    :+:      :+:    :+:   */
+/*   ft_env_remove.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 16:12:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 18:36:53 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 18:07:06 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 18:25:12 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// TODO: maybe we should reallocate to smaller size if we remove an entry
+// not sure if it's worth the effort
 /**
- * @brief Creates a deep copy of a string array.
- * @param arr The string array to copy.
- * @return The copied string array on success, NULL on error.
+ * @brief Removes an entry from the environment.
+ * @param env The environment to remove the entry from.
+ * @param key The key of the entry to remove.
+ * @return 0 on success, -1 on error.
  */
-char	**ft_strarr_cpy(char **arr)
+int	ft_env_remove(char ***env, char *key)
 {
 	int		i;
-	char	**cpy;
+	char	**arr;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	cpy = ft_calloc(i + 1, sizeof(char *));
-	if (!cpy)
-		return (NULL);
-	i = 0;
+	arr = *env;
+	i = ft_env_index(arr, key);
+	if (i == -1)
+		return (0);
+	free(arr[i]);
 	while (arr[i])
 	{
-		cpy[i] = ft_strdup(arr[i]);
-		if (!cpy[i])
-		{
-			ft_strarr_free(cpy);
-			return (NULL);
-		}
+		arr[i] = arr[i + 1];
 		i++;
 	}
-	cpy[i] = NULL;
-	return (cpy);
+	return (0);
 }
