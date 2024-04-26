@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/26 01:24:26 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/26 15:37:30 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
-SRC_DIRS := srcs
+SRC_DIRS := srcs srcs/builtins
 OBJ_DIR := obj
 INC_DIR := includes
 
@@ -24,6 +24,7 @@ vpath %.c $(SRC_DIRS)
 vpath %.h $(INC_DIR)
 CFILES := \
 		minishell.c \
+		ft_pwd.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 HEADER := $(INC_DIR)/minishell.h
@@ -75,7 +76,7 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR)
+	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 .PHONY: all clean fclean re norm ascii
 

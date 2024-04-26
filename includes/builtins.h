@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 15:21:35 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 15:21:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
-# include "builtins.h"
+# include "minishell.h"
 
-# define HELLO "Hello, World!"
+int	ft_pwd(void);
 
 #endif
