@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 15:48:04 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 15:45:02 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/26 15:50:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+int	ft_env(char ***envp)
+{
+	int	i;
 
-int	ft_pwd(void);
-int	ft_env(char ***envp);
-
-// TODO:
-// ft_echo
-// ft_cd
-// ft_export
-// ft_unset
-// ft_exit
-
-#endif
+	i = 0;
+	while ((*envp)[i] != NULL)
+	{
+		ft_putendl_fd((*envp)[i], 1);
+		i++;
+	}
+	return (0);
+}

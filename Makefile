@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/26 15:37:30 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/26 15:49:39 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ vpath %.c $(SRC_DIRS)
 vpath %.h $(INC_DIR)
 CFILES := \
 		minishell.c \
-		ft_pwd.c \
+
+# BUILTINS
+CFILES += ft_pwd.c ft_env.c
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 HEADER := $(INC_DIR)/minishell.h
