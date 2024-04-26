@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putintarr_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:18:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/03/29 11:36:37 by flfische          #+#    #+#             */
+/*   Updated: 2024/03/29 12:17:26 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../libft.h"
 
-/* INCLUDES */
-# include "../libft/libft.h"
+void	ft_putintarr_fd(int *arr, int size, int fd)
+{
+	int	i;
 
-# define HELLO "Hello, World!"
-
-#endif
+	i = 0;
+	while (i < size)
+	{
+		ft_putnbr_fd(arr[i], fd);
+		ft_putchar_fd('\n', fd);
+		i++;
+	}
+}

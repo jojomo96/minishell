@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:18:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/03/06 17:36:37 by flfische          #+#    #+#             */
+/*   Updated: 2024/03/26 10:36:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../libft.h"
 
-/* INCLUDES */
-# include "../libft/libft.h"
+/**
+ * @brief Adds the element ’new’ at the beginning of the list.
+ * @param lst The address of a pointer to the first link of a list.
+ * @param new The address of a pointer to the element to be added to the list.
+ */
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	t_list	*old;
 
-# define HELLO "Hello, World!"
-
-#endif
+	old = *lst;
+	*lst = new;
+	new->next = old;
+}

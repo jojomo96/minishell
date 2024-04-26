@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 01:18:07 by flfische         ###   ########.fr       */
+/*   Created: 2024/03/06 18:16:17 by flfische          #+#    #+#             */
+/*   Updated: 2024/03/26 10:36:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../libft.h"
 
-/* INCLUDES */
-# include "../libft/libft.h"
+/**
+ * @brief Returns the last element of the list.
+ * @param lst The beginning of the list.
+ * @return The last element of the list.
+ */
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list	*last;
 
-# define HELLO "Hello, World!"
-
-#endif
+	if (lst == NULL)
+		return (NULL);
+	last = lst;
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	return (last);
+}
