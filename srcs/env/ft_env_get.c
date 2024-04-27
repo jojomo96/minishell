@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:20:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/27 12:43:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:47:51 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return The value of the environment variable or
  * NULL if the environment variable does not exist.
  */
-char	*ft_get_env(char **env, char *key)
+char	*ft_env_get(char **env, char *key)
 {
 	int		i;
 	char	*entry;

@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/27 13:40:52 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/27 13:43:37 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CFILES := \
 		minishell.c \
 
 # BUILTINS
-CFILES += ft_pwd.c ft_env.c
+CFILES += ft_pwd.c ft_env.c ft_cd.c
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -60,7 +60,7 @@ $(NAME): $(LIBFT) $(OFILES) $(HEADER)
 	@if [ -f $(NAME) ]; then \
 		echo "$(GREEN)$(NAME) compiled successfully!$(NC)"; \
 		echo "$(CYAN)Run with ./$(NAME)$(NC)"; \
-		echo "----------------------------------------"; \
+		echo "------------------------------------------------"; \
 	else \
 		echo "$(RED)$(NAME) failed to compile$(NC)"; \
 	fi
@@ -110,6 +110,7 @@ ASCII_ART = $(CYAN)
 
 # decoration:
 ascii:
+	@echo "------------------------------------------------"
 	@echo "$(CYAN)"
 	@echo "           __     __       "
 	@echo "|\/|||\ ||(_ |__||_ |  |   "
