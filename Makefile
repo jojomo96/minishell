@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/27 12:33:46 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/27 13:40:52 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ INCLUDES += -I$(LIBFT_DIR)
 all: ascii $(NAME)
 
 $(NAME): $(LIBFT) $(OFILES) $(HEADER)
-	@echo "$(YELLOW)Compiling $(NAME)...$(NC)"
+	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
 	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS)
 	@if [ -f $(NAME) ]; then \
 		echo "$(GREEN)$(NAME) compiled successfully!$(NC)"; \
@@ -66,7 +66,9 @@ $(NAME): $(LIBFT) $(OFILES) $(HEADER)
 	fi
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	@echo "$(YELLOW)Compiling $<...$(NC)"
+	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
+	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
+	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 
 
 $(OBJ_DIR):
@@ -95,11 +97,16 @@ norm:
 .PHONY: all clean fclean re norm ascii
 
 # colors:
+GREEN = \033[0;32m
+LIGHT_GREEN = \033[0;92m
 RED = \033[0;31m
 YELLOW = \033[0;33m
-NC = \033[0m
+LIGHT_YELLOW = \033[0;93m
+ITALIC_LIGHT_YELLOW = \033[3;93m
 CYAN = \033[0;36m
-GREEN = \033[0;32m
+NC = \033[0m
+CLEAR_LINE = \033[2K\r
+ASCII_ART = $(CYAN)
 
 # decoration:
 ascii:
@@ -109,3 +116,6 @@ ascii:
 	@echo "|  ||| \||__)|  ||__|__|__ "
 	@echo "                           "
 	@echo "$(NC)"
+
+BAR_WIDTH = 50
+TOTAL_SRCS = $(words $(CFILES))
