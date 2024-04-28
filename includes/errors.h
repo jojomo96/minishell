@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 15:21:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 13:34:16 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/28 12:56:05 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/28 13:19:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef ERRORS_H
+# define ERRORS_H
 
-int	ft_pwd(void)
-{
-	char	*pwd;
+# include "minishell.h"
 
-	pwd = getcwd(NULL, 0);
-	if (pwd == NULL)
-	{
-		ft_print_error(strerror(errno), "pwd", NULL);
-		return (1);
-	}
-	ft_putendl_fd(pwd, 1);
-	free(pwd);
-	return (0);
-}
+void	ft_print_error(char *error, char *arg1, char *arg2);
+
+#endif
