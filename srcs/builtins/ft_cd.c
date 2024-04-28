@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:02:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 13:21:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/28 13:33:22 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_change_dir(char *path, char ***env)
 	ret = chdir(path);
 	if (ret == -1)
 	{
-		strerror(errno);
+		ft_print_error(strerror(errno), "cd", path);
 		return (-1);
 	}
 	ret = ft_change_pwd_env(path, env);
@@ -61,9 +61,12 @@ static int	ft_cd_to_env(char *key, char ***env)
 	path = ft_env_get(*env, key);
 	if (!path)
 	{
-		ft_putstr_fd("cd: ", 2);
-		ft_putstr_fd(key, 2);
-		ft_putendl_fd(" not set", 2);
+		if (!ft_strcmp(key, "HOME"))
+			ft_print_error("HOME not set", "cd", NULL);
+		else if (!ft_strcmp(key, "OLDPWD"))
+			ft_print_error("OLDPWD not set", "cd", NULL);
+		else if (!ft_strcmp(key, "PWD"))
+			ft_print_error("PWD not set", "cd", NULL);
 		return (1);
 	}
 	ret = ft_change_dir(path, env);
@@ -81,7 +84,11 @@ int	ft_cd(char ***env, char *path)
 	if (!path || !ft_strcmp(path, "--"))
 		ret = ft_cd_to_env("HOME", env);
 	else if (!ft_strcmp(path, "-"))
+	{
 		ret = ft_cd_to_env("OLDPWD", env);
+		if (ret == 0)
+			ft_pwd();
+	}
 	else
 		ret = ft_change_dir(path, env);
 	if (ret == -1)
