@@ -6,12 +6,16 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:55:34 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 16:27:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:03:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief Adds an address to the garbage collector list.
+ * @param address The address to add.
+ */
 void	ft_gc_add(void *address)
 {
 	t_memblock	**head;

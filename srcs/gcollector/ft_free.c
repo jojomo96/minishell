@@ -6,12 +6,16 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:03:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 16:30:17 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:02:40 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief works like `free()` but also removes the address from the gc list
+ * @param address The address to free.
+ */
 void	ft_free(void *address)
 {
 	t_memblock	**head;
