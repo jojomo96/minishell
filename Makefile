@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/28 13:25:14 by flfische         ###   ########.fr        #
+#    Updated: 2024/04/28 17:19:40 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,16 @@ CFLAGS = -Wall -Wextra -Werror
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
-SRC_DIRS := srcs srcs/builtins srcs/utils srcs/env srcs/errors
+SRC_DIRS := srcs \
+			srcs/builtins \
+			srcs/utils \
+			srcs/env \
+			srcs/errors \
+			srcs/gcollector \
+
+
+SRC_DIRS += srcs/debug
+
 OBJ_DIR := obj
 INC_DIR := includes
 
@@ -42,6 +51,17 @@ CFILES += ft_strarr_cpy.c \
 
 # ERRORS
 CFILES += ft_print_error.c
+
+# GCOLLECTOR
+CFILES += ft_malloc.c \
+			ft_free.c \
+			ft_gc_add.c \
+			ft_gc_freeall.c \
+			ft_gc_set.c \
+			ft_gc_get.c \
+
+# DEBUG
+CFILES += debug_printgc.c
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 HEADER := $(INC_DIR)/minishell.h
