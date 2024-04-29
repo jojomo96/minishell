@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   gcollector.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 17:16:39 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/28 15:40:38 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/28 16:21:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef GCOLLECTOR_H
+# define GCOLLECTOR_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
-# include "builtins.h"
-# include "debug.h"
-# include "environment.h"
-# include "errors.h"
-# include "gcollector.h"
-# include "utils.h"
-/* EXTERNAL INCLUDES */
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+# include "minishell.h"
 
-# ifndef DEBUG
-#  define DEBUG 1
-# endif
+typedef struct s_memblock
+{
+	void				*address;
+	struct s_memblock	*next;
+}						t_memblock;
 
-# define SHELL_NAME "minishell"
+void					*ft_malloc(size_t size);
+void					ft_free(void *address);
+t_memblock				**ft_gc_get(void);
+void					ft_gc_set(t_memblock *new_head);
+void					ft_gc_add(void *address);
+void					ft_gc_freeall(void);
+
+// DEBUG
+void					ft_gc_debug_print(void);
 
 #endif
