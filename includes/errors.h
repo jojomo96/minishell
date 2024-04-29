@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 17:16:39 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/28 12:56:05 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/28 13:19:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ERRORS_H
+# define ERRORS_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
-# include "builtins.h"
-# include "debug.h"
-# include "environment.h"
-# include "errors.h"
-# include "gcollector.h"
-# include "utils.h"
-/* EXTERNAL INCLUDES */
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+# include "minishell.h"
 
-# ifndef DEBUG
-#  define DEBUG 1
-# endif
-
-# define SHELL_NAME "minishell"
+void	ft_print_error(char *error, char *arg1, char *arg2);
 
 #endif

@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 17:16:39 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/27 13:36:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-/* INCLUDES */
-# include "../libft/libft.h"
-# include "builtins.h"
-# include "debug.h"
-# include "environment.h"
-# include "errors.h"
-# include "gcollector.h"
-# include "utils.h"
-/* EXTERNAL INCLUDES */
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+# include "minishell.h"
 
-# ifndef DEBUG
-#  define DEBUG 1
-# endif
+int	ft_pwd(void);
+int	ft_env(char ***envp);
+int	ft_cd(char ***env, char *path);
 
-# define SHELL_NAME "minishell"
+// TODO:
+// ft_echo
+// ft_cd
+// ft_export
+// ft_unset
+// ft_exit
 
 #endif
