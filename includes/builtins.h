@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/27 13:36:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:54:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int	ft_pwd(void);
 int	ft_env(char ***envp);
 int	ft_cd(char ***env, char *path);
+int	ft_echo(char **arr);
 
 // TODO:
 // ft_echo

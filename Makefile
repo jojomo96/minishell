@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/28 17:19:40 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/01 13:54:18 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CFILES := \
 		minishell.c \
 
 # BUILTINS
-CFILES += ft_pwd.c ft_env.c ft_cd.c
+CFILES += ft_pwd.c ft_env.c ft_cd.c ft_echo.c
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
