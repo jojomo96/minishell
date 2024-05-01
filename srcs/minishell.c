@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/27 13:54:24 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:01:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = ft_strarr_cpy(envp);
-	if (!env)
+	if (!env || ft_env_init(&env) != 0)
 		return (1);
 	ft_env(&env);
 	ft_env_add(&env, "TEST", "42");
