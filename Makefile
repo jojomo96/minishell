@@ -21,6 +21,7 @@ SRC_DIRS := srcs \
 			srcs/env \
 			srcs/errors \
 			srcs/gcollector \
+			srcs/ast \
 
 
 SRC_DIRS += srcs/debug
@@ -59,6 +60,9 @@ CFILES += ft_malloc.c \
 			ft_gc_freeall.c \
 			ft_gc_set.c \
 			ft_gc_get.c \
+
+# AST
+CFILES += ft_token.c \
 
 # DEBUG
 CFILES += debug_printgc.c

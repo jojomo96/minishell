@@ -27,6 +27,8 @@
 # include <string.h>
 # include <unistd.h>
 
+# include "ast.h"
+
 # ifndef DEBUG
 #  define DEBUG 1
 # endif
