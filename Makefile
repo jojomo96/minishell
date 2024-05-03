@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/29 16:26:06 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/01 13:02:14 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ CFILES += ft_env_index.c \
 			ft_env_create_entry.c \
 			ft_env_remove.c \
 			ft_env_get.c \
+			ft_env_init.c \
 			ft_valid_env_key.c \
 
 # UTILS
