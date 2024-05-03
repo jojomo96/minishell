@@ -70,7 +70,8 @@ MEMORY_FILES := \
 				ft_memcmp.c \
 				ft_memmove.c \
 				ft_memset.c \
-				ft_realloc_str.c
+				ft_realloc_str.c \
+				ft_realloc.c
 
 CHAR_FILES := \
 				ft_isalnum.c \

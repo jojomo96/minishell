@@ -81,6 +81,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t n);
 void				*ft_calloc(size_t count, size_t size);
 int					ft_realloc_str(char **str, size_t len, size_t new_len);
+void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 /* PUT UTILS */
 int					ft_putchar_fd(char c, int fd);
