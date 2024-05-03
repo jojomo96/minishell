@@ -6,7 +6,7 @@
 /*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/03 15:29:54 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/03 15:56:21 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,55 +55,22 @@ t_token	*ft_token_new(const char *input, size_t start, size_t token_length)
 	return (token);
 }
 
-void	ft_extract_tokens(t_token **tokens, char *input, int *position,
-		int *token_count)
+void	ft_token_free(t_token *token)
 {
-	int		start;
-	int		end;
-	char	quote_type;
-
-	start = *position;
-	end = start;
-	if (input[start] == '\'' || input[start] == '\"')
-	{
-		quote_type = input[end++];
-		while (input[end] && input[end] != quote_type)
-			end++;
-		end++;
-		while (input[end] && !ft_isspace(input[end]))
-			end++;
-	}
-	else
-	{
-		while (input[end] && !ft_isspace(input[end]))
-			end++;
-	}
-	if (start == end)
-		return ;
-	tokens[*token_count] = ft_token_new(input, start, end - start);
-	(*token_count)++;
-	*position = end;
+	free(token->content);
+	free(token);
 }
 
-t_token	**ft_tokenize_input(char *input)
+void	ft_tokens_free(t_token **tokens)
 {
-	t_token	**tokens;
-	int		position;
-	int		token_count;
-	int		input_length;
+	int	i;
 
-	input_length = ft_strlen(input);
-	tokens = (t_token **)ft_malloc(sizeof(t_token *) * (input_length + 1));
-	if (!tokens) // TODO: handle error
-		return (NULL);
-	position = 0;
-	token_count = 0;
-	while (position < input_length)
+	i = 0;
+	while (tokens[i])
 	{
-		if (ft_isspace(input[position]) && position++)
-			continue ;
-		ft_extract_tokens(tokens, input, &position, &token_count);
+		ft_token_free(tokens[i]);
+		i++;
 	}
-	tokens[token_count] = NULL;
-	return (tokens);
+	free(tokens);
 }
+

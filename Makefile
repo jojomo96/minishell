@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/04/28 17:19:40 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/03 15:45:38 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ CFILES += ft_malloc.c \
 
 # AST
 CFILES += ft_token.c \
+			ft_tokenizer.c \
 
 # DEBUG
 CFILES += debug_printgc.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/27 13:54:24 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:40:41 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	for (int i = 0; tokens[i]; i++)
 	{
 		printf("Token %d: %s		with type: %s\n", i, tokens[i]->content, getTokenName(tokens[i]->type));
+		
 	}
 	// env = ft_strarr_cpy(envp);
 	// if (!env)
