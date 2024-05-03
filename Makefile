@@ -35,7 +35,7 @@ CFILES := \
 		minishell.c \
 
 # BUILTINS
-CFILES += ft_pwd.c ft_env.c ft_cd.c
+CFILES += ft_pwd.c ft_env.c ft_cd.c ft_unset.c
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -45,6 +45,7 @@ CFILES += ft_env_index.c \
 			ft_env_remove.c \
 			ft_env_get.c \
 			ft_env_init.c \
+			ft_valid_env_key.c \
 
 # UTILS
 CFILES += ft_strarr_cpy.c \

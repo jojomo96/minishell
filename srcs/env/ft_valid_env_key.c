@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_valid_env_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 12:56:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/29 16:24:23 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/29 15:55:02 by flfische          #+#    #+#             */
+/*   Updated: 2024/04/29 15:55:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "minishell.h"
 
-# include "minishell.h"
+int	ft_valid_env_key(char *key)
+{
+	int	i;
 
-void	ft_print_error(char *error, char *arg1, char *arg2);
-void	ft_print_error_env(char *error, char *arg1, char *key);
-
-#endif
+	i = 0;
+	if (!key || !ft_isalpha(key[i]) || key[i] == '_')
+		return (0);
+	while (key[i])
+	{
+		if (!ft_isalnum(key[i]) && key[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}

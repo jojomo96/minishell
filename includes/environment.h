@@ -22,5 +22,6 @@ char	*ft_env_create_entry(char *key, char *val);
 int		ft_env_remove(char ***env, char *key);
 char	*ft_env_get(char **env, char *key);
 int		ft_env_init(char ***env);
+int		ft_valid_env_key(char *key);
 
 #endif
