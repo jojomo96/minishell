@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:20:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/27 13:47:51 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:52:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,16 @@ char	*ft_env_get(char **env, char *key)
 	temp = ft_split(entry, '=');
 	if (temp == NULL)
 		return (NULL);
-	val = temp[1];
+	if (temp[1] == NULL)
+		val = ft_strdup("");
+	else
+		val = ft_strdup(temp[1]);
+	if (val == NULL)
+		return (NULL);
+	if (temp[1] != NULL)
+		free(temp[2]);
 	free(temp[0]);
-	free(temp[2]);
+	free(temp[1]);
 	free(temp);
 	return (val);
 }
