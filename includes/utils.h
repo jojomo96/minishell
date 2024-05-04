@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 17:03:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/04 09:21:49 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 
 char	**ft_strarr_cpy(char **arr);
 void	ft_strarr_free(char **arr);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif

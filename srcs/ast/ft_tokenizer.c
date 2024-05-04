@@ -6,7 +6,7 @@
 /*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:44:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/03 16:01:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/04 09:23:59 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ static void	ft_realloc_tokens(t_token ***tokens, int *buffer_size,
 
 	if (token_count >= *buffer_size)
 	{
+		if (DEBUG)
+			printf("DEBUG: Reallocating tokens\n");
 		new_buffer_size = *buffer_size * 2 + 1;
-		new_tokens = (t_token **)realloc(*tokens, sizeof(t_token *)
-				* new_buffer_size);
+		new_tokens = (t_token **)ft_realloc(*tokens, sizeof(t_token *)
+				* (*buffer_size), sizeof(t_token *) * new_buffer_size);
 		if (!new_tokens)
 			return ; //TODO handle error
 		*tokens = new_tokens;
@@ -68,9 +70,9 @@ t_token	**ft_tokenize_input(char *input)
 	int		input_length;
 	int		buffer_size;
 
-	buffer_size = TOKEN_BUFFER_SIZE;
+	buffer_size = TOKEN_BUFFER_SIZE + 1;
 	input_length = ft_strlen(input);
-	tokens = (t_token **)ft_malloc(sizeof(t_token *) * (buffer_size + 1));
+	tokens = (t_token **)ft_malloc(sizeof(t_token *) * buffer_size);
 	if (!tokens) // TODO: handle error
 		return (NULL);
 	position = 0;

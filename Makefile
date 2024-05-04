@@ -6,7 +6,7 @@
 #    By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/03 15:45:38 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/04 09:22:04 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ CFILES += ft_env_index.c \
 
 # UTILS
 CFILES += ft_strarr_cpy.c \
-			ft_strarr_free.c
+			ft_strarr_free.c \
+			ft_realloc.c
 
 # ERRORS
 CFILES += ft_print_error.c
@@ -97,7 +98,7 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC)"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
 	@echo "$(YELLOW)Creating obj directory...$(NC)"

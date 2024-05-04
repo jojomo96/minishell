@@ -6,7 +6,7 @@
 /*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/03 15:40:41 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/04 09:24:18 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	for (int i = 0; tokens[i]; i++)
 	{
 		printf("Token %d: %s		with type: %s\n", i, tokens[i]->content, getTokenName(tokens[i]->type));
-		
+
 	}
 	// env = ft_strarr_cpy(envp);
 	// if (!env)
@@ -69,5 +69,7 @@ int	main(int argc, char **argv, char **envp)
 	// ft_env_remove(&env, "TEST2");
 	// ft_env(&env);
 	// ft_strarr_free(env);
+	ft_tokens_free(tokens);
+	// ft_gc_freeall();
 	return (0);
 }

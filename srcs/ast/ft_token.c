@@ -6,7 +6,7 @@
 /*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/03 15:56:21 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/03 21:08:27 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token	*ft_token_new(const char *input, size_t start, size_t token_length)
 	token_content = (char *)ft_malloc(sizeof(char) * (token_length + 1));
 	if (!token_content)
 	{
-		free(token);
+		ft_free(token);
 		return (NULL); // TODO: handle error
 	}
 	ft_strlcpy(token_content, input + start, token_length + 1);
@@ -57,8 +57,8 @@ t_token	*ft_token_new(const char *input, size_t start, size_t token_length)
 
 void	ft_token_free(t_token *token)
 {
-	free(token->content);
-	free(token);
+	ft_free(token->content);
+	ft_free(token);
 }
 
 void	ft_tokens_free(t_token **tokens)
@@ -71,6 +71,6 @@ void	ft_tokens_free(t_token **tokens)
 		ft_token_free(tokens[i]);
 		i++;
 	}
-	free(tokens);
+	ft_free(tokens);
 }
 
