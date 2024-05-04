@@ -1,7 +1,7 @@
 #ifndef FT_AST_H
 # define FT_AST_H
 
-# define TOKEN_BUFFER_SIZE 1
+# define TOKEN_BUFFER_SIZE 64
 
 typedef enum
 {

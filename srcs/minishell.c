@@ -6,36 +6,12 @@
 /*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/04 09:24:18 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/04 09:43:04 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-const char* getTokenName(e_token_type token) {
-    switch (token) {
-        case NODE_ARGUMENT:
-            return "NODE_ARGUMENT";
-        case NODE_PIPE:
-            return "NODE_PIPE";
-        case NODE_REDIRECT_IN:
-            return "NODE_REDIRECT_IN";
-        case NODE_REDIRECT_OUT:
-            return "NODE_REDIRECT_OUT";
-        case NODE_APPEND_OUT:
-            return "NODE_APPEND_OUT";
-        case NODE_HEREDOC:
-            return "NODE_HEREDOC";
-        case NODE_SUBSHELL:
-            return "NODE_SUBSHELL";
-        case NODE_AND:
-            return "NODE_AND";
-        case NODE_OR:
-            return "NODE_OR";
-        default:
-            return "Unknown token";
-    }
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -49,11 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	t_token **tokens = ft_tokenize_input(input);
 	if (!tokens)
 		return (1);
-	for (int i = 0; tokens[i]; i++)
-	{
-		printf("Token %d: %s		with type: %s\n", i, tokens[i]->content, getTokenName(tokens[i]->type));
-
-	}
 	// env = ft_strarr_cpy(envp);
 	// if (!env)
 	// 	return (1);

@@ -6,7 +6,7 @@
 #    By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/04 09:22:04 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/04 17:27:25 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ CFILES += ft_token.c \
 CFILES += debug_printgc.c
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
-HEADER := $(INC_DIR)/minishell.h
+HEADER := $(INC_DIR)/minishell.h \
+			$(INC_DIR)/ast.h
 INCLUDES := -I$(INC_DIR)
 
 # LIBFT
