@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/06 16:52:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:13:02 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_export_print(char **exp)
 	char	**split;
 
 	i = 0;
+	ft_strarr_sort(exp);
+	while (exp[i])
 	{
 		split = ft_split(exp[i], '=');
 		if (!split)
@@ -34,18 +36,33 @@ void	ft_export_print(char **exp)
 	}
 }
 
-int	ft_export(char ***envp, char **args)
+int	ft_export(char ***envp, char ***exp, char **args)
 {
-	int	i;
-	int	j;
-	int	ret;
+	int		i;
+	char	*key;
+	char	*val;
+	char	**tmp;
 
 	i = 0;
-	ret = 0;
-	if (!args[0])
+	if (!args || !args[0])
+		return (ft_export_print(*exp), 0);
+	while (args[i])
 	{
-		ft_export_print(*envp);
-		return (0);
+		if (ft_strchr(args[i], '='))
+		{
+			tmp = ft_split(args[i], '=');
+			if (!tmp)
+				return (ft_print_error(strerror(errno), NULL, NULL), 1);
+			key = tmp[0];
+			val = tmp[1];
+			ft_env_set(exp, key, val);
+			ft_env_set(envp, key, val);
+			free(key);
+			free(val);
+		}
+		else
+			ft_env_set(exp, args[i], NULL);
+		i++;
 	}
-	return (ret);
+	return (0);
 }
