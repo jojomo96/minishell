@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_shell_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 15:43:36 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:33:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ft_destroy_shell(t_shell *ms)
 {
-	t_shell	ms;
-
-	(void)argv;
-	if (argc != 1 || ft_shell_init(&ms, envp))
-		return (1);
-	return (ft_destroy_shell(&ms));
+	ft_strarr_free(ms->env);
+	ft_strarr_free(ms->exp);
+	ft_gc_freeall();
+	return (ms->exit_code);
 }

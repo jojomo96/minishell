@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_shell_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 15:43:36 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/07 15:30:55 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:40:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ft_shell_init(t_shell *ms, char **envp)
 {
-	t_shell	ms;
-
-	(void)argv;
-	if (argc != 1 || ft_shell_init(&ms, envp))
+	ms->env = ft_strarr_cpy(envp);
+	if (!ms->env)
 		return (1);
-	return (ft_destroy_shell(&ms));
+	ms->exp = ft_strarr_cpy(envp);
+	if (!ms->exp)
+		return (ft_strarr_free(ms->env), 1);
+	if (ft_env_init(&ms->env) || ft_env_init(&ms->exp))
+		return (ft_strarr_free(ms->env), ft_strarr_free(ms->exp), 1);
+	ms->exit_code = 0;
+	return (0);
 }

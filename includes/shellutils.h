@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   shellutils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 15:43:36 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/07 15:34:15 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:42:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SHELLUTILS_H
+# define SHELLUTILS_H
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_shell	ms;
+# include "minishell.h"
 
-	(void)argv;
-	if (argc != 1 || ft_shell_init(&ms, envp))
-		return (1);
-	return (ft_destroy_shell(&ms));
-}
+typedef struct s_shell	t_shell;
+
+int						ft_shell_init(t_shell *ms, char **envp);
+int						ft_destroy_shell(t_shell *ms);
+
+#endif

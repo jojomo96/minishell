@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 14:17:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:37:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "environment.h"
 # include "errors.h"
 # include "gcollector.h"
+# include "shellutils.h"
 # include "utils.h"
 /* EXTERNAL INCLUDES */
 # include <stdio.h>
