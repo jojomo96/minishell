@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/06 18:13:02 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:55:03 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	ft_export_print(char **exp)
 int	ft_export(char ***envp, char ***exp, char **args)
 {
 	int		i;
-	char	*key;
-	char	*val;
 	char	**tmp;
 
 	i = 0;
@@ -53,12 +51,9 @@ int	ft_export(char ***envp, char ***exp, char **args)
 			tmp = ft_split(args[i], '=');
 			if (!tmp)
 				return (ft_print_error(strerror(errno), NULL, NULL), 1);
-			key = tmp[0];
-			val = tmp[1];
-			ft_env_set(exp, key, val);
-			ft_env_set(envp, key, val);
-			free(key);
-			free(val);
+			ft_env_set(exp, tmp[0], tmp[1]);
+			ft_env_set(envp, tmp[0], tmp[1]);
+			ft_strarr_free(tmp);
 		}
 		else
 			ft_env_set(exp, args[i], NULL);

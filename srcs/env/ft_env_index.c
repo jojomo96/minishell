@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:20:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 18:29:47 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:53:47 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 int	ft_env_index(char **env, char *key)
 {
 	int	i;
+	int	len;
 
 	i = 0;
+	len = ft_strlen(key);
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], key, ft_strlen(key)) == 0)
+		if (ft_strncmp(env[i], key, len) == 0)
 		{
-			if (env[i][ft_strlen(key)] == '=')
+			if (env[i][len] == '=' || env[i][len] == '\0')
 				return (i);
 		}
 		i++;
