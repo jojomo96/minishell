@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:44:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/04 09:23:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 14:40:47 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_extract_tokens(t_token **tokens, char *input, int *position,
-		int *token_count)
+static void	ft_extract_tokens(t_ast_node **nodes, char *input, int *position,
+		int *node_count)
 {
 	int		start;
 	int		end;
@@ -37,53 +37,53 @@ static void	ft_extract_tokens(t_token **tokens, char *input, int *position,
 	}
 	if (start == end)
 		return ;
-	tokens[*token_count] = ft_token_new(input, start, end - start);
-	(*token_count)++;
+	nodes[*node_count] = ft_ast_new_node(input, start, end - start);
+	(*node_count)++;
 	*position = end;
 }
 
-static void	ft_realloc_tokens(t_token ***tokens, int *buffer_size,
-		int token_count)
+static void	ft_realloc_nodes(t_ast_node ***nodes, int *buffer_size,
+		int node_count)
 {
 	int		new_buffer_size;
-	t_token	**new_tokens;
+	t_ast_node	**new_nodes;
 
-	if (token_count >= *buffer_size)
+	if (node_count >= *buffer_size)
 	{
 		if (DEBUG)
 			printf("DEBUG: Reallocating tokens\n");
 		new_buffer_size = *buffer_size * 2 + 1;
-		new_tokens = (t_token **)ft_realloc(*tokens, sizeof(t_token *)
-				* (*buffer_size), sizeof(t_token *) * new_buffer_size);
-		if (!new_tokens)
+		new_nodes = (t_ast_node **)ft_realloc(*nodes, sizeof(t_ast_node *)
+				* (*buffer_size), sizeof(t_ast_node *) * new_buffer_size);
+		if (!new_nodes)
 			return ; //TODO handle error
-		*tokens = new_tokens;
+		*nodes = new_nodes;
 		*buffer_size = new_buffer_size;
 	}
 }
 
-t_token	**ft_tokenize_input(char *input)
+t_ast_node	**ft_tokenize_input(char *input)
 {
-	t_token	**tokens;
+	t_ast_node	**nodes;
 	int		position;
-	int		token_count;
+	int		node_count;
 	int		input_length;
 	int		buffer_size;
 
 	buffer_size = TOKEN_BUFFER_SIZE + 1;
 	input_length = ft_strlen(input);
-	tokens = (t_token **)ft_malloc(sizeof(t_token *) * buffer_size);
-	if (!tokens) // TODO: handle error
+	nodes = (t_ast_node **)ft_malloc(sizeof(t_ast_node *) * buffer_size);
+	if (!nodes) // TODO: handle error
 		return (NULL);
 	position = 0;
-	token_count = 0;
+	node_count = 0;
 	while (position < input_length)
 	{
 		if (ft_isspace(input[position]) && position++)
 			continue ;
-		ft_extract_tokens(tokens, input, &position, &token_count);
-		ft_realloc_tokens(&tokens, &buffer_size, token_count);
+		ft_extract_tokens(nodes, input, &position, &node_count);
+		ft_realloc_nodes(&nodes, &buffer_size, node_count);
 	}
-	tokens[token_count] = NULL;
-	return (tokens);
+	nodes[node_count] = NULL;
+	return (nodes);
 }

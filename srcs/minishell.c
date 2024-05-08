@@ -3,14 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/04 09:43:04 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 17:22:53 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_ast_node *create_complex_ast() {
+    // Allocate nodes
+    t_ast_node *root = malloc(sizeof(t_ast_node));
+    t_ast_node *and_right = malloc(sizeof(t_ast_node));
+
+    t_ast_node *echo_hello = malloc(sizeof(t_ast_node));
+    t_ast_node *grep_hello = malloc(sizeof(t_ast_node));
+    t_ast_node *echo_done = malloc(sizeof(t_ast_node));
+    t_ast_node *redirect_node = malloc(sizeof(t_ast_node));
+
+    // Setup leaf nodes
+    echo_hello->type = AST_TYPE_LEAF;
+    echo_hello->u_data.leaf.value = "echo hello";
+
+    grep_hello->type = AST_TYPE_LEAF;
+    grep_hello->u_data.leaf.value = "grep hello";
+
+    echo_done->type = AST_TYPE_LEAF;
+    echo_done->u_data.leaf.value = "echo done";
+
+    redirect_node->type = AST_TYPE_NODE;
+    redirect_node->u_data.s_node.op_type = OP_REDIRECT_OUT;
+    redirect_node->u_data.s_node.left = echo_hello;
+    redirect_node->u_data.s_node.right = NULL;  // Normally we would specify the file node
+
+    // Setup pipe node
+    root->type = AST_TYPE_NODE;
+    root->u_data.s_node.op_type = OP_PIPE;
+    root->u_data.s_node.left = redirect_node;
+    root->u_data.s_node.right = grep_hello;
+
+    // Setup AND node
+    and_right->type = AST_TYPE_NODE;
+    and_right->u_data.s_node.op_type = OP_AND;
+    and_right->u_data.s_node.left = root;
+    and_right->u_data.s_node.right = echo_done;
+
+    // The root of this tree now becomes the AND operation
+    return and_right;
+}
 
 
 int	main(int argc, char **argv, char **envp)
@@ -21,26 +62,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)envp;
 
-	char *input = "&& || | cat -l     \" test \"test asd \'test\"test\" test\'";
-	t_token **tokens = ft_tokenize_input(input);
-	if (!tokens)
-		return (1);
-	// env = ft_strarr_cpy(envp);
-	// if (!env)
-	// 	return (1);
-	// ft_env(&env);
-	// ft_env_add(&env, "TEST", "42");
-	// ft_putendl_fd("--------------------------------", 1);
-	// ft_env(&env);
-	// ft_putendl_fd("--------------------------------", 1);
-	// ft_env_change(&env, "TEST", "21");
-	// ft_env(&env);
-	// ft_putendl_fd("--------------------------------", 1);
-	// ft_env_remove(&env, "TEST");
-	// ft_env_remove(&env, "TEST2");
-	// ft_env(&env);
-	// ft_strarr_free(env);
-	ft_tokens_free(tokens);
-	// ft_gc_freeall();
+	t_ast_node *root = create_complex_ast();
+	write_ast_to_dot_file(root);
+	ft_ast_free_nodes(root);
 	return (0);
 }
