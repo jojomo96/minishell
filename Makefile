@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/01 13:02:14 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/07 15:37:40 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_DIRS := srcs \
 			srcs/env \
 			srcs/errors \
 			srcs/gcollector \
+			srcs/shell \
 
 
 SRC_DIRS += srcs/debug
@@ -35,7 +36,7 @@ CFILES := \
 		minishell.c \
 
 # BUILTINS
-CFILES += ft_pwd.c ft_env.c ft_cd.c ft_unset.c
+CFILES += ft_pwd.c ft_env.c ft_cd.c ft_unset.c ft_export.c
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -46,10 +47,16 @@ CFILES += ft_env_index.c \
 			ft_env_get.c \
 			ft_env_init.c \
 			ft_valid_env_key.c \
+			ft_env_set.c \
+
+# SHELL UTILS
+CFILES += ft_shell_destroy.c \
+			ft_shell_init.c \
 
 # UTILS
 CFILES += ft_strarr_cpy.c \
-			ft_strarr_free.c
+			ft_strarr_free.c \
+			ft_strarr_sort.c \
 
 # ERRORS
 CFILES += ft_print_error.c

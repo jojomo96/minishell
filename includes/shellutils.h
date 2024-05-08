@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   shellutils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 14:51:02 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/07 15:34:15 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:42:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SHELLUTILS_H
+# define SHELLUTILS_H
 
-// TODO: use ast input
-int	ft_unset(t_shell *ms, char **argv)
-{
-	int	i;
-	int	exit_code;
+# include "minishell.h"
 
-	i = 1;
-	exit_code = 0;
-	while (argv[i])
-	{
-		if (!ft_valid_env_key(argv[i]))
-		{
-			ft_print_error_env("not a valid identifier", "unset", argv[i]);
-			exit_code = 1;
-		}
-		else
-		{
-			ft_env_remove(&ms->env, argv[i]);
-			ft_env_remove(&ms->exp, argv[i]);
-		}
-		i++;
-	}
-	return (exit_code);
-}
+typedef struct s_shell	t_shell;
+
+int						ft_shell_init(t_shell *ms, char **envp);
+int						ft_destroy_shell(t_shell *ms);
+
+#endif
