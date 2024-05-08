@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 15:19:47 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 18:31:22 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum e_operation_type
 
 typedef struct s_ast_leaf
 {
-	char						*value;
+	char						**argv;
 }								t_ast_leaf;
 
 struct							s_ast_node
@@ -60,7 +60,6 @@ struct							s_ast_node
 t_ast_node						*ft_ast_new_node(const char *input,
 									size_t start, size_t value_length);
 void							ft_ast_free_node(t_ast_node *node);
-void							ft_ast_free_nodes(t_ast_node *node);
 
 t_ast_node						**ft_tokenize_input(char *input);
 

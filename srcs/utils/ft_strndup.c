@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/08 17:47:15 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/05/08 17:42:04 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/05/08 17:47:04 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
+char	*ft_strndup(const char *s, size_t n)
+{
+	char	*dup;
+	size_t	i;
+	size_t	len;
 
-char	**ft_strarr_cpy(char **arr);
-void	ft_strarr_free(char **arr);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-char	*ft_strndup(const char *s, size_t n);
-
-#endif
+	i = 0;
+	len = 0;
+	while (s[len] && len < n)
+	{
+		len++;
+	}
+	dup = ft_malloc(len + 1);
+	if (!dup)
+	{
+		return (NULL);
+	}
+	while (i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 17:16:54 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 19:33:36 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	print_dot(t_ast_node *node, char *graph)
 	if (node->type == AST_TYPE_LEAF)
 	{
 		sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node,
-			node->u_data.leaf.value);
+			node->u_data.leaf.argv[0]);
 	}
 	else
 	{
@@ -108,7 +108,7 @@ void	write_ast_to_dot_file(t_ast_node *root)
 		exit(EXIT_FAILURE);
 	}
 	url_encode(encoded_graph, graph);
-	printf("https://dreampuf.github.io/GraphvizOnline/#%s\n", encoded_graph);
+	printf("\e]8;;https://dreampuf.github.io/GraphvizOnline/#%s\e\\Tree\e]8;;\e\\\n", encoded_graph);
 	free(graph);
 	free(encoded_graph);
 }

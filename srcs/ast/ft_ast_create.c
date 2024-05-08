@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 14:48:13 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 21:21:29 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 	else
 	{
 		new_node->type = AST_TYPE_LEAF;
-		new_node->u_data.leaf.value = content;
+		new_node->u_data.leaf.argv = (char **)ft_malloc(sizeof(char *) * 2);
+		if (new_node->u_data.leaf.argv == NULL)
+			return ; // TODO: handle error
+		new_node->u_data.leaf.argv[0] = content;
 	}
 }
 
@@ -77,7 +80,7 @@ t_ast_node	*ft_ast_new_node(const char *input, size_t start,
 	{
 		printf("DEBUG: New node created: ");
 		if (new_node->type == AST_TYPE_LEAF)
-			printf("Leaf: %s\n", new_node->u_data.leaf.value);
+			printf("Leaf: %s\n", new_node->u_data.leaf.argv[0]);
 		else
 			printf("Node: %s\n",
 				op_type_to_string(new_node->u_data.s_node.op_type));
@@ -87,19 +90,28 @@ t_ast_node	*ft_ast_new_node(const char *input, size_t start,
 
 void	ft_ast_free_node(t_ast_node *node)
 {
-	if (node->type == AST_TYPE_LEAF)
-		ft_free(node->u_data.leaf.value);
-	ft_free(node);
-}
+	char	**args;
 
-void	ft_ast_free_nodes(t_ast_node *node)
-{
-	if (node == NULL)
+	if (!node)
 		return ;
-	else
+	if (node->type == AST_TYPE_LEAF)
 	{
-		ft_ast_free_nodes(node->u_data.s_node.left);
-		ft_ast_free_nodes(node->u_data.s_node.right);
+		if (node->u_data.leaf.argv)
+		{
+			args = node->u_data.leaf.argv;
+			while (*args)
+			{
+				ft_free(*args);
+				args++;
+			}
+			ft_free(node->u_data.leaf.argv);
+			node->u_data.leaf.argv = NULL;
+		}
 	}
-	ft_ast_free_node(node);
+	else if (node->type == AST_TYPE_NODE)
+	{
+		ft_ast_free_node(node->u_data.s_node.left);
+		ft_ast_free_node(node->u_data.s_node.right);
+	}
+	ft_free(node);
 }

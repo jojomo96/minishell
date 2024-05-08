@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/08 17:22:53 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 20:20:29 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_ast_node *create_complex_ast() {
 
     // Setup leaf nodes
     echo_hello->type = AST_TYPE_LEAF;
-    echo_hello->u_data.leaf.value = "echo hello";
+    echo_hello->u_data.leaf.argv = malloc(sizeof(char *) * 2);
+    echo_hello->u_data.leaf.argv[0] = "echo hello";
 
     grep_hello->type = AST_TYPE_LEAF;
-    grep_hello->u_data.leaf.value = "grep hello";
+    grep_hello->u_data.leaf.argv = malloc(sizeof(char *) * 2);
+    grep_hello->u_data.leaf.argv[0] = "grep hello";
 
     echo_done->type = AST_TYPE_LEAF;
-    echo_done->u_data.leaf.value = "echo done";
+    echo_done->u_data.leaf.argv = malloc(sizeof(char *) * 2);
+    echo_done->u_data.leaf.argv[0] = "echo done";
 
     redirect_node->type = AST_TYPE_NODE;
     redirect_node->u_data.s_node.op_type = OP_REDIRECT_OUT;
@@ -62,8 +65,16 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)envp;
 
-	t_ast_node *root = create_complex_ast();
-	write_ast_to_dot_file(root);
-	ft_ast_free_nodes(root);
+	// t_ast_node *root = create_complex_ast();
+	// write_ast_to_dot_file(root);
+	// ft_ast_free_node(root);
+
+	t_ast_node	**nodes;
+
+	nodes = ft_tokenize_input("echo hello>file.txt | grep hello && echo done");
+	if (!nodes)
+		return (1);
+
+	ft_ast_free_node(*nodes);
 	return (0);
 }

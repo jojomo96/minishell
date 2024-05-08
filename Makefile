@@ -6,12 +6,12 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/08 14:47:18 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/08 20:03:29 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
@@ -49,7 +49,8 @@ CFILES += ft_env_index.c \
 # UTILS
 CFILES += ft_strarr_cpy.c \
 			ft_strarr_free.c \
-			ft_realloc.c
+			ft_realloc.c \
+			ft_strndup.c \
 
 # ERRORS
 CFILES += ft_print_error.c
@@ -99,7 +100,7 @@ $(NAME): $(LIBFT) $(OFILES) $(HEADER)
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
-	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC)"
+	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC) "
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):

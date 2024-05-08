@@ -6,37 +6,77 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:44:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 14:40:47 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/08 20:05:00 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+static int ft_starts_with_operator(const char* input) {
+    const char *double_char_operators[] = {"<<", ">>", "&&", "||", NULL};
+    const char *single_char_operators[] = {"<", ">", "|", "(", ")", NULL};
+    int i;
+
+    i = 0;
+    while (double_char_operators[i]) {
+        if (strncmp(input, double_char_operators[i], 2) == 0)
+            return 2;
+        i++;
+    }
+    i = 0;
+    while (single_char_operators[i]) {
+        if (strncmp(input, single_char_operators[i], 1) == 0)
+            return 1;
+        i++;
+    }
+    return 0;
+}
+// static void	ft_extract_tokens(t_ast_node **nodes, char *input, int *position,
+// 		int *node_count)
+// {
+// 	int		start;
+// 	int		end;
+// 	char	quote_type;
+
+// 	start = *position;
+// 	end = start;
+// 	if (input[start] == '\'' || input[start] == '\"')
+// 	{
+// 		quote_type = input[end++];
+// 		while (input[end] && input[end] != quote_type)
+// 			end++;
+// 		end++;
+// 		while (input[end] && !ft_isspace(input[end]))
+// 			end++;
+// 	}
+// 	else
+// 	{
+// 		while (input[end] && !ft_isspace(input[end]))
+// 			end++;
+// 	}
+// 	if (start == end)
+// 		return ;
+// 	nodes[*node_count] = ft_ast_new_node(input, start, end - start);
+// 	(*node_count)++;
+// 	*position = end;
+// }
 
 static void	ft_extract_tokens(t_ast_node **nodes, char *input, int *position,
 		int *node_count)
 {
 	int		start;
 	int		end;
-	char	quote_type;
 
 	start = *position;
 	end = start;
-	if (input[start] == '\'' || input[start] == '\"')
-	{
-		quote_type = input[end++];
-		while (input[end] && input[end] != quote_type)
-			end++;
-		end++;
-		while (input[end] && !ft_isspace(input[end]))
-			end++;
-	}
+	if (ft_starts_with_operator(input + start))
+		end += ft_starts_with_operator(input + start);
 	else
 	{
-		while (input[end] && !ft_isspace(input[end]))
+		while (input[end] && !ft_starts_with_operator(&input[end]))
 			end++;
 	}
-	if (start == end)
-		return ;
 	nodes[*node_count] = ft_ast_new_node(input, start, end - start);
 	(*node_count)++;
 	*position = end;
