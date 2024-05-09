@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 12:55:58 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 13:20:03 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int	main(int argc, char **argv, char **envp)
 	// t_ast_node *root = create_complex_ast();
 	// write_ast_to_dot_file(root);
 	// ft_ast_free_node(root);
-	nodes = ft_tokenize_input("echo test >> (file.txt && echo done)");
+	nodes = ft_tokenize_input("echo test >> file.txt && echo done)");
 	if (!nodes)
 		return (1);
 	ast = NULL;
 	build_ast(&ast, nodes);
-    write_ast_to_dot_file(ast);
+    // write_ast_to_dot_file(ast);
 	ft_gc_freeall();
 	return (0);
 }
