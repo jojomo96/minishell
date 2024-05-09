@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 12:34:34 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 15:05:09 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ struct							s_ast_node
 			t_ast_node			*left;
 			t_ast_node			*right;
 		} s_node;
-		t_ast_paranthesis	type;
+		t_ast_paranthesis		type;
 	} u_data;
 };
 
@@ -71,6 +71,8 @@ void							ft_ast_free_node(t_ast_node *node);
 
 t_ast_node						**ft_tokenize_input(char *input);
 void							build_ast(t_ast_node **ast, t_ast_node **nodes);
+int								find_highest_precedence_index(t_ast_node **nodes,
+									int *is_in_parenthesis);
 
 // utils
 const char						*op_type_to_string(t_operation_type op_type);

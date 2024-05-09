@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 11:01:25 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 15:33:27 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 const char	*op_type_to_string(t_operation_type op_type)
 {
 	int			num_op_types;
-	const char	*op_type_strings[] = {"OP_REDIRECT_IN", "OP_REDIRECT_OUT",
-			"OP_APPEND_OUT", "OP_HEREDOC", "OP_PIPE", "OP_AND", "OP_OR",
+	const char	*op_type_strings[] = {"<", ">",
+			">>", "<<", "|", "&&", "||",
 			"OP_SUBSHELL"};
 
 	num_op_types = sizeof(op_type_strings) / sizeof(op_type_strings[0]);
@@ -125,6 +125,16 @@ void	write_ast_to_dot_file(t_ast_node *root)
 	url_encode(encoded_graph, graph);
 	printf("\e]8;;https://dreampuf.github.io/GraphvizOnline/#%s\e\\Tree\e]8;;\e\\\n",
 		encoded_graph);
+	char *url = ft_strjoin("https://dreampuf.github.io/GraphvizOnline/#", encoded_graph);
+	char *args[] = {"open", url, NULL};
+	execve("/usr/bin/open", args, NULL);
+
+	free(url);
+
+
+	printf("https://dreampuf.github.io/GraphvizOnline/#%s\n",
+		encoded_graph);
+
 	free(graph);
 	free(encoded_graph);
 }

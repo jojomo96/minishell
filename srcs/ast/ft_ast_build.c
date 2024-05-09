@@ -6,78 +6,90 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:05:31 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 13:23:53 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:12:26 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	node_precedence(t_ast_node *node)
+static void	ft_split_nodes(t_ast_node **nodes, t_ast_node ***left_nodes,
+		t_ast_node ***right_nodes, int index)
 {
-	if (node->type == AST_TYPE_LEAF || node->type == AST_TYPE_PARANTHESIS)
-		return (0);
-	if (node->u_data.s_node.op_type == OP_REDIRECT_IN
-		|| node->u_data.s_node.op_type == OP_REDIRECT_OUT
-		|| node->u_data.s_node.op_type == OP_APPEND_OUT
-		|| node->u_data.s_node.op_type == OP_HEREDOC)
+	int	i;
+	int	total_nodes;
+	int	left_nodes_count;
+	int	right_nodes_count;
+
+	total_nodes = 0;
+	while (nodes[total_nodes])
+		total_nodes++;
+	left_nodes_count = index;
+	right_nodes_count = total_nodes - index - 1;
+	*left_nodes = ft_malloc(sizeof(t_ast_node *) * (left_nodes_count + 1));
+	*right_nodes = ft_malloc(sizeof(t_ast_node *) * (right_nodes_count + 1));
+	i = 0;
+	while (nodes[i])
 	{
-		return (1);
+		if (i < index)
+			(*left_nodes)[i] = nodes[i];
+		else if (i > index)
+			(*right_nodes)[i - index - 1] = nodes[i];
+		i++;
 	}
-	else if (node->u_data.s_node.op_type == OP_PIPE)
-	{
-		return (2);
-	}
-	else if (node->u_data.s_node.op_type == OP_AND
-		|| node->u_data.s_node.op_type == OP_OR)
-	{
-		return (4);
-	}
-	else if (node->u_data.s_node.op_type == OP_SUBSHELL)
-	{
-		return (3);
-	}
-	else
-	{
-		return (0);
-	}
+	(*left_nodes)[left_nodes_count] = NULL;
+	(*right_nodes)[right_nodes_count] = NULL;
 }
+
+static void ft_remove_surrounding_parenthesis(t_ast_node ***nodes)
+{
+	int previous_size;
+	t_ast_node **new_nodes;
+	t_ast_node **temp;
+
+	previous_size = 0;
+	while ((*nodes)[previous_size])
+		previous_size++;
+	if (previous_size < 2)
+		return ; // todo: handle error
+	new_nodes = ft_malloc(sizeof(t_ast_node *) * (previous_size - 2));
+	ft_memcpy(new_nodes, *nodes + 1, sizeof(t_ast_node *) * (previous_size - 2));
+	new_nodes[previous_size - 2] = NULL;
+	temp = *nodes;
+	*nodes = new_nodes;
+	free(temp);
+}
+
 
 // Use this function to build your AST
 void	build_ast(t_ast_node **ast, t_ast_node **nodes)
 {
-	int	index;
-	int	highest_precedence;
-	int	highest_precedence_index;
-	int	is_in_parenthesis;
+	int			highest_precedence_index;
+	int			is_in_parenthesis;
+	t_ast_node	**left_nodes;
+	t_ast_node	**right_nodes;
 
-	(void)ast;
-	index = 0;
-	highest_precedence = 0;
+	left_nodes = NULL;
+	right_nodes = NULL;
 	highest_precedence_index = 0;
 	is_in_parenthesis = 0;
-	while (nodes[index])
+	highest_precedence_index = find_highest_precedence_index(nodes,
+			&is_in_parenthesis);
+	if (highest_precedence_index == -1)
 	{
-		if (nodes[index]->type == AST_TYPE_PARANTHESIS)
+		if (nodes[0] && nodes[0]->type == AST_TYPE_LEAF)
+			*ast = nodes[0];
+		else if (nodes[0] && nodes[0]->type == AST_TYPE_PARANTHESIS)
 		{
-			if (nodes[index]->u_data.type == AST_PARANTHESIS_OPEN)
-				is_in_parenthesis += 1;
-			else
-				is_in_parenthesis -= 1;
-			if (is_in_parenthesis < 0)
-				ft_print_syntax_error(")");
+			ft_remove_surrounding_parenthesis(&nodes);
+			build_ast(ast, nodes);
 		}
-		if (is_in_parenthesis > 0)
-		{
-			index++;
-			continue ;
-		}
-		if (node_precedence(nodes[index]) > highest_precedence)
-		{
-			highest_precedence = node_precedence(nodes[index]);
-			highest_precedence_index = index;
-		}
-		index++;
 	}
-	printf("highest precedence: %d\n", highest_precedence);
-	printf("highest precedence index: %d\n", highest_precedence_index);
+	else
+	{
+		ft_split_nodes(nodes, &left_nodes, &right_nodes,
+			highest_precedence_index);
+		build_ast(&nodes[highest_precedence_index]->u_data.s_node.left, left_nodes);
+		build_ast(&nodes[highest_precedence_index]->u_data.s_node.right, right_nodes);
+		*ast = nodes[highest_precedence_index];
+	}
 }

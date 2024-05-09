@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/09 13:36:35 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/09 13:57:40 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ CFILES += ft_ast_create.c \
 			ft_tokenizer.c \
 			ft_split_args.c \
 			ft_ast_build.c \
+			ft_ast_percendence.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
