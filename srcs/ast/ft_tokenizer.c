@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:44:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 14:30:09 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:18:07 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ static void	ft_realloc_nodes(t_ast_node ***nodes, int *buffer_size,
 		new_buffer_size = *buffer_size * 2 + 1;
 		new_nodes = (t_ast_node **)ft_realloc(*nodes, sizeof(t_ast_node *)
 				* (*buffer_size), sizeof(t_ast_node *) * new_buffer_size);
-		if (!new_nodes)
-			return ; // TODO handle error
 		*nodes = new_nodes;
 		*buffer_size = new_buffer_size;
 	}
@@ -86,8 +84,6 @@ t_ast_node	**ft_tokenize_input(char *input)
 	buffer_size = TOKEN_BUFFER_SIZE + 1;
 	input_length = ft_strlen(input);
 	nodes = (t_ast_node **)ft_malloc(sizeof(t_ast_node *) * buffer_size);
-	if (!nodes) // TODO: handle error
-		return (NULL);
 	position = 0;
 	node_count = 0;
 	while (position < input_length)

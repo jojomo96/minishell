@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 20:49:37 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 10:29:45 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:17:52 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ char	**ft_split_args(char *content)
 
 	args = (char **)ft_malloc(sizeof(char *) * (ft_estimate_arg_count(content)
 				+ 1));
-	if (args == NULL)
-		return (NULL); // TODO: handle error
 	quote_type = 0;
 	in_quote = 0;
 	return (ft_split_args_norm(content, args, quote_type, in_quote));

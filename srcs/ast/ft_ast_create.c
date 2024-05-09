@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 12:56:10 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:17:28 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 	{
 		new_node->type = AST_TYPE_LEAF;
 		new_node->u_data.leaf.argv = (char **)ft_malloc(sizeof(char *) * 2);
-		if (new_node->u_data.leaf.argv == NULL)
-			return ; // TODO: handle error
 		new_node->u_data.leaf.argv = ft_split_args(content);
 	}
 }
@@ -77,11 +75,7 @@ t_ast_node	*ft_ast_new_node(const char *input, size_t start,
 	int					is_operator;
 
 	new_node = (t_ast_node *)ft_malloc(sizeof(t_ast_node));
-	if (new_node == NULL)
-		return (NULL); // TODO: handle error
 	content = (char *)ft_malloc(sizeof(char) * (value_length + 1));
-	if (content == NULL)
-		return (ft_free(new_node), NULL); // TODO: handle error
 	ft_strlcpy(content, input + start, value_length + 1);
 	ft_get_operation_type(content, &is_operator, &op_type);
 	ft_set_node_type(new_node, is_operator, op_type, content);
