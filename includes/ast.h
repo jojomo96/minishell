@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 08:51:58 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 12:34:34 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@ typedef struct s_ast_node		t_ast_node;
 typedef enum e_ast_node_type
 {
 	AST_TYPE_LEAF,
-	AST_TYPE_NODE
+	AST_TYPE_NODE,
+	AST_TYPE_PARANTHESIS
 }								t_ast_node_type;
+
+typedef enum e_ast_paranthesis
+{
+	AST_PARANTHESIS_OPEN,
+	AST_PARANTHESIS_CLOSE
+}								t_ast_paranthesis;
 
 typedef enum e_operation_type
 {
@@ -54,6 +61,7 @@ struct							s_ast_node
 			t_ast_node			*left;
 			t_ast_node			*right;
 		} s_node;
+		t_ast_paranthesis	type;
 	} u_data;
 };
 
@@ -62,6 +70,7 @@ t_ast_node						*ft_ast_new_node(const char *input,
 void							ft_ast_free_node(t_ast_node *node);
 
 t_ast_node						**ft_tokenize_input(char *input);
+void							build_ast(t_ast_node **ast, t_ast_node **nodes);
 
 // utils
 const char						*op_type_to_string(t_operation_type op_type);

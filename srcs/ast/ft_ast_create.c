@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 08:15:24 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 12:56:10 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void	ft_get_operation_type(char *value, int *is_op,
 	else if (ft_strcmp(value, "||") == 0)
 		*op_type = OP_OR;
 	else if (ft_strcmp(value, "(") == 0)
-		*op_type = OP_SUBSHELL;
+		*is_op = -1;
 	else if (ft_strcmp(value, ")") == 0)
-		*op_type = OP_SUBSHELL;
+		*is_op = -2;
 	else
 		*is_op = 0;
 }
@@ -41,12 +41,21 @@ static void	ft_get_operation_type(char *value, int *is_op,
 static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 		t_operation_type op_type, char *content)
 {
-	if (is_operator)
+	if (is_operator == 1)
 	{
 		new_node->type = AST_TYPE_NODE;
 		new_node->u_data.s_node.op_type = op_type;
 		new_node->u_data.s_node.left = NULL;
 		new_node->u_data.s_node.right = NULL;
+		ft_free(content);
+	}
+	else if (is_operator == -1 || is_operator == -2)
+	{
+		new_node->type = AST_TYPE_PARANTHESIS;
+		if (is_operator == -1)
+			new_node->u_data.type = AST_PARANTHESIS_OPEN;
+		if (is_operator == -2)
+			new_node->u_data.type = AST_PARANTHESIS_CLOSE;
 		ft_free(content);
 	}
 	else
