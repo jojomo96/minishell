@@ -6,13 +6,13 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 14:55:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:09:59 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export_print(char **exp)
+static void	ft_export_print(char **exp, int fd_out)
 {
 	int		i;
 	char	**split;
@@ -23,40 +23,43 @@ void	ft_export_print(char **exp)
 	{
 		split = ft_split(exp[i], '=');
 		if (!split)
-		{
-			ft_print_error(strerror(errno), NULL, NULL);
-			return ;
-		}
+			return (ft_print_error(strerror(errno), NULL, NULL));
+		ft_putstr_fd("declare -x ", fd_out);
+		ft_putstr_fd(split[0], fd_out);
 		if (split[1])
-			printf("declare -x %s=\"%s\"\n", split[0], split[1]);
+		{
+			ft_putstr_fd("=\"", fd_out);
+			ft_putstr_fd(split[1], fd_out);
+			ft_putstr_fd("\"\n", fd_out);
+		}
 		else
-			printf("declare -x %s\n", split[0]);
+			ft_putstr_fd("\n", fd_out);
 		i++;
 		ft_strarr_free(split);
 	}
 }
 
-int	ft_export(char ***envp, char ***exp, char **args)
+int	ft_export(t_shell *ms, char **argv, int fd_out)
 {
 	int		i;
 	char	**tmp;
 
-	i = 0;
-	if (!args || !args[0])
-		return (ft_export_print(*exp), 0);
-	while (args[i])
+	if (argv[1] == NULL)
+		return (ft_export_print(ms->exp, fd_out), 0);
+	i = 1;
+	while (argv[i])
 	{
-		if (ft_strchr(args[i], '='))
+		if (ft_strchr(argv[i], '='))
 		{
-			tmp = ft_split(args[i], '=');
+			tmp = ft_split(argv[i], '=');
 			if (!tmp)
 				return (ft_print_error(strerror(errno), NULL, NULL), 1);
-			ft_env_set(exp, tmp[0], tmp[1]);
-			ft_env_set(envp, tmp[0], tmp[1]);
+			ft_env_set(&ms->exp, tmp[0], tmp[1]);
+			ft_env_set(&ms->env, tmp[0], tmp[1]);
 			ft_strarr_free(tmp);
 		}
 		else
-			ft_env_set(exp, args[i], NULL);
+			ft_env_set(&ms->exp, argv[i], NULL);
 		i++;
 	}
 	return (0);

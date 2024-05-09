@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/09 11:19:21 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/09 14:04:32 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ CFILES += ft_env_index.c \
 			ft_env_init.c \
 			ft_valid_env_key.c \
 			ft_env_set.c \
+			ft_env_set_both.c \
 
 # SHELL UTILS
 CFILES += ft_shell_destroy.c \
@@ -101,7 +102,7 @@ $(NAME): $(LIBFT) $(OFILES) $(HEADER)
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
-	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC)"
+	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC) "
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 
 
 $(OBJ_DIR):

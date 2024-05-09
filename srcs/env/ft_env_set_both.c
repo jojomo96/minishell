@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_env_set_both.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 12:28:38 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/09 13:59:17 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/09 14:04:49 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_shell *ms, char **argv)
+int	ft_env_set_both(t_shell *ms, char *key, char *val)
 {
-	int	i;
-	int	exit_code;
+	int	ret;
 
-	i = 1;
-	exit_code = 0;
-	while (argv[i])
+	if (!ft_valid_env_key(key))
 	{
-		if (!ft_valid_env_key(argv[i]))
-		{
-			ft_print_error_env("not a valid identifier", "unset", argv[i]);
-			exit_code = 1;
-		}
-		else
-		{
-			ft_env_remove(&ms->env, argv[i]);
-			ft_env_remove(&ms->exp, argv[i]);
-		}
-		i++;
+		ft_print_error_env("not a valid identifier", "export", key);
+		return (-1);
 	}
-	return (exit_code);
+	ret = ft_env_set(&ms->env, key, val);
+	if (ret == -1)
+		return (-1);
+	ret = ft_env_set(&ms->exp, key, val);
+	if (ret == -1)
+		return (-1);
+	return (0);
 }
