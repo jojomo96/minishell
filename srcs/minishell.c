@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 08:09:50 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 08:52:11 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ t_ast_node *create_complex_ast() {
     grep_hello->u_data.leaf.argv[0] = "grep hello";
 
     echo_done->type = AST_TYPE_LEAF;
-    echo_done->u_data.leaf.argv = malloc(sizeof(char *) * 2);
-    echo_done->u_data.leaf.argv[0] = "echo done";
+    echo_done->u_data.leaf.argv = malloc(sizeof(char *) * 3);
+    echo_done->u_data.leaf.argv[0] = "echo";
+    echo_done->u_data.leaf.argv[1] = "done";
 
     redirect_node->type = AST_TYPE_NODE;
     redirect_node->u_data.s_node.op_type = OP_REDIRECT_OUT;

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 20:49:37 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 08:04:26 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 09:06:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,50 +57,58 @@ int	ft_estimate_arg_count(const char *content)
 	return (count);
 }
 
+void	process_quotes(char *content, t_range_split *r, char *quote_type,
+		int *in_quote)
+{
+	while (content[r->end] != '\0')
+	{
+		if (ft_is_quote(content[r->end]) && (*in_quote == 0
+				|| content[r->end] == *quote_type))
+		{
+			if (*in_quote)
+				*in_quote = 0;
+			else
+				*in_quote = 1;
+			*quote_type = content[r->end];
+		}
+		r->end++;
+		if (content[r->end] == ' ' && !(*in_quote))
+			break ;
+	}
+}
+
+char	**ft_split_args_norm(char *content, char **args, char quote_type,
+		int in_quote)
+{
+	t_range_split	r;
+
+	r = ft_create_range_split();
+	while (content[r.end] != '\0')
+	{
+		while (content[r.end] == ' ' && !in_quote)
+			r.end++;
+		r.start = r.end;
+		process_quotes(content, &r, &quote_type, &in_quote);
+		if (r.end > r.start)
+			args[r.i++] = ft_strndup(content + r.start, r.end - r.start);
+		if (content[r.end] != '\0')
+			r.end++;
+	}
+	args[r.i] = NULL;
+	return (args);
+}
+
 char	**ft_split_args(char *content)
 {
 	char	**args;
-	int		start;
-	int		i;
 	char	quote_type;
 	int		in_quote;
-	int		end;
 
-	start = 0;
-	start = 0;
-	end = 0;
-	i = 0;
-	quote_type = 0;
-	in_quote = 0;
 	args = (char **)malloc(sizeof(char *) * (ft_estimate_arg_count(content)
 				+ 1));
 	if (args == NULL)
-		return (NULL);
-	while (content[end] != '\0')
-	{
-		while (content[end] == ' ' && !in_quote)
-			end++;
-		start = end;
-		while (content[end] != '\0')
-		{
-			if ((content[end] == '"' || content[end] == '\'') && (in_quote == 0
-					|| content[end] == quote_type))
-			{
-				if (in_quote)
-					in_quote = 0;
-				else
-					in_quote = 1;
-				quote_type = content[end];
-			}
-			end++;
-			if (content[end] == ' ' && !in_quote)
-				break ;
-		}
-		if (end > start)
-			args[i++] = strndup(content + start, end - start);
-		if (content[end] != '\0')
-			end++;
-	}
-	args[i] = NULL;
-	return (args);
+		return (NULL); // TODO: handle error
+	quote_type = 0;
+	in_quote = 0;
+	return (ft_split_args_norm(content, args, quote_type, in_quote));
 }

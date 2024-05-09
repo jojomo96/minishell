@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 07:55:56 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 08:51:58 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,15 @@ t_ast_node						**ft_tokenize_input(char *input);
 // utils
 const char						*op_type_to_string(t_operation_type op_type);
 void							write_ast_to_dot_file(t_ast_node *root);
-char						**ft_split_args(char *content);
+char							**ft_split_args(char *content);
+
+typedef struct s_iterator_split
+{
+	int							start;
+	int							end;
+	int							i;
+}								t_range_split;
+
+t_range_split					ft_create_range_split(void);
 
 #endif

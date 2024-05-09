@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 19:33:36 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 08:49:11 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ const char	*op_type_to_string(t_operation_type op_type)
 
 void	url_encode(char *dest, const char *src)
 {
-	//TODO: remove function
 	char	*d;
 
+	// TODO: remove function
 	d = dest;
 	for (; *src; src++)
 	{
@@ -51,9 +51,10 @@ void	url_encode(char *dest, const char *src)
 
 static void	print_dot(t_ast_node *node, char *graph)
 {
-	//TODO: remove function
 	static int	nullcount = 0;
 	char		buffer[1024];
+	char		label[512];
+	int			i;
 
 	if (node == NULL)
 	{
@@ -63,8 +64,16 @@ static void	print_dot(t_ast_node *node, char *graph)
 	}
 	if (node->type == AST_TYPE_LEAF)
 	{
-		sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node,
-			node->u_data.leaf.argv[0]);
+		label[0] = '\0';
+		i = 0;
+		while (node->u_data.leaf.argv[i] != NULL)
+		{
+			if (i > 0)
+				strcat(label, " ");
+			strcat(label, node->u_data.leaf.argv[i]);
+			i++;
+		}
+		sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node, label);
 	}
 	else
 	{
@@ -72,26 +81,32 @@ static void	print_dot(t_ast_node *node, char *graph)
 			op_type_to_string(node->u_data.s_node.op_type));
 	}
 	strcat(graph, buffer);
-	if (node->u_data.s_node.left != NULL)
+	if (node->type == AST_TYPE_NODE)
 	{
-		print_dot(node->u_data.s_node.left, graph);
-		sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node,
-			(void *)node->u_data.s_node.left);
-		strcat(graph, buffer);
-	}
-	if (node->u_data.s_node.right != NULL)
-	{
-		print_dot(node->u_data.s_node.right, graph);
-		sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node,
-			(void *)node->u_data.s_node.right);
-		strcat(graph, buffer);
+		if (node->u_data.s_node.left != NULL)
+		{
+			print_dot(node->u_data.s_node.left, graph);
+			sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node,
+				(void *)node->u_data.s_node.left);
+			strcat(graph, buffer);
+		}
+		if (node->u_data.s_node.right != NULL)
+		{
+			print_dot(node->u_data.s_node.right, graph);
+			sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node,
+				(void *)node->u_data.s_node.right);
+			strcat(graph, buffer);
+		}
 	}
 }
 
 void	write_ast_to_dot_file(t_ast_node *root)
 {
-	//TODO: remove function
-	char *graph = malloc(10000);
+	char	*graph;
+	char	*encoded_graph;
+
+	// TODO: remove function
+	graph = malloc(10000);
 	if (!graph)
 	{
 		perror("Failed to allocate memory for graph");
@@ -100,7 +115,7 @@ void	write_ast_to_dot_file(t_ast_node *root)
 	strcpy(graph, "digraph AST {\n");
 	print_dot(root, graph);
 	strcat(graph, "}\n");
-	char *encoded_graph = malloc(3 * strlen(graph) + 1);
+	encoded_graph = malloc(3 * strlen(graph) + 1);
 	if (!encoded_graph)
 	{
 		perror("Failed to allocate memory for encoded graph");
@@ -108,7 +123,18 @@ void	write_ast_to_dot_file(t_ast_node *root)
 		exit(EXIT_FAILURE);
 	}
 	url_encode(encoded_graph, graph);
-	printf("\e]8;;https://dreampuf.github.io/GraphvizOnline/#%s\e\\Tree\e]8;;\e\\\n", encoded_graph);
+	printf("\e]8;;https://dreampuf.github.io/GraphvizOnline/#%s\e\\Tree\e]8;;\e\\\n",
+		encoded_graph);
 	free(graph);
 	free(encoded_graph);
+}
+
+t_range_split	ft_create_range_split(void)
+{
+	t_range_split	range;
+
+	range.start = 0;
+	range.end = 0;
+	range.i = 0;
+	return (range);
 }
