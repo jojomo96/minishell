@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 13:41:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 11:15:35 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:05:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,26 @@ static int	ft_has_nl(char *str)
 	return (1);
 }
 
-// TODO: use ast input
-int	ft_echo(char **arr)
+int	ft_echo(char **argv, int fd_out)
 {
 	int	i;
 	int	nl;
 
 	i = 1;
 	nl = 1;
-	while (arr[i] && ft_has_nl(arr[i]))
+	while (argv[i] && ft_has_nl(argv[i]))
 	{
 		nl = 0;
 		i++;
 	}
-	while (arr[i])
+	while (argv[i])
 	{
-		ft_putstr_fd(arr[i], 1);
-		if (arr[i + 1])
-			ft_putchar_fd(' ', 1);
+		ft_putstr_fd(argv[i], fd_out);
+		if (argv[i + 1])
+			ft_putchar_fd(' ', fd_out);
 		i++;
 	}
 	if (nl)
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', fd_out);
 	return (0);
 }

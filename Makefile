@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/09 13:57:40 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/09 16:44:36 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ CFILES += ft_env_index.c \
 			ft_env_init.c \
 			ft_valid_env_key.c \
 			ft_env_set.c \
+			ft_env_set_both.c \
 
 # SHELL UTILS
 CFILES += ft_shell_destroy.c \
