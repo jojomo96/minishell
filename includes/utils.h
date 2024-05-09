@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 11:13:10 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:20:16 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 char	**ft_strarr_cpy(char **arr);
 void	ft_strarr_free(char **arr);
+void	ft_strarr_sort(char **arr);
 
 int		ft_isquoted(char *str);
 

@@ -1,38 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_index.c                                     :+:      :+:    :+:   */
+/*   ft_strarr_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 17:20:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 14:53:47 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/05 12:26:11 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/05 12:30:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Gets the index of an entry in the environment.
- * @param env The environment to search in.
- * @param key The key of the entry to search for.
- * @return The index of the entry on success, -1 on error or not found.
+ * @brief Sorts a string array in ascending order.
+ * @param arr The string array to sort.
+ * @note The array must be NULL-terminated.
+ * @note The array will be sorted in place.
+ * @note The sorting is done using ft_strcmp.
  */
-int	ft_env_index(char **env, char *key)
+void	ft_strarr_sort(char **arr)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		j;
+	char	*tmp;
 
 	i = 0;
-	len = ft_strlen(key);
-	while (env[i])
+	while (arr[i])
 	{
-		if (ft_strncmp(env[i], key, len) == 0)
+		j = i + 1;
+		while (arr[j])
 		{
-			if (env[i][len] == '=' || env[i][len] == '\0')
-				return (i);
+			if (ft_strcmp(arr[i], arr[j]) > 0)
+			{
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
+			j++;
 		}
 		i++;
 	}
-	return (-1);
 }

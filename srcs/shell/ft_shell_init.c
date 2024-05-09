@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_shell_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 14:51:02 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/07 15:30:55 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:40:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO: use ast input
-int	ft_unset(t_shell *ms, char **argv)
+int	ft_shell_init(t_shell *ms, char **envp)
 {
-	int	i;
-	int	exit_code;
-
-	i = 1;
-	exit_code = 0;
-	while (argv[i])
-	{
-		if (!ft_valid_env_key(argv[i]))
-		{
-			ft_print_error_env("not a valid identifier", "unset", argv[i]);
-			exit_code = 1;
-		}
-		else
-		{
-			ft_env_remove(&ms->env, argv[i]);
-			ft_env_remove(&ms->exp, argv[i]);
-		}
-		i++;
-	}
-	return (exit_code);
+	ms->env = ft_strarr_cpy(envp);
+	if (!ms->env)
+		return (1);
+	ms->exp = ft_strarr_cpy(envp);
+	if (!ms->exp)
+		return (ft_strarr_free(ms->env), 1);
+	if (ft_env_init(&ms->env) || ft_env_init(&ms->exp))
+		return (ft_strarr_free(ms->env), ft_strarr_free(ms->exp), 1);
+	ms->exit_code = 0;
+	return (0);
 }

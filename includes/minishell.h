@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 17:16:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:37:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "environment.h"
 # include "errors.h"
 # include "gcollector.h"
+# include "shellutils.h"
 # include "utils.h"
 /* EXTERNAL INCLUDES */
 # include <stdio.h>
@@ -32,5 +33,12 @@
 # endif
 
 # define SHELL_NAME "minishell"
+
+typedef struct s_shell
+{
+	int		exit_code;
+	char	**env;
+	char	**exp;
+}			t_shell;
 
 #endif
