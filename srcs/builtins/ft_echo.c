@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 13:41:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/04 21:53:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:15:35 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	ft_has_nl(char *str)
 	has_quote = 0;
 	if (!ft_strcmp(str, "-n"))
 		return (1);
-	if ((str[0] == '\"' && str[ft_strlen(str) - 1] == '\"') || (str[0] == '\''
-			&& str[ft_strlen(str) - 1] == '\''))
+	if (ft_isquoted(str) && ft_strlen(str) > 2)
 	{
 		has_quote = 1;
 		str++;
@@ -45,7 +44,7 @@ int	ft_echo(char **arr)
 	int	i;
 	int	nl;
 
-	i = 0;
+	i = 1;
 	nl = 1;
 	while (arr[i] && ft_has_nl(arr[i]))
 	{

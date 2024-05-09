@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/03 11:44:38 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/09 11:14:06 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ CFILES += ft_env_index.c \
 
 # UTILS
 CFILES += ft_strarr_cpy.c \
-			ft_strarr_free.c
+			ft_strarr_free.c \
+			ft_isquoted.c \
 
 # ERRORS
 CFILES += ft_print_error.c
