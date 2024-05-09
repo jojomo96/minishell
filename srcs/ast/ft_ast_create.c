@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 21:21:29 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 08:15:24 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 		new_node->u_data.leaf.argv = (char **)ft_malloc(sizeof(char *) * 2);
 		if (new_node->u_data.leaf.argv == NULL)
 			return ; // TODO: handle error
-		new_node->u_data.leaf.argv[0] = content;
+		new_node->u_data.leaf.argv = ft_split_args(content);
 	}
 }
 
@@ -77,14 +77,7 @@ t_ast_node	*ft_ast_new_node(const char *input, size_t start,
 	ft_get_operation_type(content, &is_operator, &op_type);
 	ft_set_node_type(new_node, is_operator, op_type, content);
 	if (DEBUG)
-	{
-		printf("DEBUG: New node created: ");
-		if (new_node->type == AST_TYPE_LEAF)
-			printf("Leaf: %s\n", new_node->u_data.leaf.argv[0]);
-		else
-			printf("Node: %s\n",
-				op_type_to_string(new_node->u_data.s_node.op_type));
-	}
+		ft_print_debug_node_creation(new_node);
 	return (new_node);
 }
 

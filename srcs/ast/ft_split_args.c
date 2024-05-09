@@ -6,59 +6,101 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 20:49:37 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 21:38:21 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 08:04:26 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_count_substr(char const *s, char del)
+bool	ft_is_quote(char c)
 {
-	size_t	count;
-	size_t	i;
-	int		was_del;
+	return (c == '\'' || c == '\"');
+}
 
-	i = 0;
+int	ft_estimate_arg_count(const char *content)
+{
+	int		count;
+	int		in_quotes;
+	char	current_quote;
+
 	count = 0;
-	was_del = 1;
-	while (s[i])
+	in_quotes = 0;
+	current_quote = 0;
+	while (*content)
 	{
-		if (s[i] != del)
+		while (*content == ' ')
+			content++;
+		if (*content == '\0')
+			break ;
+		if (!in_quotes && *content != ' ')
+			count++;
+		while (*content)
 		{
-			if (was_del)
-				count++;
-			was_del = 0;
+			if (*content == '"' || *content == '\'')
+			{
+				if (in_quotes && *content == current_quote)
+					in_quotes = 0;
+				else if (!in_quotes)
+				{
+					in_quotes = 1;
+					current_quote = *content;
+				}
+			}
+			content++;
+			if (!in_quotes && *content == ' ')
+				break ;
+			if (!in_quotes && (*content != ' ' && *content != '"'
+					&& *content != '\''))
+				break ;
 		}
-		else
-			was_del = 1;
-		i++;
 	}
 	return (count);
 }
 
-static char	**ft_split_args(char *content)
+char	**ft_split_args(char *content)
 {
 	char	**args;
 	int		start;
-	int		end;
-	char	quote_type;
 	int		i;
+	char	quote_type;
+	int		in_quote;
+	int		end;
 
 	start = 0;
+	start = 0;
 	end = 0;
-	args = (char **)ft_malloc(sizeof(char *) * ft_count_substr(content, ' ')
-			+ 1);
-	if (args == NULL)
-		return (NULL); // TODO: handle error
-	args[0] = NULL;
 	i = 0;
-	while (*content)
+	quote_type = 0;
+	in_quote = 0;
+	args = (char **)malloc(sizeof(char *) * (ft_estimate_arg_count(content)
+				+ 1));
+	if (args == NULL)
+		return (NULL);
+	while (content[end] != '\0')
 	{
-		if (*content == '\'' || *content == '\"')
+		while (content[end] == ' ' && !in_quote)
+			end++;
+		start = end;
+		while (content[end] != '\0')
 		{
-			quote_type = *content;
-			while (*content && *content != quote_type)
-				content++;
+			if ((content[end] == '"' || content[end] == '\'') && (in_quote == 0
+					|| content[end] == quote_type))
+			{
+				if (in_quote)
+					in_quote = 0;
+				else
+					in_quote = 1;
+				quote_type = content[end];
+			}
+			end++;
+			if (content[end] == ' ' && !in_quote)
+				break ;
 		}
+		if (end > start)
+			args[i++] = strndup(content + start, end - start);
+		if (content[end] != '\0')
+			end++;
 	}
+	args[i] = NULL;
+	return (args);
 }

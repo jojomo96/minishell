@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/08 20:20:29 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 08:09:50 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp)
 
 	t_ast_node	**nodes;
 
-	nodes = ft_tokenize_input("echo hello>file.txt | grep hello && echo done");
+	nodes = ft_tokenize_input("echo hello> \"file.txt test\"test \"hallo' test' \"| grep hello && echo done");
 	if (!nodes)
 		return (1);
 

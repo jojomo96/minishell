@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/08 20:03:29 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/09 08:13:30 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,9 +67,11 @@ CFILES += ft_malloc.c \
 CFILES += ft_ast_create.c \
 			ft_ast_utils.c \
 			ft_tokenizer.c \
+			ft_split_args.c \
 
 # DEBUG
-CFILES += debug_printgc.c
+CFILES += debug_printgc.c \
+			ft_debug_ast.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 HEADER := $(INC_DIR)/minishell.h \
