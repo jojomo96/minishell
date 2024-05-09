@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/09 16:44:36 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/09 17:15:29 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,17 @@ INC_DIR := includes
 # FILES
 vpath %.c $(SRC_DIRS)
 vpath %.h $(INC_DIR)
+
 CFILES := \
 		minishell.c \
 
 # BUILTINS
-CFILES += ft_pwd.c ft_env.c ft_cd.c ft_unset.c ft_export.c ft_echo.c
+CFILES += ft_pwd.c \
+			ft_env.c \
+			ft_cd.c \
+			ft_unset.c \
+			ft_export.c \
+			ft_echo.c \
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -87,8 +93,19 @@ CFILES += debug_printgc.c \
 			ft_debug_ast.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
-HEADER := $(INC_DIR)/minishell.h \
-			$(INC_DIR)/ast.h
+
+HEADER_FILES := minishell.h \
+				ast.h \
+				builtins.h \
+				debug.h \
+				environment.h \
+				errors.h \
+				gcollector.h \
+				shellutils.h \
+				utils.h \
+
+HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
+
 INCLUDES := -I$(INC_DIR)
 
 # LIBFT
@@ -101,7 +118,7 @@ INCLUDES += -I$(LIBFT_DIR)
 # RULES
 all: ascii $(NAME)
 
-$(NAME): $(LIBFT) $(OFILES) $(HEADER)
+$(NAME): $(LIBFT) $(OFILES)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
 	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS)
 	@if [ -f $(NAME) ]; then \
@@ -112,7 +129,7 @@ $(NAME): $(LIBFT) $(OFILES) $(HEADER)
 		echo "$(RED)$(NAME) failed to compile$(NC)"; \
 	fi
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC) "
