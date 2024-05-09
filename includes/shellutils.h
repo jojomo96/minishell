@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   shellutils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 12:56:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:35:43 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/05/07 15:34:15 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:42:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef SHELLUTILS_H
+# define SHELLUTILS_H
 
 # include "minishell.h"
 
-void	ft_print_error(char *error, char *arg1, char *arg2);
-void	ft_print_syntax_error(char *arg);
-void	ft_print_error_env(char *error, char *arg1, char *key);
+typedef struct s_shell	t_shell;
+
+int						ft_shell_init(t_shell *ms, char **envp);
+int						ft_destroy_shell(t_shell *ms);
 
 #endif

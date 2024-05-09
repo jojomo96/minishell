@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:20:03 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 13:37:45 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,11 @@ int	main(int argc, char **argv, char **envp)
 	build_ast(&ast, nodes);
     // write_ast_to_dot_file(ast);
 	ft_gc_freeall();
-	return (0);
+
+	t_shell	ms;
+
+	(void)argv;
+	if (argc != 1 || ft_shell_init(&ms, envp))
+		return (1);
+	return (ft_destroy_shell(&ms));
 }

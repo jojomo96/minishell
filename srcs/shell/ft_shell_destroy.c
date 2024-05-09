@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_shell_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 12:56:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:35:43 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 15:33:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-void	ft_print_error(char *error, char *arg1, char *arg2);
-void	ft_print_syntax_error(char *arg);
-void	ft_print_error_env(char *error, char *arg1, char *key);
-
-#endif
+int	ft_destroy_shell(t_shell *ms)
+{
+	ft_strarr_free(ms->env);
+	ft_strarr_free(ms->exp);
+	ft_gc_freeall();
+	return (ms->exit_code);
+}

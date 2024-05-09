@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 11:19:50 by flfische         ###   ########.fr       */
+/*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/07 14:51:02 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+// TODO: use ast input
+int	ft_unset(t_shell *ms, char **argv)
+{
+	int	i;
+	int	exit_code;
 
-typedef struct s_shell	t_shell;
-
-int						ft_pwd(void);
-int						ft_env(char ***envp);
-int						ft_cd(char ***env, char *path);
-int						ft_unset(t_shell *ms, char **keys);
-int						ft_export(char ***env, char ***exp, char **args);
-int						ft_echo(char **args);
-
-// TODO:
-// ft_echo
-// ft_cd
-// ft_export
-// ft_unset
-// ft_exit
-
-#endif
+	i = 1;
+	exit_code = 0;
+	while (argv[i])
+	{
+		if (!ft_valid_env_key(argv[i]))
+		{
+			ft_print_error_env("not a valid identifier", "unset", argv[i]);
+			exit_code = 1;
+		}
+		else
+		{
+			ft_env_remove(&ms->env, argv[i]);
+			ft_env_remove(&ms->exp, argv[i]);
+		}
+		i++;
+	}
+	return (exit_code);
+}

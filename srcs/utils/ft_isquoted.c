@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_isquoted.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 11:19:50 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/09 11:12:19 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/09 11:14:56 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-typedef struct s_shell	t_shell;
-
-int						ft_pwd(void);
-int						ft_env(char ***envp);
-int						ft_cd(char ***env, char *path);
-int						ft_unset(t_shell *ms, char **keys);
-int						ft_export(char ***env, char ***exp, char **args);
-int						ft_echo(char **args);
-
-// TODO:
-// ft_echo
-// ft_cd
-// ft_export
-// ft_unset
-// ft_exit
-
-#endif
+/**
+ * @brief Check if a string is quoted.
+ * @param str The string to check.
+ * @return 1 if the string is quoted, 0 otherwise.
+ */
+int	ft_isquoted(char *str)
+{
+	if (str[0] == '\"' && str[ft_strlen(str) - 1] == '\"')
+		return (1);
+	if (str[0] == '\'' && str[ft_strlen(str) - 1] == '\'')
+		return (1);
+	return (0);
+}
