@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/09 14:04:32 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/09 16:44:36 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
@@ -21,6 +21,7 @@ SRC_DIRS := srcs \
 			srcs/env \
 			srcs/errors \
 			srcs/gcollector \
+			srcs/ast \
 			srcs/shell \
 
 
@@ -57,6 +58,8 @@ CFILES += ft_shell_destroy.c \
 # UTILS
 CFILES += ft_strarr_cpy.c \
 			ft_strarr_free.c \
+			ft_realloc.c \
+			ft_strndup.c \
 			ft_isquoted.c \
 			ft_strarr_sort.c \
 
@@ -71,11 +74,21 @@ CFILES += ft_malloc.c \
 			ft_gc_set.c \
 			ft_gc_get.c \
 
+# AST
+CFILES += ft_ast_create.c \
+			ft_ast_utils.c \
+			ft_tokenizer.c \
+			ft_split_args.c \
+			ft_ast_build.c \
+			ft_ast_percendence.c \
+
 # DEBUG
-CFILES += debug_printgc.c
+CFILES += debug_printgc.c \
+			ft_debug_ast.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
-HEADER := $(INC_DIR)/minishell.h
+HEADER := $(INC_DIR)/minishell.h \
+			$(INC_DIR)/ast.h
 INCLUDES := -I$(INC_DIR)
 
 # LIBFT
@@ -103,7 +116,7 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC) "
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
 	@echo "$(YELLOW)Creating obj directory...$(NC)"

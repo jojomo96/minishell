@@ -23,3 +23,7 @@ test*
 Thumbs.db
 .vscode
 .*.swp
+
+*.dot
+.venv
+*.svg

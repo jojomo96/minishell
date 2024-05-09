@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz <jmoritz@studen.42heilbronn.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 10:49:23 by flfische          #+#    #+#              #
-#    Updated: 2024/04/26 10:02:21 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/04 09:16:31 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ MEMORY_FILES := \
 				ft_memcmp.c \
 				ft_memmove.c \
 				ft_memset.c \
-				ft_realloc_str.c
+				ft_realloc_str.c \
 
 CHAR_FILES := \
 				ft_isalnum.c \
@@ -99,7 +99,7 @@ PUT_FILES := \
 				ft_putstrarr_fd.c \
 				ft_putintarr_fd.c
 
-GNL_FILES := get_next_line.c 
+GNL_FILES := get_next_line.c
 
 DLIST_SRCS := \
 				ft_dlist_edit.c \
@@ -128,7 +128,7 @@ NAME := libft.a
 all: ascii_art $(NAME)
 
 
-$(NAME): $(OFILES) 
+$(NAME): $(OFILES)
 	@printf "\n$(YELLOW)Creating $(NAME)$(NC)\n"
 	@ar rcs $(NAME) $(OFILES)
 # only print if the file was created

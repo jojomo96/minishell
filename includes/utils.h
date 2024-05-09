@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 11:20:16 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:36:50 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 char	**ft_strarr_cpy(char **arr);
 void	ft_strarr_free(char **arr);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char	*ft_strndup(const char *s, size_t n);
 void	ft_strarr_sort(char **arr);
 
 int		ft_isquoted(char *str);

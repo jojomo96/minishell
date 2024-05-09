@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:58:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/29 16:29:09 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:38:01 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,12 @@ void	ft_print_error_env(char *error, char *arg1, char *key)
 		ft_putstr_fd("': ", STDERR_FILENO);
 	}
 	ft_putendl_fd(error, STDERR_FILENO);
+}
+
+void	ft_print_syntax_error(char *arg)
+{
+	ft_putstrcolon_fd(SHELL_NAME, STDERR_FILENO);
+	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
 }
