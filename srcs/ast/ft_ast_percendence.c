@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ast_percendence.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:55:21 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 15:45:58 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 17:05:49 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	ft_node_precedence(t_ast_node *node)
 	else if (node->u_data.s_node.op_type == OP_AND
 		|| node->u_data.s_node.op_type == OP_OR)
 		return (4);
-	else if (node->u_data.s_node.op_type == OP_SUBSHELL)
-		return (3);
 	else
 		return (0);
 }
