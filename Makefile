@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/07 15:37:40 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/09 11:19:21 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFILES := \
 		minishell.c \
 
 # BUILTINS
-CFILES += ft_pwd.c ft_env.c ft_cd.c ft_unset.c ft_export.c
+CFILES += ft_pwd.c ft_env.c ft_cd.c ft_unset.c ft_export.c ft_echo.c
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -56,6 +56,7 @@ CFILES += ft_shell_destroy.c \
 # UTILS
 CFILES += ft_strarr_cpy.c \
 			ft_strarr_free.c \
+			ft_isquoted.c \
 			ft_strarr_sort.c \
 
 # ERRORS

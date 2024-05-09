@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/07 14:50:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:19:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int						ft_env(char ***envp);
 int						ft_cd(char ***env, char *path);
 int						ft_unset(t_shell *ms, char **keys);
 int						ft_export(char ***env, char ***exp, char **args);
+int						ft_echo(char **args);
 
 // TODO:
 // ft_echo
