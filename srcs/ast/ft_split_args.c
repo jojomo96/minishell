@@ -6,18 +6,38 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 20:49:37 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 09:06:43 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 09:17:29 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	ft_is_quote(char c)
+// helper function for ft_estimate_arg_count
+static void	process_segment(const char **content, int *in_quotes,
+		char *current_quote)
 {
-	return (c == '\'' || c == '\"');
+	while (**content)
+	{
+		if (**content == '"' || **content == '\'')
+		{
+			if (*in_quotes && **content == *current_quote)
+				*in_quotes = 0;
+			else if (!*in_quotes)
+			{
+				*in_quotes = 1;
+				*current_quote = **content;
+			}
+		}
+		(*content)++;
+		if (!*in_quotes && **content == ' ')
+			break ;
+		if (!*in_quotes && (**content != ' ' && **content != '"'
+				&& **content != '\''))
+			break ;
+	}
 }
 
-int	ft_estimate_arg_count(const char *content)
+static int	ft_estimate_arg_count(const char *content)
 {
 	int		count;
 	int		in_quotes;
@@ -34,36 +54,19 @@ int	ft_estimate_arg_count(const char *content)
 			break ;
 		if (!in_quotes && *content != ' ')
 			count++;
-		while (*content)
-		{
-			if (*content == '"' || *content == '\'')
-			{
-				if (in_quotes && *content == current_quote)
-					in_quotes = 0;
-				else if (!in_quotes)
-				{
-					in_quotes = 1;
-					current_quote = *content;
-				}
-			}
-			content++;
-			if (!in_quotes && *content == ' ')
-				break ;
-			if (!in_quotes && (*content != ' ' && *content != '"'
-					&& *content != '\''))
-				break ;
-		}
+		process_segment(&content, &in_quotes, &current_quote);
 	}
 	return (count);
 }
 
-void	process_quotes(char *content, t_range_split *r, char *quote_type,
+// helper function fot ft_spin_args_norm
+static void	process_quotes(char *content, t_range_split *r, char *quote_type,
 		int *in_quote)
 {
 	while (content[r->end] != '\0')
 	{
-		if (ft_is_quote(content[r->end]) && (*in_quote == 0
-				|| content[r->end] == *quote_type))
+		if ((content[r->end] == '\'' || content[r->end] == '\"')
+			&& (*in_quote == 0 || content[r->end] == *quote_type))
 		{
 			if (*in_quote)
 				*in_quote = 0;
@@ -77,7 +80,7 @@ void	process_quotes(char *content, t_range_split *r, char *quote_type,
 	}
 }
 
-char	**ft_split_args_norm(char *content, char **args, char quote_type,
+static char	**ft_split_args_norm(char *content, char **args, char quote_type,
 		int in_quote)
 {
 	t_range_split	r;

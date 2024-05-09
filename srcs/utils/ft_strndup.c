@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:42:04 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/08 17:47:04 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 09:15:36 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strndup(const char *s, size_t n)
 	dup = ft_malloc(len + 1);
 	if (!dup)
 	{
-		return (NULL);
+		return (NULL); //TODO: error handling
 	}
 	while (i < len)
 	{
