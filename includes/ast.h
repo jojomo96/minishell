@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 15:05:09 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:40:16 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ typedef enum e_operation_type
 	OP_HEREDOC,
 	OP_PIPE,
 	OP_AND,
-	OP_OR,
-	OP_SUBSHELL
+	OP_OR
 }								t_operation_type;
 
 typedef struct s_ast_leaf

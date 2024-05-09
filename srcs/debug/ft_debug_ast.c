@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 08:11:00 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 14:59:00 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:41:46 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	ft_print_debuge_node_array(t_ast_node **nodes)
 
 	i = 0;
 	printf("DEBUG: Printing node array\n");
-	// ft_print_debug_node(nodes[0]);
-
 	while (nodes && nodes[i])
 	{
 		printf("	Node[%d]: ", i);

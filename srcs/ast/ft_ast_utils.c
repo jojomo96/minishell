@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 15:33:27 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:41:00 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ const char	*op_type_to_string(t_operation_type op_type)
 {
 	int			num_op_types;
 	const char	*op_type_strings[] = {"<", ">",
-			">>", "<<", "|", "&&", "||",
-			"OP_SUBSHELL"};
+			">>", "<<", "|", "&&", "||"};
 
 	num_op_types = sizeof(op_type_strings) / sizeof(op_type_strings[0]);
 	if ((int)op_type >= num_op_types)
