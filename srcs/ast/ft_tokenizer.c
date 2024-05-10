@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:44:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:18:07 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/10 10:09:04 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static int	ft_starts_with_operator(const char *input)
 	i = 0;
 	while (double_char_operators[i])
 	{
-		if (strncmp(input, double_char_operators[i], 2) == 0)
+		if (ft_strncmp(input, double_char_operators[i], 2) == 0)
 			return (2);
 		i++;
 	}
 	i = 0;
 	while (single_char_operators[i])
 	{
-		if (strncmp(input, single_char_operators[i], 1) == 0)
+		if (ft_strncmp(input, single_char_operators[i], 1) == 0)
 			return (1);
 		i++;
 	}
