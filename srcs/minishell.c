@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 16:03:46 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/10 10:09:58 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	ast = NULL;
 	build_ast(&ast, nodes);
-    write_ast_to_dot_file(ast);
+	// write_ast_to_dot_file(ast);
 	return (ft_destroy_shell(&ms));
 }
