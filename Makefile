@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/09 17:15:29 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/10 11:02:36 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_DIRS := srcs \
 			srcs/errors \
 			srcs/gcollector \
 			srcs/ast \
+			srcs/ast/operations \
 			srcs/shell \
 
 
@@ -68,6 +69,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_strndup.c \
 			ft_isquoted.c \
 			ft_strarr_sort.c \
+			ft_strarr_len.c \
 
 # ERRORS
 CFILES += ft_print_error.c
@@ -87,6 +89,9 @@ CFILES += ft_ast_create.c \
 			ft_split_args.c \
 			ft_ast_build.c \
 			ft_ast_percendence.c \
+
+# AST OPPERATIONS
+CFILES += ft_ast_move_arguments.c \
 
 # DEBUG
 CFILES += debug_printgc.c \

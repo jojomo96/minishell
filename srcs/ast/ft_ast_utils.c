@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/10 10:05:34 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/10 11:43:41 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,56 +48,91 @@ void	url_encode(char *dest, const char *src)
 	*d = '\0';
 }
 
-static void	print_dot(t_ast_node *node, char *graph)
+static void print_dot(t_ast_node *node, char *graph)
 {
-	static int	nullcount = 0;
-	char		buffer[1024];
-	char		label[512];
-	int			i;
+    static int nullcount = 0;
+    char buffer[1024];
+    char label[512];
+    int i;
 
-	if (node == NULL)
-	{
-		sprintf(buffer, "    null%d [shape=point];\n", nullcount++);
-		strcat(graph, buffer);
-		return ;
-	}
-	if (node->type == AST_TYPE_LEAF)
-	{
-		label[0] = '\0';
-		i = 0;
-		while (node->u_data.leaf.argv[i] != NULL)
-		{
-			if (i > 0)
-				strcat(label, " ");
-			strcat(label, node->u_data.leaf.argv[i]);
-			i++;
-		}
-		sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node, label);
-	}
-	else
-	{
-		sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node,
-			op_type_to_string(node->u_data.s_node.op_type));
-	}
-	strcat(graph, buffer);
-	if (node->type == AST_TYPE_NODE)
-	{
-		if (node->u_data.s_node.left != NULL)
-		{
-			print_dot(node->u_data.s_node.left, graph);
-			sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node,
-				(void *)node->u_data.s_node.left);
-			strcat(graph, buffer);
-		}
-		if (node->u_data.s_node.right != NULL)
-		{
-			print_dot(node->u_data.s_node.right, graph);
-			sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node,
-				(void *)node->u_data.s_node.right);
-			strcat(graph, buffer);
-		}
-	}
+    if (node == NULL)
+    {
+        sprintf(buffer, "    null%d [shape=point];\n", nullcount++);
+        strcat(graph, buffer);
+        return;
+    }
+
+    if (node->type == AST_TYPE_LEAF)
+    {
+        label[0] = '\0';
+        i = 0;
+        while (node->u_data.leaf.argv[i] != NULL)
+        {
+            if (i > 0)
+                strcat(label, " ");
+            strcat(label, node->u_data.leaf.argv[i]);
+            i++;
+        }
+        sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node, label);
+    }
+    else if (node->type == AST_TYPE_NODE)
+    {
+        // Set shape to diamond for AST_TYPE_NODE
+        sprintf(buffer, "    \"%p\" [shape=diamond, label=\"%s\"];\n", (void *)node,
+            op_type_to_string(node->u_data.s_node.op_type));
+    }
+    else
+    {
+        // Default case for other types, could also use a specific shape if needed
+        sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node,
+            op_type_to_string(node->u_data.s_node.op_type));
+    }
+
+    strcat(graph, buffer);
+
+    if (node->type == AST_TYPE_NODE)
+    {
+        if (node->u_data.s_node.left != NULL)
+        {
+            print_dot(node->u_data.s_node.left, graph);
+            sprintf(buffer, "    \"%p\" [color=red];\n", (void *)node->u_data.s_node.left);  // Set color for left node
+            strcat(graph, buffer);
+            sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node, (void *)node->u_data.s_node.left);
+            strcat(graph, buffer);
+        }
+        if (node->u_data.s_node.right != NULL)
+        {
+            print_dot(node->u_data.s_node.right, graph);
+            sprintf(buffer, "    \"%p\" [color=green];\n", (void *)node->u_data.s_node.right);  // Set color for right node
+            strcat(graph, buffer);
+            sprintf(buffer, "    \"%p\" -> \"%p\";\n", (void *)node, (void *)node->u_data.s_node.right);
+            strcat(graph, buffer);
+        }
+    }
 }
+
+void start_graph(t_ast_node *root, char *graph)
+{
+    strcpy(graph, "digraph AST {\n");
+    print_dot(root, graph);
+    strcat(graph, "    // Legend\n");
+    strcat(graph, "    subgraph cluster_01 {\n");
+    strcat(graph, "        label = \"Legend\";\n");
+    strcat(graph, "        color = black;\n");
+    strcat(graph, "        style = \"filled\";\n");
+    strcat(graph, "        fillcolor = \"lightgrey\";\n");
+    strcat(graph, "        key [label=<<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" cellborder=\"0\">\n");
+    strcat(graph, "               <tr><td align=\"right\" port=\"i1\"> </td><td bgcolor=\"red\">Left</td></tr>\n");
+    strcat(graph, "               <tr><td align=\"right\" port=\"i2\"> </td><td bgcolor=\"green\">Right</td></tr>\n");
+    strcat(graph, "             </table>> shape=none];\n");
+    strcat(graph, "        rankdir=LR;\n");
+    strcat(graph, "        node [style=invis];\n");
+    strcat(graph, "        edge [style=invis];\n");
+    strcat(graph, "    }\n");
+    strcat(graph, "}\n");
+}
+
+
 
 void	write_ast_to_dot_file(t_ast_node *root)
 {
@@ -111,9 +146,7 @@ void	write_ast_to_dot_file(t_ast_node *root)
 		perror("Failed to allocate memory for graph");
 		exit(EXIT_FAILURE);
 	}
-	strcpy(graph, "digraph AST {\n");
-	print_dot(root, graph);
-	strcat(graph, "}\n");
+	start_graph(root, graph);
 	encoded_graph = malloc(3 * strlen(graph) + 1);
 	if (!encoded_graph)
 	{
