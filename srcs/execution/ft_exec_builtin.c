@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:22:13 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 14:56:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:11:12 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exec_builtin(t_shell *ms, t_builtin builtin, char **argv, int fd_out)
 	if (builtin == BUILTIN_ECHO)
 		ms->exit_code = ft_echo(argv, fd_out);
 	else if (builtin == BUILTIN_CD)
-		ms->exit_code = ft_cd(ms, argv[1], fd_out);
+		ms->exit_code = ft_cd(ms, argv, fd_out);
 	else if (builtin == BUILTIN_PWD)
 		ms->exit_code = ft_pwd(fd_out);
 	else if (builtin == BUILTIN_EXPORT)

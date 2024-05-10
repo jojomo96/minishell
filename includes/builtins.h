@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 11:44:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:10:58 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_builtin
 
 int						ft_pwd(int fd_out);
 int						ft_env(t_shell *ms, int fd_out);
-int						ft_cd(t_shell *ms, char *path, int fd_out);
+int						ft_cd(t_shell *ms, char **argv, int fd_out);
 int						ft_unset(t_shell *ms, char **argv);
 int						ft_export(t_shell *ms, char **argv, int fd_out);
 int						ft_echo(char **argv, int fd_out);
