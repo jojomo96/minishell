@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:20:36 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 14:11:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/10 09:53:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int						ft_cd(t_shell *ms, char *path, int fd_out);
 int						ft_unset(t_shell *ms, char **argv);
 int						ft_export(t_shell *ms, char **argv, int fd_out);
 int						ft_echo(char **argv, int fd_out);
-
-// TODO:
-// ft_exit
+void					ft_exit(t_shell *ms, char **argv, int fd_out);
 
 #endif
