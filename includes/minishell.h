@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:36:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/10 11:45:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "debug.h"
 # include "environment.h"
 # include "errors.h"
+# include "execution.h"
 # include "gcollector.h"
 # include "shellutils.h"
 # include "utils.h"
@@ -28,7 +29,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
 
 # ifndef DEBUG
 #  define DEBUG 1
