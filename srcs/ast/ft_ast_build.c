@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:05:31 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:16:23 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/10 10:01:39 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	ft_remove_surrounding_parenthesis(t_ast_node ***nodes)
 	new_nodes[pre_size - 2] = NULL;
 	temp = *nodes;
 	*nodes = new_nodes;
-	free(temp);
+	ft_free(temp);
 }
 
 void	ft_handle_ast_type_leaf_or_perentisis(t_ast_node **ast,

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:41:00 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/10 10:05:34 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,27 @@ void	write_ast_to_dot_file(t_ast_node *root)
 		encoded_graph);
 	char *url = ft_strjoin("https://dreampuf.github.io/GraphvizOnline/#", encoded_graph);
 	char *args[] = {"open", url, NULL};
-	execve("/usr/bin/open", args, NULL);
+
+	pid_t pid = fork();
+	if (pid == -1)
+	{
+		perror("Failed to fork");
+		free(graph);
+		free(encoded_graph);
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		execve("/usr/bin/open", args, NULL);
+		perror("Failed to execute open");
+		free(graph);
+		free(encoded_graph);
+		exit(EXIT_FAILURE);
+	} else {
+		waitpid(pid, NULL, 0);
+	}
 
 	free(url);
-
-
-	printf("https://dreampuf.github.io/GraphvizOnline/#%s\n",
-		encoded_graph);
 
 	free(graph);
 	free(encoded_graph);
