@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:37:25 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 10:12:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/11 13:22:16 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	ft_isdigits(char *str)
 
 void	ft_exit(t_shell *ms, char **argv, int fd_out)
 {
-	ft_putendl_fd("exit", fd_out);
+	if (isatty(fileno(stdin)))
+		ft_putendl_fd("exit", fd_out);
 	if (argv[1])
 	{
 		if (argv[2])
