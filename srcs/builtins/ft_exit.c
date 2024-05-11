@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:37:25 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/11 13:53:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:45:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_exit(t_shell *ms, char **argv, int fd_out)
 			ft_destroy_shell(ms, 1);
 		}
 		ms->exit_code = ft_atoi(argv[1]);
+		ms->exit_code = ms->exit_code % 256;
 	}
 	if (isatty(fileno(stdin)))
 		ft_putendl_fd("exit", STDERR_FILENO);
