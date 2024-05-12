@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/10 11:48:55 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/12 10:35:13 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ CFILES += ft_execute.c \
 # DEBUG
 CFILES += debug_printgc.c \
 			ft_debug_ast.c \
+			debug_message.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
@@ -111,6 +112,7 @@ HEADER_FILES := minishell.h \
 				shellutils.h \
 				utils.h \
 				execution.h \
+				colors.h \
 
 HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 

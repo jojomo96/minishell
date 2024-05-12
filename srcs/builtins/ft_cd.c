@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:02:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 15:10:24 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:36:57 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	ft_cd(t_shell *ms, char **argv, int fd_out)
 	int		ret;
 	char	*path;
 
+	debug_message("executing builtin: cd");
 	path = argv[0];
 	if (argv[2])
 	{

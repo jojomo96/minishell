@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   debug_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:38:32 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/12 10:32:44 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/12 10:35:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_shell *ms, char **argv)
+void	debug_message(char *message)
 {
-	int	i;
-	int	exit_code;
-
-	debug_message("executing builtin: unset");
-	i = 1;
-	exit_code = 0;
-	while (argv[i])
+	if (DEBUG)
 	{
-		if (!ft_valid_env_key(argv[i]))
-		{
-			ft_print_error_env("not a valid identifier", "unset", argv[i]);
-			exit_code = 1;
-		}
-		else
-		{
-			ft_env_remove(&ms->env, argv[i]);
-			ft_env_remove(&ms->exp, argv[i]);
-		}
-		i++;
+		ft_putstr_fd(BOLD, STDERR_FILENO);
+		ft_putstr_fd(UNDERLINE, STDERR_FILENO);
+		ft_putstr_fd(BLUE, STDERR_FILENO);
+		ft_putstr_fd("DEBUG:", STDERR_FILENO);
+		ft_putstr_fd(RESET, STDERR_FILENO);
+		ft_putstr_fd(" ", STDERR_FILENO);
+		ft_putstr_fd(BLUE, STDERR_FILENO);
+		ft_putendl_fd(message, STDERR_FILENO);
+		ft_putstr_fd(RESET, STDERR_FILENO);
 	}
-	return (exit_code);
 }

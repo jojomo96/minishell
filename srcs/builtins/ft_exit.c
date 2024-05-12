@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:37:25 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/11 14:45:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:37:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	ft_isdigits(char *str)
 void	ft_exit(t_shell *ms, char **argv, int fd_out)
 {
 	(void)fd_out;
+	debug_message("executing builtin: echo");
 	if (argv[1])
 	{
 		if (argv[2])

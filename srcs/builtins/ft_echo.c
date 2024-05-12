@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 13:41:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 14:05:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:36:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	ft_echo(char **argv, int fd_out)
 	int	i;
 	int	nl;
 
+	debug_message("executing builtin: echo");
 	i = 1;
 	nl = 1;
 	while (argv[i] && ft_has_nl(argv[i]))

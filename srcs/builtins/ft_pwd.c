@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:21:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:09:04 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:38:08 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_pwd(int fd_out)
 {
 	char	*pwd;
 
+	debug_message("executing builtin: pwd");
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 	{
