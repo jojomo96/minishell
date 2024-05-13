@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 14:21:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:24:19 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 
 
 // Function to split the string while keeping the delimiter
-char	**splitString(const char *str, bool (delim)(char c), int *count)
+char	**ft_split_on_delim(const char *str, bool(delim)(char c))
 {
-	int		len;
 	int		i;
 	int		j;
 	int		k;
 	char	**result;
 	char	*temp;
 
-	len = ft_strlen(str);
-	result = malloc(sizeof(char *) * (len + 1));
-	temp = malloc(sizeof(char) * (len + 2));
+	result = malloc(sizeof(char *) * (ft_strlen(str) + 1));
+	temp = malloc(sizeof(char) * (ft_strlen(str) + 2));
 	i = 0;
 	j = 0;
 	k = 0;
@@ -39,7 +37,18 @@ char	**splitString(const char *str, bool (delim)(char c), int *count)
 			temp[j] = '\0';
 			result[k++] = ft_strdup(temp);
 			j = 0;
-			temp[j++] = str[i++];
+			temp[j] = str[i];
+			while (str[i] == '\'' || str[i] == '\"' || str[i] == ' ')
+			{
+				i++;
+				j++;
+				temp[j] = '\0';
+				result[k++] = ft_strdup(temp);
+				j = 0;
+				temp[j] = str[i];
+			}
+			i++;
+			j++;
 		}
 	}
 	if (j != 0)
@@ -49,6 +58,5 @@ char	**splitString(const char *str, bool (delim)(char c), int *count)
 	}
 	free(temp);
 	result[k] = NULL;
-	*count = k;
 	return (result);
 }

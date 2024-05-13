@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/13 14:28:19 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:20:55 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 
 	// char	**env;
-	nodes = ft_tokenize_input("echo $USEr$?$test \'$USER\'");
+	nodes = ft_tokenize_input("\"echo test'hal lo$US ER'\" test");
 	if (!nodes)
 		return (1);
 	ast = NULL;
