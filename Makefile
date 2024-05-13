@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/12 10:35:13 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/13 13:14:30 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ CFILES += ft_env_index.c \
 # SHELL UTILS
 CFILES += ft_shell_destroy.c \
 			ft_shell_init.c \
+			ft_shell_static.c \
 
 # UTILS
 CFILES += ft_strarr_cpy.c \
