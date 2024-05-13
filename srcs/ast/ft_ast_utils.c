@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 08:57:45 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 11:08:23 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,24 @@ void	url_encode(char *dest, const char *src)
 	*d = '\0';
 }
 
-static void print_dot(t_ast_node *node, char *graph)
-{
+
+static void escape_quotes(const char *input, char *output) {
+    while (*input) {
+        if (*input == '\"') {
+            *output++ = '\\'; // Add a backslash before the quote
+        } else if (*input == '\'') {
+			*output++ = '\\'; // Double the backslashes
+		}
+        *output++ = *input++;
+    }
+    *output = '\0'; // Null-terminate the output string
+}
+
+static void print_dot(t_ast_node *node, char *graph) {
     static int nullcount = 0;
     char buffer[1024];
     char label[512];
+    char escaped_label[1024]; // Larger buffer to account for escaped characters
     int i;
 
     if (node == NULL)
@@ -73,10 +86,9 @@ static void print_dot(t_ast_node *node, char *graph)
             strcat(label, node->u_data.leaf.argv[i]);
             i++;
         }
-        sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node, label);
-    }
-    else if (node->type == AST_TYPE_NODE)
-    {
+        escape_quotes(label, escaped_label); // Escape any quotes in label
+        sprintf(buffer, "    \"%p\" [label=\"%s\"];\n", (void *)node, escaped_label);
+    } else if (node->type == AST_TYPE_NODE) {
         // Set shape to diamond for AST_TYPE_NODE
         sprintf(buffer, "    \"%p\" [shape=diamond, label=\"%s\"];\n", (void *)node,
             op_type_to_string(node->u_data.s_node.op_type));

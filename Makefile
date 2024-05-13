@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/13 09:15:23 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/13 13:17:57 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_isquoted.c \
 			ft_strarr_sort.c \
 			ft_strarr_len.c \
+			ft_split_multi.c \
 
 # ERRORS
 CFILES += ft_print_error.c
@@ -92,7 +93,9 @@ CFILES += ft_ast_create.c \
 
 # AST OPPERATIONS
 CFILES += ft_ast_move_arguments.c \
-			fr_traverse_and_process.c \
+			ft_traverse_and_process.c \
+			ft_expand_env_variables.c \
+
 
 # DEBUG
 CFILES += debug_printgc.c \

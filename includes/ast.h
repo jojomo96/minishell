@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 09:49:25 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 10:29:47 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void							ft_ast_move_arguments(t_ast_node *node);
 void							fr_traverse_and_process(t_ast_node *node,
 									t_ast_node_type node_type,
 									void (*process)(t_ast_node *));
+void							ft_expand_env_variables(t_ast_node *node);
 
 typedef struct s_iterator_split
 {
