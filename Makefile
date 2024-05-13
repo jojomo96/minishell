@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/13 13:14:30 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/13 16:49:04 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_strndup.c \
 			ft_isquoted.c \
 			ft_strarr_sort.c \
+			ft_isdir.c \
 
 # ERRORS
 CFILES += ft_print_error.c
@@ -95,6 +96,7 @@ CFILES += ft_ast_create.c \
 # EXECUTION
 CFILES += ft_execute.c \
 			ft_exec_builtin.c \
+			ft_exec_command.c \
 
 # DEBUG
 CFILES += debug_printgc.c \

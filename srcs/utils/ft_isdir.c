@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_isdir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/13 16:48:08 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/13 16:44:35 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/13 16:46:28 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
+// checks if the path is a directory
+int	ft_isdir(char *path)
+{
+	struct stat	statbuf;
 
-char	**ft_strarr_cpy(char **arr);
-void	ft_strarr_free(char **arr);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-char	*ft_strndup(const char *s, size_t n);
-void	ft_strarr_sort(char **arr);
-
-int		ft_isquoted(char *str);
-int		ft_isdir(char *path);
-
-#endif
+	if (stat(path, &statbuf) == -1)
+		return (0);
+	return (S_ISDIR(statbuf.st_mode));
+}
