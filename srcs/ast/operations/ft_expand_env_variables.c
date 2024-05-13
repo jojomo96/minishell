@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 15:20:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:29:44 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	**ft_expand_env_variables_in_strarr(char **arr)
 		char **test = ft_split_on_delim(new_arr[i], &isDelimiter);
 		while(test && *test)
 			printf("test: %s\n", *test++);
+		printf("\n");
 		i++;
 	}
 	return (new_arr);

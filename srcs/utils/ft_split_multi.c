@@ -6,13 +6,11 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 15:24:19 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:48:41 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 // Function to split the string while keeping the delimiter
 char	**ft_split_on_delim(const char *str, bool(delim)(char c))
@@ -35,7 +33,8 @@ char	**ft_split_on_delim(const char *str, bool(delim)(char c))
 		else
 		{
 			temp[j] = '\0';
-			result[k++] = ft_strdup(temp);
+			if (j != 0)
+				result[k++] = ft_strdup(temp);
 			j = 0;
 			temp[j] = str[i];
 			while (str[i] == '\'' || str[i] == '\"' || str[i] == ' ')
