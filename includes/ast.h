@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:40:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/13 09:49:25 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ int								find_highest_precedence_index(t_ast_node **nodes,
 const char						*op_type_to_string(t_operation_type op_type);
 void							write_ast_to_dot_file(t_ast_node *root);
 char							**ft_split_args(char *content);
+
+// operations
+void							ft_ast_move_arguments(t_ast_node *node);
+void							fr_traverse_and_process(t_ast_node *node,
+									t_ast_node_type node_type,
+									void (*process)(t_ast_node *));
 
 typedef struct s_iterator_split
 {

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   fr_traverse_and_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 11:03:01 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/05/13 09:06:52 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/05/13 09:11:52 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-char	**ft_strarr_cpy(char **arr);
-void	ft_strarr_free(char **arr);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-char	*ft_strndup(const char *s, size_t n);
-void	ft_strarr_sort(char **arr);
-
-int		ft_isquoted(char *str);
-int		ft_strarr_len(char **arr);
-
-#endif
+void	fr_traverse_and_process(t_ast_node *node, t_ast_node_type node_type,
+		void (*process)(t_ast_node *))
+{
+	if (node == NULL)
+		return ;
+	if (node->type == AST_TYPE_NODE)
+	{
+		fr_traverse_and_process(node->u_data.s_node.left, node_type, process);
+		fr_traverse_and_process(node->u_data.s_node.right, node_type, process);
+	}
+	if (node->type == node_type)
+		process(node);
+}
