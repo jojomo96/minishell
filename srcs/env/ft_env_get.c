@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:20:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/03 10:52:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:06:00 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
