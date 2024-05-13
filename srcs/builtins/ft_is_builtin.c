@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_is_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:38:32 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/10 11:28:04 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/10 11:28:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_shell *ms, char **argv)
+t_builtin	ft_is_builtin(char *cmd)
 {
-	int	i;
-	int	exit_code;
-
-	debug_message("executing builtin: unset");
-	i = 1;
-	exit_code = 0;
-	while (argv[i])
-	{
-		if (!ft_valid_env_key(argv[i]))
-		{
-			ft_print_error_env("not a valid identifier", "unset", argv[i]);
-			exit_code = 1;
-		}
-		else
-		{
-			ft_env_remove(&ms->env, argv[i]);
-			ft_env_remove(&ms->exp, argv[i]);
-		}
-		i++;
-	}
-	return (exit_code);
+	if (!ft_strcmp(cmd, "echo"))
+		return (BUILTIN_ECHO);
+	if (!ft_strcmp(cmd, "cd"))
+		return (BUILTIN_CD);
+	if (!ft_strcmp(cmd, "pwd"))
+		return (BUILTIN_PWD);
+	if (!ft_strcmp(cmd, "export"))
+		return (BUILTIN_EXPORT);
+	if (!ft_strcmp(cmd, "unset"))
+		return (BUILTIN_UNSET);
+	if (!ft_strcmp(cmd, "env"))
+		return (BUILTIN_ENV);
+	if (!ft_strcmp(cmd, "exit"))
+		return (BUILTIN_EXIT);
+	return (NONE);
 }

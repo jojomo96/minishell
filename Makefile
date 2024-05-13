@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/13 11:55:29 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/13 13:14:30 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_DIRS := srcs \
 			srcs/gcollector \
 			srcs/ast \
 			srcs/shell \
+			srcs/execution \
 
 
 SRC_DIRS += srcs/debug
@@ -45,6 +46,7 @@ CFILES += ft_pwd.c \
 			ft_export.c \
 			ft_echo.c \
 			ft_exit.c \
+			ft_is_builtin.c \
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -90,9 +92,14 @@ CFILES += ft_ast_create.c \
 			ft_ast_build.c \
 			ft_ast_percendence.c \
 
+# EXECUTION
+CFILES += ft_execute.c \
+			ft_exec_builtin.c \
+
 # DEBUG
 CFILES += debug_printgc.c \
 			ft_debug_ast.c \
+			debug_message.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
@@ -105,6 +112,8 @@ HEADER_FILES := minishell.h \
 				gcollector.h \
 				shellutils.h \
 				utils.h \
+				execution.h \
+				colors.h \
 
 HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 

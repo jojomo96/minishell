@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:36:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/12 10:31:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include "../libft/libft.h"
 # include "ast.h"
 # include "builtins.h"
+# include "colors.h"
 # include "debug.h"
 # include "environment.h"
 # include "errors.h"
+# include "execution.h"
 # include "gcollector.h"
 # include "shellutils.h"
 # include "utils.h"
@@ -27,8 +29,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <unistd.h>
-
 
 # ifndef DEBUG
 #  define DEBUG 1

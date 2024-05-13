@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 14:09:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:37:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_export(t_shell *ms, char **argv, int fd_out)
 	int		i;
 	char	**tmp;
 
+	debug_message("executing builtin: export");
 	if (argv[1] == NULL)
 		return (ft_export_print(ms->exp, fd_out), 0);
 	i = 1;

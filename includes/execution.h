@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 15:45:02 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:36:52 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/10 11:41:12 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/10 11:41:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-int	ft_env(t_shell *ms, int fd_out)
-{
-	int	i;
+# include "minishell.h"
 
-	debug_message("executing builtin: env");
-	i = 0;
-	while (ms->env[i] != NULL)
-	{
-		ft_putendl_fd(ms->env[i], fd_out);
-		i++;
-	}
-	return (0);
-}
+int	ft_execute(t_shell *ms, t_ast_node *node, int fd_out);
+int	ft_exec_builtin(t_shell *ms, t_builtin builtin, char **argv, int fd_out);
+
+#endif
