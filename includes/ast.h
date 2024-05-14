@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:40:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:10:13 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ const char						*op_type_to_string(t_operation_type op_type);
 void							write_ast_to_dot_file(t_ast_node *root);
 char							**ft_split_args(char *content);
 
-typedef struct s_iterator_split
-{
-	int							start;
-	int							end;
-	int							i;
-}								t_range_split;
-
-t_range_split					ft_create_range_split(void);
+// operations
+void							ft_ast_move_arguments(t_ast_node *node);
+void							fr_traverse_and_process(t_ast_node *node,
+									t_ast_node_type node_type,
+									void (*process)(t_ast_node *));
+void							ft_expand_arguments(t_ast_node *node);
+void							ft_remove_outer_quotes(char **arr);
+void							ft_toggle_quotes(char *arr, bool *in_s_quotes,
+									bool *in_d_quotes);
 
 #endif
