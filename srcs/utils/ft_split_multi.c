@@ -6,96 +6,96 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 08:24:13 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 08:27:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-typedef struct s_split_multi
+typedef struct s_split_state
 {
-	int					i;
-	int					j;
-	int					k;
+	int					str_idx;
+	int					buffer_idx;
+	int					result_idx;
 	char				**result;
-	char				*temp;
-	bool				was_question_mark;
-}						t_split_multi;
+	char				*buffer;
+	bool				found_question_mark;
+}						t_split_state;
 
-static t_split_multi	*init_split_multi(const char *str)
+static t_split_state	*ft_init_split_state(const char *str)
 {
-	t_split_multi	*split_multi;
+	t_split_state	*state;
 
-	split_multi = malloc(sizeof(t_split_multi));
-	if (!split_multi)
+	state = malloc(sizeof(t_split_state));
+	if (!state)
 		return (NULL);
-	split_multi->result = malloc(sizeof(char *) * (ft_strlen(str) + 1));
-	if (!split_multi->result)
+	state->result = malloc(sizeof(char *) * (ft_strlen(str) + 1));
+	if (!state->result)
 	{
-		free(split_multi);
+		free(state);
 		return (NULL);
 	}
-	split_multi->temp = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!split_multi->temp)
+	state->buffer = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	if (!state->buffer)
 	{
-		free(split_multi->result);
-		free(split_multi);
+		free(state->result);
+		free(state);
 		return (NULL);
 	}
-	split_multi->i = 0;
-	split_multi->j = 0;
-	split_multi->k = 0;
-	split_multi->was_question_mark = false;
-	return (split_multi);
+	state->str_idx = 0;
+	state->result_idx = 0;
+	state->buffer_idx = 0;
+	state->found_question_mark = false;
+	return (state);
 }
 
-static void	ft_handle_split(t_split_multi *s, char *str)
+static void	ft_handle_split(t_split_state *state, char *str)
 {
-	s->was_question_mark = false;
-	s->temp[s->j] = '\0';
-	if (s->j != 0)
-		s->result[s->k++] = ft_strdup(s->temp);
-	s->j = 0;
-	while (str[s->i] == '\'' || str[s->i] == '\"' || str[s->i] == ' ')
+	state->found_question_mark = false;
+	state->buffer[state->buffer_idx] = '\0';
+	if (state->buffer_idx != 0)
+		state->result[state->result_idx++] = ft_strdup(state->buffer);
+	state->buffer_idx = 0;
+	while (str[state->str_idx] == '\'' || str[state->str_idx] == '\"'
+		|| str[state->str_idx] == ' ')
 	{
-		s->temp[s->j] = str[s->i];
-		s->temp[++s->j] = '\0';
-		s->result[s->k++] = ft_strdup(s->temp);
-		s->j = 0;
-		s->i++;
+		state->buffer[state->buffer_idx] = str[state->str_idx];
+		state->buffer[++state->buffer_idx] = '\0';
+		state->result[state->result_idx++] = ft_strdup(state->buffer);
+		state->buffer_idx = 0;
+		state->str_idx++;
 	}
-	if (str[s->i] != '\0')
+	if (str[state->str_idx] != '\0')
 	{
-		s->temp[s->j] = str[s->i];
-		s->j++;
+		state->buffer[state->buffer_idx] = str[state->str_idx];
+		state->buffer_idx++;
 	}
-	s->i++;
+	state->str_idx++;
 }
 
-// Function to split the string while keeping the delimiter
 char	**ft_split_on_delim(const char *str, bool(delim)(char c))
 {
-	t_split_multi	*s;
+	t_split_state	*state;
 
-	s = init_split_multi(str);
-	s->was_question_mark = false;
-	while (str[s->i] != '\0')
+	state = ft_init_split_state(str);
+	state->found_question_mark = false;
+	while (str[state->str_idx] != '\0')
 	{
-		if (!delim(str[s->i]) && !s->was_question_mark)
+		if (!delim(str[state->str_idx]) && !state->found_question_mark)
 		{
-			if (str[s->i] == '?')
-				s->was_question_mark = true;
-			s->temp[s->j++] = str[s->i++];
+			if (str[state->str_idx] == '?')
+				state->found_question_mark = true;
+			state->buffer[state->buffer_idx++] = str[state->str_idx++];
 		}
 		else
-			ft_handle_split(s, (char *)str);
+			ft_handle_split(state, (char *)str);
 	}
-	if (s->j != 0)
+	if (state->buffer_idx != 0)
 	{
-		s->temp[s->j] = '\0';
-		s->result[s->k++] = ft_strdup(s->temp);
+		state->buffer[state->buffer_idx] = '\0';
+		state->result[state->result_idx++] = ft_strdup(state->buffer);
 	}
-	free(s->temp);
-	s->result[s->k] = NULL;
-	return (s->result);
+	free(state->buffer);
+	state->result[state->result_idx] = NULL;
+	return (state->result);
 }
