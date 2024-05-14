@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_shell_destroy.c                                 :+:      :+:    :+:   */
+/*   debug_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 10:17:21 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/12 10:32:44 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/12 10:35:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_destroy_shell(t_shell *ms, int should_exit)
+void	debug_message(char *message)
 {
 	if (DEBUG)
-		printf("Destroying shell\n");
-	ft_strarr_free(ms->env);
-	ft_strarr_free(ms->exp);
-	ft_gc_freeall();
-	if (should_exit)
-		exit(ms->exit_code);
-	return (ms->exit_code);
+	{
+		ft_putstr_fd(BOLD, STDERR_FILENO);
+		ft_putstr_fd(UNDERLINE, STDERR_FILENO);
+		ft_putstr_fd(BLUE, STDERR_FILENO);
+		ft_putstr_fd("DEBUG:", STDERR_FILENO);
+		ft_putstr_fd(RESET, STDERR_FILENO);
+		ft_putstr_fd(" ", STDERR_FILENO);
+		ft_putstr_fd(BLUE, STDERR_FILENO);
+		ft_putendl_fd(message, STDERR_FILENO);
+		ft_putstr_fd(RESET, STDERR_FILENO);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:45:02 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 14:11:14 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:36:52 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_env(t_shell *ms, int fd_out)
 {
 	int	i;
 
+	debug_message("executing builtin: env");
 	i = 0;
 	while (ms->env[i] != NULL)
 	{

@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/14 12:58:41 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/14 13:14:57 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_DIRS := srcs \
 			srcs/ast \
 			srcs/ast/operations \
 			srcs/shell \
+			srcs/execution \
 
 
 SRC_DIRS += srcs/debug
@@ -45,6 +46,8 @@ CFILES += ft_pwd.c \
 			ft_unset.c \
 			ft_export.c \
 			ft_echo.c \
+			ft_exit.c \
+			ft_is_builtin.c \
 
 # ENVIRONMENT
 CFILES += ft_env_index.c \
@@ -61,6 +64,7 @@ CFILES += ft_env_index.c \
 # SHELL UTILS
 CFILES += ft_shell_destroy.c \
 			ft_shell_init.c \
+			ft_shell_static.c \
 
 # UTILS
 CFILES += ft_strarr_cpy.c \
@@ -98,10 +102,14 @@ CFILES += ft_ast_move_arguments.c \
 			ft_traverse_and_process.c \
 			ft_expand_arguments.c \
 
+# EXECUTION
+CFILES += ft_execute.c \
+			ft_exec_builtin.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
 			ft_debug_ast.c \
+			debug_message.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
@@ -114,6 +122,8 @@ HEADER_FILES := minishell.h \
 				gcollector.h \
 				shellutils.h \
 				utils.h \
+				execution.h \
+				colors.h \
 
 HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 

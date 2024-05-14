@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:02:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 14:04:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:36:57 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,22 @@ static int	ft_cd_to_env(char *key, t_shell *ms)
 		return (1);
 	return (0);
 }
-
-int	ft_cd(t_shell *ms, char *path, int fd_out)
+/**
+ * @brief Change the current working directory.
+ * @note old bash does not print error if argc > 2
+ */
+int	ft_cd(t_shell *ms, char **argv, int fd_out)
 {
-	int	ret;
+	int		ret;
+	char	*path;
 
+	debug_message("executing builtin: cd");
+	path = argv[0];
+	if (argv[2])
+	{
+		ft_print_error("too many arguments", "cd", NULL);
+		return (1);
+	}
 	if (!path || !ft_strcmp(path, "--"))
 		ret = ft_cd_to_env("HOME", ms);
 	else if (!ft_strcmp(path, "-"))

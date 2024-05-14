@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_shell_destroy.c                                 :+:      :+:    :+:   */
+/*   ft_is_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/10 10:17:21 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/10 11:28:04 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/10 11:28:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_destroy_shell(t_shell *ms, int should_exit)
+t_builtin	ft_is_builtin(char *cmd)
 {
-	if (DEBUG)
-		printf("Destroying shell\n");
-	ft_strarr_free(ms->env);
-	ft_strarr_free(ms->exp);
-	ft_gc_freeall();
-	if (should_exit)
-		exit(ms->exit_code);
-	return (ms->exit_code);
+	if (!ft_strcmp(cmd, "echo"))
+		return (BUILTIN_ECHO);
+	if (!ft_strcmp(cmd, "cd"))
+		return (BUILTIN_CD);
+	if (!ft_strcmp(cmd, "pwd"))
+		return (BUILTIN_PWD);
+	if (!ft_strcmp(cmd, "export"))
+		return (BUILTIN_EXPORT);
+	if (!ft_strcmp(cmd, "unset"))
+		return (BUILTIN_UNSET);
+	if (!ft_strcmp(cmd, "env"))
+		return (BUILTIN_ENV);
+	if (!ft_strcmp(cmd, "exit"))
+		return (BUILTIN_EXIT);
+	return (NONE);
 }

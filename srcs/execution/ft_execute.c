@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shellutils.h                                       :+:      :+:    :+:   */
+/*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:34:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/13 11:53:58 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/10 11:46:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELLUTILS_H
-# define SHELLUTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
+// TODO : add cmd execution of non - builtin commands
+int	ft_execute(t_shell *ms, t_ast_node *node, int fd_out)
+{
+	t_builtin	builtin;
 
-typedef struct s_shell	t_shell;
-
-int						ft_shell_init(t_shell *ms, char **envp);
-int						ft_destroy_shell(t_shell *ms, int should_exit);
-t_shell					*ft_get_shell(void);
-
-#endif
+	builtin = ft_is_builtin(node->u_data.leaf.argv[0]);
+	if (builtin != NONE)
+		return (ft_exec_builtin(ms, builtin, node->u_data.leaf.argv, fd_out));
+	return (0);
+}
