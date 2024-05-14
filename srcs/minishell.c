@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 10:00:32 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 11:17:19 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 
 	// char	**env;
-	nodes = ft_tokenize_input("aaa$?aaa bbb$b?bbb $test? $c?");
+	nodes = ft_tokenize_input("$$?");
 	if (!nodes)
 		return (1);
 	ast = NULL;

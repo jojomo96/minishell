@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 09:39:40 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 11:11:14 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_getenv(const char *name)
 {
 	(void)name;
-	return ("TEST_ENV");
+	return ("ho test");
 }
 
 char	*ft_get_exit_code(void)
@@ -25,7 +25,7 @@ char	*ft_get_exit_code(void)
 
 bool	isDelimiter(char c)
 {
-	return (!ft_isalnum(c) && c != '_');
+	return (!ft_isalnum(c) && c != '_' && c != '*');
 }
 
 static void	ft_handle_quotes(char *arr, bool *in_s_quotes, bool *in_d_quotes)
@@ -72,7 +72,7 @@ static void	ft_expand_splited_args(char **splited_args)
 	while (splited_args[i])
 	{
 		ft_handle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
-		if (splited_args[i][0] == '$' && !in_s_quotes)
+		if (splited_args[i][0] == '$' && !in_s_quotes && splited_args[i][1] != '\0')
 			ft_handel_env_variable(splited_args[i]);
 		i++;
 	}
