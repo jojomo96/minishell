@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 16:30:52 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 17:15:22 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **envp)
 			input = readline(PROMPT_SUCCESS);
 		if (input == NULL)
 			break ;
+		add_history(input);
 		ft_handle_input(input);
 		free(input);
 	}
