@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:45:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 11:08:23 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:10:27 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,14 +195,4 @@ void	write_ast_to_dot_file(t_ast_node *root)
 
 	free(graph);
 	free(encoded_graph);
-}
-
-t_range_split	ft_create_range_split(void)
-{
-	t_range_split	range;
-
-	range.start = 0;
-	range.end = 0;
-	range.i = 0;
-	return (range);
 }
