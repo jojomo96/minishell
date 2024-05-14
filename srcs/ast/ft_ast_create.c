@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ast_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:17:28 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 09:39:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 		new_node->type = AST_TYPE_LEAF;
 		new_node->u_data.leaf.argv = (char **)ft_malloc(sizeof(char *) * 2);
 		new_node->u_data.leaf.argv = ft_split_args(content);
+		new_node->u_data.leaf.fd_in = STDIN_FILENO;
+		new_node->u_data.leaf.fd_out = STDOUT_FILENO;
 	}
 }
 
