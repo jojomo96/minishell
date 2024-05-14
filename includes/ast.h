@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 16:26:41 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:00:32 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void							fr_traverse_and_process(t_ast_node *node,
 									t_ast_node_type node_type,
 									void (*process)(t_ast_node *));
 void							ft_expand_arguments(t_ast_node *node);
+void							ft_remove_outer_quotes(char **arr);
+void							ft_toggle_quotes(char *arr, bool *in_s_quotes,
+									bool *in_d_quotes);
 
 typedef struct s_iterator_split
 {

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 11:17:19 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 12:57:35 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 
 	// char	**env;
-	nodes = ft_tokenize_input("$$?");
+	nodes = ft_tokenize_input("echo test\"$USER\"");
 	if (!nodes)
 		return (1);
 	ast = NULL;
 	build_ast(&ast, nodes);
 	ft_expand_arguments(ast);
-	// fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
+	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
 	// write_ast_to_dot_file(ast);
 	return (ft_destroy_shell(&ms));
 }

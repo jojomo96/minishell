@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 11:11:14 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:01:23 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,6 @@ char	*ft_get_exit_code(void)
 bool	isDelimiter(char c)
 {
 	return (!ft_isalnum(c) && c != '_' && c != '*');
-}
-
-static void	ft_handle_quotes(char *arr, bool *in_s_quotes, bool *in_d_quotes)
-{
-	if (arr == NULL || *arr == '\0')
-		return ;
-	if (arr[0] == '\'' && !*in_d_quotes)
-	{
-		if (!*in_s_quotes)
-			arr[0] = '\0';
-		*in_s_quotes = !*in_s_quotes;
-	}
-	if (arr[0] == '\"')
-	{
-		if (!*in_d_quotes)
-			arr[0] = '\0';
-		*in_d_quotes = !*in_d_quotes;
-	}
 }
 
 static void	ft_handel_env_variable(char *str)
@@ -71,7 +53,7 @@ static void	ft_expand_splited_args(char **splited_args)
 	i = 0;
 	while (splited_args[i])
 	{
-		ft_handle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
+		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
 		if (splited_args[i][0] == '$' && !in_s_quotes && splited_args[i][1] != '\0')
 			ft_handel_env_variable(splited_args[i]);
 		i++;
@@ -95,6 +77,7 @@ static char	**ft_expand_arguments_in_strarr(char **arr)
 			j++;
 		}
 		ft_expand_splited_args(splited_args);
+		ft_remove_outer_quotes(splited_args);
 		ft_free(arr[i]);
 		arr[i] = ft_strarr_join(splited_args);
 		if (DEBUG)
