@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 16:26:17 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 17:40:21 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define PROMPT BOLD " " SHELL_NAME " ➜ " RESET
 # define PROMPT_SUCCESS CYAN "✅" PROMPT RESET
 # define PROMPT_ERROR CYAN "❌" PROMPT RESET
+# define PROMPT_DEFAULT CYAN "👋" PROMPT RESET
 
 typedef struct s_shell
 {
