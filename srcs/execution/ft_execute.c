@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 11:25:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:37:49 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 int	ft_execute(t_shell *ms, t_ast_node *node)
 {
-	return (0);
-}
-
-int	ft_execute_leaf(t_shell *ms, t_ast_node *node)
-{
-	char	*builtin;
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-		return (ft_print_error(strerror(errno), NULL, NULL), 1);
-	if (pid == 0)
-	{
-		builtin = ft_is_builtin(node->u_data.leaf.argv[0]);
-		if (builtin)
-			ms->exit_code = ft_exec_builtin(ms, builtin, node->u_data.leaf.argv,
-					node->u_data.leaf.fd_out);
-		else
-			ms->exit_code = ft_exec_command(ms, node);
-		ft_destroy_shell(ms, 1);
-	}
-	return (0);
+	ft_expand_arguments(node);
+	return (ft_execute_node(ms, node));
 }
 
 // add expander
 int	ft_execute_node(t_shell *ms, t_ast_node *node)
 {
+	if (node->type == AST_TYPE_LEAF)
+		return (ft_execute_leaf(ms, node));
+	if (node->u_data.s_node.op_type == OP_PIPE)
+		return (ft_execute_pipe(ms, node));
+	if (node->u_data.s_node.op_type == OP_AND)
+		return (ft_exec_and(ms, node));
+	if (node->u_data.s_node.op_type == OP_OR)
+		return (ft_exec_or(ms, node));
+	if (node->u_data.s_node.op_type == OP_REDIRECT_IN)
+		return (ft_exec_redirect_in(ms, node));
+	if (node->u_data.s_node.op_type == OP_REDIRECT_OUT)
+		return (ft_exec_redirect_out(ms, node));
+	if (node->u_data.s_node.op_type == OP_APPEND_OUT)
+		return (ft_exec_append_out(ms, node));
+	if (node->u_data.s_node.op_type == OP_HEREDOC)
+		return (ft_exec_heredoc(ms, node));
+	return (0);
 }

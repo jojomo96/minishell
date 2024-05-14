@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 11:28:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:00:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,18 @@ char	*ft_get_path(t_shell *ms, char *arg)
 int	ft_exec_command(t_shell *ms, t_ast_node *node)
 {
 	char	*path;
+	pid_t	pid;
 
-	path = ft_get_path(ms, node->u_data.leaf.argv[0]);
-	if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
+	pid = fork();
+	if (pid == -1)
+		return (ft_print_error(strerror(errno), NULL, NULL), 1);
+	if (pid == 0)
 	{
-		if (errno == EISDIR)
-			ms->exit_code = 126;
-		else
-			ms->exit_code = 127;
-		ft_print_error(strerror(errno), node->u_data.leaf.argv[0], NULL);
+		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
+		if (!path)
+			return (ft_print_error(strerror(errno), NULL, NULL), 1);
+		if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
+			return (ft_print_error(strerror(errno), NULL, NULL), 1);
+		free(path);
 	}
-	return (ft_destroy_shell(ms, 0));
 }

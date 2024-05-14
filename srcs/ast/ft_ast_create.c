@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 09:39:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 18:29:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ static void	ft_get_operation_type(char *value, int *is_op,
 		*is_op = 0;
 }
 
+static void	leaf_init(t_ast_leaf *leaf)
+{
+	leaf->argv = NULL;
+	leaf->fd_in = STDIN_FILENO;
+	leaf->fd_out = STDOUT_FILENO;
+	leaf->pid = -1;
+	leaf->exit_status = 0;
+}
+
 static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 		t_operation_type op_type, char *content)
 {
@@ -61,10 +70,9 @@ static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 	else
 	{
 		new_node->type = AST_TYPE_LEAF;
+		leaf_init(&new_node->u_data.leaf);
 		new_node->u_data.leaf.argv = (char **)ft_malloc(sizeof(char *) * 2);
 		new_node->u_data.leaf.argv = ft_split_args(content);
-		new_node->u_data.leaf.fd_in = STDIN_FILENO;
-		new_node->u_data.leaf.fd_out = STDOUT_FILENO;
 	}
 }
 
