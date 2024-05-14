@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 08:13:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 08:24:00 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static char	**ft_expand_env_variables_in_strarr(char **arr)
 		ft_expand_splited_args(splited_args);
 		free(new_args_arr[i]);
 		new_args_arr[i] = ft_strarr_join(splited_args);
-		printf("new_args_arr[%d]: %s\n", i, new_args_arr[i]);
 		i++;
 	}
 	return (new_args_arr);
