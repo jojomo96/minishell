@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/13 15:56:48 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:02:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 # define UTILS_H
 
 # include "minishell.h"
+
+typedef struct s_split_state
+{
+	int					str_idx;
+	int					buffer_idx;
+	int					result_idx;
+	char				**result;
+	char				*buffer;
+	bool				found_exit_code;
+}						t_split_state;
 
 char	**ft_strarr_cpy(char **arr);
 void	ft_strarr_free(char **arr);

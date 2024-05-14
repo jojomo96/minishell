@@ -6,21 +6,11 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 10:00:43 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:02:52 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-typedef struct s_split_state
-{
-	int					str_idx;
-	int					buffer_idx;
-	int					result_idx;
-	char				**result;
-	char				*buffer;
-	bool				found_exit_code;
-}						t_split_state;
 
 static t_split_state	*ft_init_split_state(const char *str)
 {
