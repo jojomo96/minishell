@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 17:37:49 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:33:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_execute(t_shell *ms, t_ast_node *node)
 int	ft_execute_node(t_shell *ms, t_ast_node *node)
 {
 	if (node->type == AST_TYPE_LEAF)
-		return (ft_execute_leaf(ms, node));
-	if (node->u_data.s_node.op_type == OP_PIPE)
-		return (ft_execute_pipe(ms, node));
+		return (ft_exec_leaf(ms, node));
+	// if (node->u_data.s_node.op_type == OP_PIPE)
+	// 	return (ft_exec_pipe(ms, node));
 	if (node->u_data.s_node.op_type == OP_AND)
 		return (ft_exec_and(ms, node));
 	if (node->u_data.s_node.op_type == OP_OR)
@@ -35,7 +35,7 @@ int	ft_execute_node(t_shell *ms, t_ast_node *node)
 		return (ft_exec_redirect_out(ms, node));
 	if (node->u_data.s_node.op_type == OP_APPEND_OUT)
 		return (ft_exec_append_out(ms, node));
-	if (node->u_data.s_node.op_type == OP_HEREDOC)
-		return (ft_exec_heredoc(ms, node));
+	// if (node->u_data.s_node.op_type == OP_HEREDOC)
+	// 	return (ft_exec_heredoc(ms, node));
 	return (0);
 }

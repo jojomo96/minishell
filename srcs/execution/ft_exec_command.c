@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 16:00:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:34:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_get_path(t_shell *ms, char *arg)
 {
 	char	*path_env;
 
-	if (ft_isfdir(arg) && ft_strcmp(arg, ".") != 0 && ft_strcmp(arg, "..") != 0)
+	if (ft_isdir(arg) && ft_strcmp(arg, ".") != 0 && ft_strcmp(arg, "..") != 0)
 	{
 		errno = EISDIR;
 		return (NULL);
@@ -77,4 +77,5 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 			return (ft_print_error(strerror(errno), NULL, NULL), 1);
 		free(path);
 	}
+	return (0);
 }

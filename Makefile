@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/14 14:28:34 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/14 19:24:05 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,9 @@ CFILES += ft_ast_move_arguments.c \
 CFILES += ft_execute.c \
 			ft_exec_builtin.c \
 			ft_exec_command.c \
+			ft_exec_leaf.c \
+			ft_exec_operator.c \
+			ft_redirect_out.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
