@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 13:10:13 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 17:44:59 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define AST_H
 
 # define TOKEN_BUFFER_SIZE 64
-
-# include <stdio.h>
 
 typedef struct s_ast_node		t_ast_node;
 

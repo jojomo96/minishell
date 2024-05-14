@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 17:40:21 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 19:25:30 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@
 # include "shellutils.h"
 # include "utils.h"
 /* EXTERNAL INCLUDES */
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <readline/readline.h>
+/* READLINE INCLUDES */
 # include <readline/history.h>
+# include <readline/readline.h>
 
 # ifndef DEBUG
 #  define DEBUG 1
@@ -44,6 +46,10 @@
 # define PROMPT_SUCCESS CYAN "✅" PROMPT RESET
 # define PROMPT_ERROR CYAN "❌" PROMPT RESET
 # define PROMPT_DEFAULT CYAN "👋" PROMPT RESET
+# define PROMPT_EXIT MOVEUP CLEARLINE PROMPT_DEFAULT "exit\n"
+
+#define ANSI_HIDE "\033[8m"
+#define ANSI_RESET "\033[0m"
 
 typedef struct s_shell
 {
