@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/14 13:14:57 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/14 16:02:17 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,7 +141,7 @@ all: ascii $(NAME)
 
 $(NAME): $(LIBFT) $(OFILES)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
-	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS)
+	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) -lreadline
 	@if [ -f $(NAME) ]; then \
 		echo "$(GREEN)$(NAME) compiled successfully!$(NC)"; \
 		echo "$(CYAN)Run with ./$(NAME)$(NC)"; \

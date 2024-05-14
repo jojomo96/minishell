@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 10:30:20 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:31:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:03:33 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define DIM		"\033[2m"
 # define ITALIC		"\033[3m"
 # define UNDERLINE	"\033[4m"
+# define CLEARLINE	"\033[2K"
+# define MOVEUP		"\033[A"
 
 # define BLACK		"\033[30m"
 # define RED		"\033[31m"
