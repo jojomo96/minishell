@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:31:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:26:17 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # ifndef DEBUG
 #  define DEBUG 1
 # endif
 
 # define SHELL_NAME "minishell"
+# define PROMPT BOLD " " SHELL_NAME " ➜ " RESET
+# define PROMPT_SUCCESS CYAN "✅" PROMPT RESET
+# define PROMPT_ERROR CYAN "❌" PROMPT RESET
 
 typedef struct s_shell
 {
