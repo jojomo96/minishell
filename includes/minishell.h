@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 19:40:04 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:45:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@
 
 typedef struct s_shell
 {
-	int		exit_code;
-	char	**env;
-	char	**exp;
-}			t_shell;
+	int			exit_code;
+	char		**env;
+	char		**exp;
+	t_ast_node	*ast;
+}				t_shell;
 
 #endif

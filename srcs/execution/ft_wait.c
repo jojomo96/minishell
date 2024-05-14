@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   ft_wait.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 17:09:31 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 20:16:49 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/14 20:18:51 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/14 20:44:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "minishell.h"
 
-void	debug_printgc(void);
-void	ft_print_debug_node_creation(t_ast_node *new_node);
-void	ft_print_debug_node(t_ast_node *node);
-void	ft_print_debuge_node_array(t_ast_node **nodes);
-void	debug_message(char *message);
-void	debug_message_1(char *message, char *arg1);
+void	ft_wait_node(t_ast_node *node)
+{
+	int	status;
 
-#endif
+	if (node->type == AST_TYPE_LEAF)
+	{
+		if (node->u_data.leaf.pid == -1)
+			return ;
+		waitpid(node->u_data.leaf.pid, &status, 0);
+		node->u_data.leaf.exit_status = WEXITSTATUS(status);
+		ft_get_shell()->exit_code = node->u_data.leaf.exit_status;
+	}
+}

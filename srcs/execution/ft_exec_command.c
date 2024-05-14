@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 19:34:46 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:17:10 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_get_path_from_env(char *path_env, char *arg)
 			return (NULL);
 		if (access(path, F_OK | X_OK) == 0)
 			return (ft_strarr_free(paths), path);
+		free(path);
+		i++;
 	}
 	ft_strarr_free(paths);
 	return (NULL);
@@ -65,17 +67,21 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 	char	*path;
 	pid_t	pid;
 
+	debug_message_1("Executing command:", node->u_data.leaf.argv[0]);
 	pid = fork();
+	node->u_data.leaf.pid = pid;
 	if (pid == -1)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
 	if (pid == 0)
 	{
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
+		debug_message(path);
 		if (!path)
 			return (ft_print_error(strerror(errno), NULL, NULL), 1);
 		if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
 			return (ft_print_error(strerror(errno), NULL, NULL), 1);
 		free(path);
+		exit(1);
 	}
 	return (0);
 }
