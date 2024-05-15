@@ -6,24 +6,39 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:53:28 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 14:57:00 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/15 11:27:54 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-	static void ft_ast_find_leftmost_leaf(t_ast_node *origin, t_ast_node **dst) {
-		if (*dst == NULL) {
-			origin->u_data.s_node.left = ft_ast_new_node("", 0, 0);
-			*dst = origin->u_data.s_node.left;
-		}
-		while (*dst && (*dst)->type == AST_TYPE_NODE && (*dst)->u_data.s_node.left != NULL)
-			*dst = (*dst)->u_data.s_node.left;
-		if ((*dst)->u_data.s_node.left == NULL)
-			(*dst)->u_data.s_node.left = ft_ast_new_node("", 0, 0);
-	}
+bool	ft_is_redirect(t_ast_node *node)
+{
+	t_operation_type	type;
 
-static void	ft_ast_move_arguments_help(t_ast_node *origin,t_ast_node *dst, t_ast_node *src)
+	if (node->type != AST_TYPE_NODE)
+		return (false);
+	type = node->u_data.s_node.op_type;
+	return (type == OP_REDIRECT_IN || type == OP_REDIRECT_OUT
+		|| type == OP_APPEND_OUT || type == OP_HEREDOC);
+}
+
+static void	ft_ast_find_leftmost_leaf(t_ast_node *origin, t_ast_node **dst)
+{
+	if (*dst == NULL)
+	{
+		origin->u_data.s_node.left = ft_ast_new_node("", 0, 0);
+		*dst = origin->u_data.s_node.left;
+	}
+	while (*dst && (*dst)->type == AST_TYPE_NODE
+		&& (*dst)->u_data.s_node.left != NULL)
+		*dst = (*dst)->u_data.s_node.left;
+	if ((*dst)->u_data.s_node.left == NULL)
+		(*dst)->u_data.s_node.left = ft_ast_new_node("", 0, 0);
+}
+
+static void	ft_ast_move_arguments_help(t_ast_node *origin, t_ast_node *dst,
+		t_ast_node *src)
 {
 	int	dst_argv_len;
 	int	src_argv_len;
@@ -51,6 +66,9 @@ static void	ft_ast_move_arguments_help(t_ast_node *origin,t_ast_node *dst, t_ast
 
 void	ft_ast_move_arguments(t_ast_node *node)
 {
-	ft_ast_move_arguments_help(node,node->u_data.s_node.left,
-		node->u_data.s_node.right);
+	if (node->type != AST_TYPE_NODE)
+		return ;
+	if (ft_is_redirect(node))
+		ft_ast_move_arguments_help(node, node->u_data.s_node.left,
+			node->u_data.s_node.right);
 }
