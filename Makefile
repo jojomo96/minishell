@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 11:44:24 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/15 12:28:49 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,11 @@ CFILES += ft_execute.c \
 CFILES += debug_printgc.c \
 			ft_debug_ast.c \
 			debug_message.c \
+
+# SIGNALS
+CFILES += ft_signals.c \
+			ft_handler_heredoc.c \
+			ft_handler_normal.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
