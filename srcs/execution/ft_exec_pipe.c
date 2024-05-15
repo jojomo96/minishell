@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/15 14:18:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:26:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ static int	set_right_fd(t_ast_node *node, int fd)
 	return (0);
 }
 
+static int	set_left_fd(t_ast_node *node, int fd)
+{
+	t_ast_node	*left;
+
+	left = node->u_data.s_node.left;
+	while (left->type != AST_TYPE_LEAF)
+		left = left->u_data.s_node.right;
+	left->u_data.leaf.fd_out = fd;
+	return (0);
+}
+
 int	ft_exec_pipe(t_shell *ms, t_ast_node *node)
 {
 	int			status;
@@ -34,7 +45,7 @@ int	ft_exec_pipe(t_shell *ms, t_ast_node *node)
 	right = node->u_data.s_node.right;
 	if (pipe(pipe_fd) == -1)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
-	left->u_data.leaf.fd_out = pipe_fd[1];
+	set_left_fd(node, pipe_fd[1]);
 	set_right_fd(node, pipe_fd[0]);
 	if (left->type == AST_TYPE_LEAF)
 		status = ft_exec_pipe_leaf(ms, left);
@@ -42,7 +53,7 @@ int	ft_exec_pipe(t_shell *ms, t_ast_node *node)
 		status = ft_execute(ms, left);
 	if (left->type == AST_TYPE_LEAF && left->u_data.leaf.pid != -1)
 		waitpid(left->u_data.leaf.pid, &status, 0);
-	left->u_data.leaf.exit_status = WEXITSTATUS(status);
+	left->exit_status = WEXITSTATUS(status);
 	close(pipe_fd[1]);
 	if (right->type == AST_TYPE_LEAF)
 		status = ft_exec_pipe_leaf(ms, right);
