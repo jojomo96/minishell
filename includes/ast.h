@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 19:39:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:48:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ typedef struct s_ast_leaf
 	int							fd_in;
 	int							fd_out;
 	pid_t						pid;
-	int							exit_status;
 }								t_ast_leaf;
 
 struct							s_ast_node
 {
 	t_ast_node_type				type;
+	int							exit_status;
 	union
 	{
 		t_ast_leaf				leaf;

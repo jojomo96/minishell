@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 14:11:12 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/15 15:13:34 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC_DIRS := srcs \
 			srcs/ast/operations \
 			srcs/shell \
 			srcs/execution \
+			srcs/signals \
+			srcs/history \
 
 
 SRC_DIRS += srcs/debug
@@ -118,6 +120,14 @@ CFILES += debug_printgc.c \
 			ft_debug_ast.c \
 			debug_message.c \
 
+# SIGNALS
+CFILES += ft_signals.c \
+			ft_handler_heredoc.c \
+			ft_handler_normal.c \
+
+# HISTORY
+CFILES += ft_history.c \
+
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
 HEADER_FILES := minishell.h \
@@ -131,6 +141,8 @@ HEADER_FILES := minishell.h \
 				utils.h \
 				execution.h \
 				colors.h \
+				signals.h \
+				history.h \
 
 HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 
@@ -180,6 +192,8 @@ fclean: clean
 	@echo "$(RED)Removing binary files...$(NC)"
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@echo "$(RED)Removing history file...$(NC)"
+	@rm -f .minishell_history
 
 re: fclean all
 

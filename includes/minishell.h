@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 19:45:17 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:19:38 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "gcollector.h"
 # include "shellutils.h"
 # include "utils.h"
+# include "signals.h"
+# include "history.h"
 /* EXTERNAL INCLUDES */
 # include <fcntl.h>
 # include <signal.h>
