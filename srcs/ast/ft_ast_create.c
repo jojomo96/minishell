@@ -38,7 +38,7 @@ static void	ft_get_operation_type(char *value, int *is_op,
 		*is_op = 0;
 }
 
-static void	leaf_init(t_ast_leaf *leaf)
+static void	ft_leaf_init(t_ast_leaf *leaf)
 {
 	leaf->argv = NULL;
 	leaf->fd_in = STDIN_FILENO;
@@ -70,7 +70,7 @@ static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 	else
 	{
 		new_node->type = AST_TYPE_LEAF;
-		leaf_init(&new_node->u_data.leaf);
+		ft_leaf_init(&new_node->u_data.leaf);
 		new_node->u_data.leaf.argv = (char **)ft_malloc(sizeof(char *) * 2);
 		new_node->u_data.leaf.argv = ft_split_args(content);
 	}
