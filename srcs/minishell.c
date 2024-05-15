@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 19:16:42 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 20:38:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	ft_handle_input(char *input)
 	build_ast(&ast, nodes);
 	ft_expand_arguments(ast);
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
+	ft_get_shell()->ast = ast;
+	ft_execute(ft_get_shell(), ast);
+	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
 	// write_ast_to_dot_file(ast);
 	return (0);
 }
@@ -76,6 +79,7 @@ void	ft_sigint_handler(int signum)
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell				*ms;

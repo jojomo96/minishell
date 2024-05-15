@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 17:44:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/14 19:39:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef enum e_operation_type
 typedef struct s_ast_leaf
 {
 	char						**argv;
+	int							fd_in;
+	int							fd_out;
+	pid_t						pid;
+	int							exit_status;
 }								t_ast_leaf;
 
 struct							s_ast_node

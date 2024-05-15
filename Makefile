@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/14 16:02:17 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/15 09:50:29 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_strndup.c \
 			ft_isquoted.c \
 			ft_strarr_sort.c \
+			ft_isdir.c \
 			ft_strarr_len.c \
 			ft_split_on_delim.c \
 			ft_strarr_join.c \
@@ -105,6 +106,11 @@ CFILES += ft_ast_move_arguments.c \
 # EXECUTION
 CFILES += ft_execute.c \
 			ft_exec_builtin.c \
+			ft_exec_command.c \
+			ft_exec_leaf.c \
+			ft_exec_operator.c \
+			ft_redirect.c \
+			ft_wait.c \
 
 # DEBUG
 CFILES += debug_printgc.c \

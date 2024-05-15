@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:37:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:57:28 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ static void	ft_export_print(char **exp, int fd_out)
 	}
 }
 
+static int	export_error(char **tmp)
+{
+	if (!tmp)
+		return (ft_print_error(strerror(errno), NULL, NULL), 1);
+	if (!ft_valid_env_key(tmp[0]))
+		return (ft_print_error_env("not a valid identifier", "export", tmp[0]),
+			ft_strarr_free(tmp), 1);
+	return (0);
+}
+
 int	ft_export(t_shell *ms, char **argv, int fd_out)
 {
 	int		i;
@@ -53,12 +63,14 @@ int	ft_export(t_shell *ms, char **argv, int fd_out)
 		if (ft_strchr(argv[i], '='))
 		{
 			tmp = ft_split(argv[i], '=');
-			if (!tmp)
-				return (ft_print_error(strerror(errno), NULL, NULL), 1);
-			ft_env_set(&ms->exp, tmp[0], tmp[1]);
-			ft_env_set(&ms->env, tmp[0], tmp[1]);
+			if (export_error(tmp))
+				return (1);
+			ft_env_set_both(ms, tmp[0], tmp[1]);
 			ft_strarr_free(tmp);
 		}
+		else if (!ft_valid_env_key(argv[i]))
+			return (ft_print_error_env("not a valid identifier", "export",
+					argv[i]), 1);
 		else
 			ft_env_set(&ms->exp, argv[i], NULL);
 		i++;
