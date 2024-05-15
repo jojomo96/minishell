@@ -27,3 +27,5 @@ Thumbs.db
 *.dot
 .venv
 *.svg
+
+.minishell_history

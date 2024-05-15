@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 12:28:49 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/15 14:26:50 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_DIRS := srcs \
 			srcs/shell \
 			srcs/execution \
 			srcs/signals \
+			srcs/history \
 
 
 SRC_DIRS += srcs/debug
@@ -123,6 +124,9 @@ CFILES += ft_signals.c \
 			ft_handler_heredoc.c \
 			ft_handler_normal.c \
 
+# HISTORY
+CFILES += ft_history.c \
+
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
 HEADER_FILES := minishell.h \
@@ -137,6 +141,7 @@ HEADER_FILES := minishell.h \
 				execution.h \
 				colors.h \
 				signals.h \
+				history.h \
 
 HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 
@@ -186,6 +191,8 @@ fclean: clean
 	@echo "$(RED)Removing binary files...$(NC)"
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@echo "$(RED)Removing history file...$(NC)"
+	@rm -f .minishell_history
 
 re: fclean all
 

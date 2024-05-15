@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/15 11:49:05 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/15 14:19:24 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_handle_input_loop(t_shell *ms)
 			write(STDOUT_FILENO, PROMPT_EXIT, sizeof(PROMPT_EXIT) - 1);
 			ft_destroy_shell(ms, 1);
 		}
-		add_history(input);
+		ft_history_add(input);
 		ft_handle_input(input);
 		free(input);
 	}
@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 
 	ft_signals_init();
+	ft_history_init();
 	ms = ft_get_shell();
 	if (argc != 1 || ft_shell_init(ms, envp))
 		return (1);
