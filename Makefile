@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 09:50:29 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/15 11:44:24 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_DIRS := srcs \
 			srcs/ast/operations \
 			srcs/shell \
 			srcs/execution \
+			srcs/signals \
 
 
 SRC_DIRS += srcs/debug
@@ -130,6 +131,7 @@ HEADER_FILES := minishell.h \
 				utils.h \
 				execution.h \
 				colors.h \
+				signals.h \
 
 HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 
