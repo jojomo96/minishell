@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 09:50:29 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/15 14:11:12 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ CFILES += ft_execute.c \
 			ft_exec_operator.c \
 			ft_redirect.c \
 			ft_wait.c \
+			ft_exec_pipe.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
