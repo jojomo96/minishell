@@ -26,7 +26,7 @@ int	ft_handle_input(char *input)
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
-	fr_traverse_and_process(ast, ast->type, &ft_wait_node);
+	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
 	// write_ast_to_dot_file(ast);
 	return (0);
 }
