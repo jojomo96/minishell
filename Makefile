@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 14:26:50 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/21 20:16:00 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
@@ -113,11 +113,13 @@ CFILES += ft_execute.c \
 			ft_exec_operator.c \
 			ft_redirect.c \
 			ft_wait.c \
+			ft_exec_pipe.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
 			ft_debug_ast.c \
 			debug_message.c \
+			debug_print_node.c \
 
 # SIGNALS
 CFILES += ft_signals.c \

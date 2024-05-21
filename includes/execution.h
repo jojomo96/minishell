@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:41:12 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 20:37:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:46:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int		ft_exec_or(t_shell *ms, t_ast_node *node);
 int		ft_exec_redirect_in(t_shell *ms, t_ast_node *node);
 int		ft_exec_redirect_out(t_shell *ms, t_ast_node *node);
 int		ft_exec_append_out(t_shell *ms, t_ast_node *node);
+int		ft_exec_pipe(t_shell *ms, t_ast_node *node);
 
 void	ft_wait_node(t_ast_node *node);
+
+void	ft_close_fds(t_ast_node *node);
 
 #endif
