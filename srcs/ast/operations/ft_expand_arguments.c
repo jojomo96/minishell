@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 13:01:23 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/21 18:25:22 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ static void	ft_expand_splited_args(char **splited_args)
 		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
 		if (splited_args[i][0] == '$' && !in_s_quotes && splited_args[i][1] != '\0')
 			ft_handel_env_variable(splited_args[i]);
+		if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes)
+		{
+			free(splited_args[i]);
+			splited_args[i] = ft_strdup(ft_getenv("HOME"));
+		}
 		i++;
 	}
 }
