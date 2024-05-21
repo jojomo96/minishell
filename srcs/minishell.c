@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 19:22:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:26:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_handle_input(char *input)
 		return (1);
 	if (nodes[0] == NULL)
 	{
-		free(nodes);
+		ft_free(nodes);
 		return (0);
 	}
 	ast = NULL;

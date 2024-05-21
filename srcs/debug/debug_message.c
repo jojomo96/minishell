@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 10:32:44 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 20:16:38 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:31:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	debug_message(char *message)
 		ft_putstr_fd(RESET, STDERR_FILENO);
 		ft_putstr_fd(" ", STDERR_FILENO);
 		ft_putstr_fd(BLUE, STDERR_FILENO);
-		ft_putendl_fd(message, STDERR_FILENO);
+		if (message)
+			ft_putendl_fd(message, STDERR_FILENO);
 		ft_putstr_fd(RESET, STDERR_FILENO);
 	}
 }
