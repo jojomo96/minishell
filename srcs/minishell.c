@@ -27,7 +27,7 @@ int	ft_handle_input(char *input)
 	}
 	ast = NULL;
 	build_ast(&ast, nodes);
-	ft_expand_arguments(ast);
+	// ft_expand_arguments(ast);
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
