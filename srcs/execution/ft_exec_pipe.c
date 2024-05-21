@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:24:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:56:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	set_right_fd(t_ast_node *node, int fd)
 	while (right->type != AST_TYPE_LEAF)
 		right = right->u_data.s_node.left;
 	right->u_data.leaf.fd_in = fd;
-	// printf("%s %d\n", right->u_data.leaf.argv[0], right->u_data.leaf.fd_in);
 	return (0);
 }
 
@@ -32,7 +31,6 @@ static int	set_left_fd(t_ast_node *node, int fd)
 	while (left->type != AST_TYPE_LEAF)
 		left = left->u_data.s_node.right;
 	left->u_data.leaf.fd_out = fd;
-	// printf("%s %d\n", left->u_data.leaf.argv[0], left->u_data.leaf.fd_out);
 	return (0);
 }
 

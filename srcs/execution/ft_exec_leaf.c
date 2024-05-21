@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:33:53 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:50:22 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:56:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ int	ft_exec_pipe_leaf(t_shell *ms, t_ast_node *node)
 
 	std_in = dup(STDIN_FILENO);
 	std_out = dup(STDOUT_FILENO);
-	// if (node->u_data.leaf.fd_in != STDIN_FILENO)
-	// 	dup2(node->u_data.leaf.fd_in, STDIN_FILENO);
-	// if (node->u_data.leaf.fd_out != STDOUT_FILENO)
-	// 	dup2(node->u_data.leaf.fd_out, STDOUT_FILENO);
-	// if (node->u_data.leaf.fd_in != STDIN_FILENO)
-	// 	close(node->u_data.leaf.fd_in);
-	// if (node->u_data.leaf.fd_out != STDOUT_FILENO)
-	// 	close(node->u_data.leaf.fd_out);
 	builtin = ft_is_builtin(node->u_data.leaf.argv[0]);
 	if (builtin)
 		ms->exit_code = ft_exec_builtin_fork(ms, node, builtin);

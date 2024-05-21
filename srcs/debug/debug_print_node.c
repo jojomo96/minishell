@@ -6,11 +6,22 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:14:10 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:22:41 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:57:40 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	deub_leaf(t_ast_node *node)
+{
+	ft_putstr_fd("LEAF: ", STDERR_FILENO);
+	ft_putstr_fd(node->u_data.leaf.argv[0], STDERR_FILENO);
+	ft_putstr_fd("	", STDERR_FILENO);
+	ft_putnbr_fd(node->u_data.leaf.fd_in, STDERR_FILENO);
+	ft_putstr_fd(" ", STDERR_FILENO);
+	ft_putnbr_fd(node->u_data.leaf.fd_out, STDERR_FILENO);
+	ft_putendl_fd("", STDERR_FILENO);
+}
 
 void	debug_print_node(t_ast_node *node)
 {
@@ -24,15 +35,7 @@ void	debug_print_node(t_ast_node *node)
 		ft_putstr_fd(" ", STDERR_FILENO);
 		ft_putstr_fd(BLUE, STDERR_FILENO);
 		if (node->type == AST_TYPE_LEAF)
-		{
-			ft_putstr_fd("LEAF: ", STDERR_FILENO);
-			ft_putstr_fd(node->u_data.leaf.argv[0], STDERR_FILENO);
-			ft_putstr_fd("	", STDERR_FILENO);
-			ft_putnbr_fd(node->u_data.leaf.fd_in, STDERR_FILENO);
-			ft_putstr_fd(" ", STDERR_FILENO);
-			ft_putnbr_fd(node->u_data.leaf.fd_out, STDERR_FILENO);
-			ft_putendl_fd("", STDERR_FILENO);
-		}
+			deub_leaf(node);
 		else
 		{
 			ft_putstr_fd("NODE: ", STDERR_FILENO);
