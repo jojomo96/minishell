@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 15:17:05 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/21 20:16:00 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,7 @@ CFILES += ft_execute.c \
 CFILES += debug_printgc.c \
 			ft_debug_ast.c \
 			debug_message.c \
+			debug_print_node.c \
 
 # SIGNALS
 CFILES += ft_signals.c \
