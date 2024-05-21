@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 18:33:21 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/21 18:02:17 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	ft_handle_input(char *input)
 	nodes = ft_tokenize_input(input);
 	if (!nodes)
 		return (1);
+	if(nodes[0] == NULL)
+	{
+		free(nodes);
+		return (0);
+	}
 	ast = NULL;
 	build_ast(&ast, nodes);
 	// ft_expand_arguments(ast);
