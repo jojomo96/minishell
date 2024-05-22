@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:55:02 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/29 15:55:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:29:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_valid_env_key(char *key)
 	int	i;
 
 	i = 0;
-	if (!key || !ft_isalpha(key[i]) || key[i] == '_')
+	if (!key || !ft_isalpha(key[i]) || key[i] != '_')
 		return (0);
 	while (key[i])
 	{
