@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:09 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 14:51:07 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:29:49 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_exec_redirect_out(t_shell *ms, t_ast_node *node)
 	int	std_out;
 	int	ret;
 
+	ft_expand_arguments(node->u_data.s_node.right);
 	std_out = dup(STDOUT_FILENO);
 	fd = open(node->u_data.s_node.right->u_data.leaf.argv[0],
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -51,6 +52,7 @@ int	ft_exec_append_out(t_shell *ms, t_ast_node *node)
 	int	std_out;
 	int	ret;
 
+	ft_expand_arguments(node->u_data.s_node.right);
 	std_out = dup(STDOUT_FILENO);
 	fd = open(node->u_data.s_node.right->u_data.leaf.argv[0],
 			O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -76,6 +78,7 @@ int	ft_exec_redirect_in(t_shell *ms, t_ast_node *node)
 	int	std_in;
 	int	ret;
 
+	ft_expand_arguments(node->u_data.s_node.right);
 	std_in = dup(STDIN_FILENO);
 	fd = open(node->u_data.s_node.right->u_data.leaf.argv[0], O_RDONLY);
 	if (fd == -1)
