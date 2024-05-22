@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:09 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/15 10:45:49 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 13:53:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int	ft_exec_redirect_in(t_shell *ms, t_ast_node *node)
 	if (dup2(std_in, STDIN_FILENO) == -1)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
 	close(std_in);
+	node->u_data.s_node.right->exit_status = ret;
 	return (ret);
 }
