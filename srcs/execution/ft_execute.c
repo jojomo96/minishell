@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 14:15:09 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:00:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	ft_execute(t_shell *ms, t_ast_node *node)
 // add expander
 int	ft_execute_node(t_shell *ms, t_ast_node *node)
 {
+	if (node->type == AST_TYPE_LEAF && (node->u_data.leaf.argv[0] == NULL
+			|| node->u_data.leaf.argv[0][0] == '\0'))
+		return (0);
 	if (node->type == AST_TYPE_LEAF)
 		return (ft_exec_leaf(ms, node));
 	if (node->u_data.s_node.op_type == OP_PIPE)

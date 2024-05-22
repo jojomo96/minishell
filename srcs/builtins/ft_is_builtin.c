@@ -6,37 +6,27 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:28:04 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 14:05:41 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:42:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	make_lower(unsigned int i, char c)
-{
-	(void)i;
-	return (ft_tolower(c));
-}
-
 t_builtin	ft_is_builtin(char *cmd)
 {
-	char	*lower;
-
-	lower = ft_strmapi(cmd, &make_lower);
-	if (!ft_strcmp(lower, "echo"))
+	if (!ft_strcmp(cmd, "echo"))
 		return (BUILTIN_ECHO);
-	if (!ft_strcmp(lower, "cd"))
+	if (!ft_strcmp(cmd, "cd"))
 		return (BUILTIN_CD);
-	if (!ft_strcmp(lower, "pwd"))
+	if (!ft_strcmp(cmd, "pwd"))
 		return (BUILTIN_PWD);
-	if (!ft_strcmp(lower, "export"))
+	if (!ft_strcmp(cmd, "export"))
 		return (BUILTIN_EXPORT);
-	if (!ft_strcmp(lower, "unset"))
+	if (!ft_strcmp(cmd, "unset"))
 		return (BUILTIN_UNSET);
-	if (!ft_strcmp(lower, "env"))
+	if (!ft_strcmp(cmd, "env"))
 		return (BUILTIN_ENV);
-	if (!ft_strcmp(lower, "exit"))
+	if (!ft_strcmp(cmd, "exit"))
 		return (BUILTIN_EXIT);
-	free(lower);
 	return (NONE);
 }

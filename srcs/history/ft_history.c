@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:08:14 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 19:12:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:22:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_history_add(char *input)
 			0644);
 	if (fd < 0)
 	{
-		// ft_putstr_fd("Error: could not open history file\n", STDERR_FILENO);
+		ft_putstr_fd("Error: could not open history file\n", STDERR_FILENO);
 		return ;
 	}
 	if (write(fd, input, strlen(input)) < 0 || write(fd, "\n", 1) < 0)
