@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 18:53:10 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 19:07:30 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	isDelimiter(char c)
 	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.'); // maybe remove .
 }
 
-static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes)
+static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes, bool is_last_arg)
 {
 	char	*str;
 	char	*new_value;
@@ -25,9 +25,9 @@ static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes)
 	if (str_ptr == NULL || *str_ptr == NULL)
 		return ;
 	str = *str_ptr;
-	if (str[1] == '\0' && !in_d_quotes)
+	if (str[1] == '\0' && !in_d_quotes && !is_last_arg)
 		new_value = ft_strdup("");
-	else if (str[1] == '\0' && in_d_quotes)
+	else if (str[1] == '\0' && (in_d_quotes || is_last_arg))
 		new_value = ft_strdup("$");
 	else if (str[1] == '?')
 		new_value = ft_itoa(ft_get_shell()->exit_code);
@@ -53,7 +53,7 @@ static void	ft_expand_splited_args(char **splited_args)
 	{
 		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
 		if (splited_args[i][0] == '$' && !in_s_quotes)
-			ft_handle_env_variable(&splited_args[i], in_d_quotes);
+			ft_handle_env_variable(&splited_args[i], in_d_quotes, splited_args[i + 1] == NULL);
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes)
 		{
 			free(splited_args[i]);
