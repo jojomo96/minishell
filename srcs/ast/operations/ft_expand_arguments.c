@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 11:50:48 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 15:46:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,9 @@ static void	ft_expand_splited_args(char **splited_args)
 		}
 		i++;
 	}
-
-
 	i = 0;
-	while (splited_args[i])
-	{
-		expand_wildcard(splited_args[i]);
-		i++;
-	}
-
+	while (splited_args[i] && ft_strnstr(splited_args[i], "*", ft_strlen(splited_args[i])) != NULL)
+		expand_wildcard(&splited_args[i++]);
 }
 
 static char	**ft_expand_arguments_in_strarr(char **arr)
