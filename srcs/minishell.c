@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 16:36:04 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:17:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	ft_signals_init();
-	ft_history_init();
 	ms = ft_get_shell();
+	ms->history_file = ft_strjoin(getcwd(NULL, 0), HISTORY_FILE);
+	ft_history_init();
 	if (argc != 1 || ft_shell_init(ms, envp))
 		return (1);
 	if (isatty(STDIN_FILENO))
