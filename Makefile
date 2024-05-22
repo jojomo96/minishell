@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/21 20:16:00 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/22 11:06:23 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ CFILES += ft_ast_create.c \
 CFILES += ft_ast_move_arguments.c \
 			ft_traverse_and_process.c \
 			ft_expand_arguments.c \
+			ft_expand_wildcard.c \
 
 # EXECUTION
 CFILES += ft_execute.c \
