@@ -6,23 +6,23 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:28:04 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 12:54:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:05:41 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static char	make_lower(unsigned int i, char c)
-// {
-// 	(void)i;
-// 	return (ft_tolower(c));
-// }
+static char	make_lower(unsigned int i, char c)
+{
+	(void)i;
+	return (ft_tolower(c));
+}
 
 t_builtin	ft_is_builtin(char *cmd)
 {
 	char	*lower;
 
-	lower = ft_strdup(cmd);
+	lower = ft_strmapi(cmd, &make_lower);
 	if (!ft_strcmp(lower, "echo"))
 		return (BUILTIN_ECHO);
 	if (!ft_strcmp(lower, "cd"))

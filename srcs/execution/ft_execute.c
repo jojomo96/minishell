@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/15 14:10:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:15:09 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_execute(t_shell *ms, t_ast_node *node)
 {
+	errno = 0;
 	ft_expand_arguments(node);
 	return (ft_execute_node(ms, node));
 }
