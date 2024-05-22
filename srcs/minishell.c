@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:53:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:04:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ void	ft_handle_input_pipe(void)
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
-	input = ft_strtrim(line, "\n");
-	free(line);
-	ft_handle_input(input);
-	free(input);
+	while (line)
+	{
+		input = ft_strtrim(line, "\n");
+		free(line);
+		ft_handle_input(input);
+		free(input);
+		line = get_next_line(STDIN_FILENO);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
