@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:33:53 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:56:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:10:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_exec_pipe_leaf(t_shell *ms, t_ast_node *node)
 	int	std_in;
 	int	std_out;
 
+	ft_expand_arguments(node);
 	std_in = dup(STDIN_FILENO);
 	std_out = dup(STDOUT_FILENO);
 	builtin = ft_is_builtin(node->u_data.leaf.argv[0]);
