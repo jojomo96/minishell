@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:37:25 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 17:32:58 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:12:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ void	ft_exit(t_shell *ms, char **argv, int fd_out)
 	debug_message("executing builtin: echo");
 	if (argv[1])
 	{
+		if (!ft_isdigits(argv[1]) || ft_strlen(argv[1]) == 0)
+		{
+			ft_putendl_fd("exit", STDERR_FILENO);
+			ft_print_error("numeric argument required", "exit", argv[1]);
+			ms->exit_code = 255;
+			ft_destroy_shell(ms, 1);
+		}
 		if (argv[2])
 		{
 			ft_putendl_fd("exit", STDERR_FILENO);
 			ft_print_error("too many arguments", "exit", NULL);
 			ms->exit_code = 1;
 			return ;
-		}
-		if (!ft_isdigits(argv[1]))
-		{
-			ft_putendl_fd("exit", STDERR_FILENO);
-			ft_print_error("numeric argument required", "exit", argv[1]);
-			ms->exit_code = 255;
-			ft_destroy_shell(ms, 1);
 		}
 		ms->exit_code = ft_atoi(argv[1]);
 		ms->exit_code = ms->exit_code % 256;
