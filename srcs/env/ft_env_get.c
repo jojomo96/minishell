@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:20:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/13 16:06:00 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 10:51:41 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ char	*ft_env_get(char **env, char *key)
 	free(temp[1]);
 	free(temp);
 	return (val);
+}
+
+char	*ft_fetch_env_var(char *name)
+{
+	debug_message_1("Fetching environment variable: ", name);
+	return (ft_env_get(ft_get_shell()->env, name));
 }

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 19:53:37 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 11:06:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ int	ft_handle_input(char *input)
 	nodes = ft_tokenize_input(input);
 	if (!nodes)
 		return (1);
+	if (nodes[0] == NULL)
+	{
+		ft_free(nodes);
+		return (0);
+	}
 	ast = NULL;
 	build_ast(&ast, nodes);
-	// ft_expand_arguments(ast);
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
@@ -73,9 +77,9 @@ void	ft_handle_input_pipe(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell				*ms;
-	(void)argv;
+	t_shell	*ms;
 
+	(void)argv;
 	ft_signals_init();
 	ft_history_init();
 	ms = ft_get_shell();

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 19:33:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:10:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_execute_node(t_shell *ms, t_ast_node *node)
 {
 	if (node->type == AST_TYPE_LEAF)
 		return (ft_exec_leaf(ms, node));
-	// if (node->u_data.s_node.op_type == OP_PIPE)
-	// 	return (ft_exec_pipe(ms, node));
+	if (node->u_data.s_node.op_type == OP_PIPE)
+		return (ft_exec_pipe(ms, node));
 	if (node->u_data.s_node.op_type == OP_AND)
 		return (ft_exec_and(ms, node));
 	if (node->u_data.s_node.op_type == OP_OR)

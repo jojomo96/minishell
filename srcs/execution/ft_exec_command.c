@@ -6,11 +6,19 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 20:17:10 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:56:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_close_fds(t_ast_node *node)
+{
+	if (node->u_data.leaf.fd_in != STDIN_FILENO)
+		close(node->u_data.leaf.fd_in);
+	if (node->u_data.leaf.fd_out != STDOUT_FILENO)
+		close(node->u_data.leaf.fd_out);
+}
 
 // gets the path of the command from the PATH environment variable
 char	*ft_get_path_from_env(char *path_env, char *arg)
@@ -74,14 +82,18 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
 	if (pid == 0)
 	{
+		if (node->u_data.leaf.fd_in != STDIN_FILENO)
+			dup2(node->u_data.leaf.fd_in, STDIN_FILENO);
+		if (node->u_data.leaf.fd_out != STDOUT_FILENO)
+			dup2(node->u_data.leaf.fd_out, STDOUT_FILENO);
+		fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &ft_close_fds);
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
-		debug_message(path);
 		if (!path)
-			return (ft_print_error(strerror(errno), NULL, NULL), 1);
+			return (ft_print_error(node->u_data.leaf.argv[0], strerror(errno),
+					NULL), exit(127), 1);
 		if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
 			return (ft_print_error(strerror(errno), NULL, NULL), 1);
-		free(path);
-		exit(1);
+		return (debug_message(path), free(path), exit(1), 1);
 	}
 	return (0);
 }

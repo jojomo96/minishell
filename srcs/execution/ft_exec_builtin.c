@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:22:13 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 14:57:07 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:51:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	ft_exec_builtin_fork(t_shell *ms, t_ast_node *node, t_builtin builtin)
 	{
 		ms->exit_code = ft_exec_builtin(ms, builtin, node->u_data.leaf.argv,
 				node->u_data.leaf.fd_out);
+		fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &ft_close_fds);
 		ft_destroy_shell(ms, 1);
 	}
 	return (0);
