@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 13:02:52 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 10:19:40 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ char	**ft_split_on_delim(const char *str, bool(delim)(char c))
 	t_split_state	*state;
 
 	state = ft_init_split_state(str);
-	state->found_exit_code = false;
-	while (str[state->str_idx] != '\0')
+	while ((size_t)state->str_idx < (size_t)ft_strlen(str)
+		&& str[state->str_idx] != '\0')
 	{
 		if ((!delim(str[state->str_idx]) || is_exit_code((char *)str,
 					state->str_idx)) && !state->found_exit_code)
