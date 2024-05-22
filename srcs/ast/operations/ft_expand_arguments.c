@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 15:46:43 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:43:32 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	isDelimiter(char c)
 {
-	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.' );
+	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.'); // maybe remove .
 }
 
-static void	ft_handel_env_variable(char **str_ptr)
+static void	ft_handle_env_variable(char **str_ptr)
 {
 	char	*str;
 	char	*new_value;
@@ -25,7 +25,9 @@ static void	ft_handel_env_variable(char **str_ptr)
 	if (str_ptr == NULL || *str_ptr == NULL)
 		return ;
 	str = *str_ptr;
-	if (str[1] == '?')
+	if (str[1] == '\0')
+		new_value = ft_strdup("");
+	else if (str[1] == '?')
 		new_value = ft_itoa(ft_get_shell()->exit_code);
 	else
 		new_value = ft_fetch_env_var(str + 1);
@@ -33,7 +35,7 @@ static void	ft_handel_env_variable(char **str_ptr)
 	if (new_value != NULL)
 		*str_ptr = new_value;
 	else
-		*str_ptr = NULL;
+		*str_ptr = ft_strdup("");
 }
 
 static void	ft_expand_splited_args(char **splited_args)
@@ -48,9 +50,8 @@ static void	ft_expand_splited_args(char **splited_args)
 	while (splited_args[i])
 	{
 		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
-		if (splited_args[i][0] == '$' && !in_s_quotes
-			&& splited_args[i][1] != '\0')
-			ft_handel_env_variable(&splited_args[i]);
+		if (splited_args[i][0] == '$' && !in_s_quotes)
+			ft_handle_env_variable(&splited_args[i]);
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes)
 		{
 			free(splited_args[i]);
@@ -59,7 +60,8 @@ static void	ft_expand_splited_args(char **splited_args)
 		i++;
 	}
 	i = 0;
-	while (splited_args[i] && ft_strnstr(splited_args[i], "*", ft_strlen(splited_args[i])) != NULL)
+	while (splited_args[i] && ft_strnstr(splited_args[i], "*",
+			ft_strlen(splited_args[i])) != NULL)
 		expand_wildcard(&splited_args[i++]);
 }
 
