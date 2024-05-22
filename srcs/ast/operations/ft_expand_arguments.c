@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 11:10:41 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 11:50:48 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_handel_env_variable(char **str_ptr)
 	if (str_ptr == NULL || *str_ptr == NULL)
 		return ;
 	str = *str_ptr;
-	if (str[1] && str[1] == '\0')
+	if (str[1] == '?')
 		new_value = ft_itoa(ft_get_shell()->exit_code);
 	else
 		new_value = ft_fetch_env_var(str + 1);
