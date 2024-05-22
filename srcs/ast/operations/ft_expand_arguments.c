@@ -40,7 +40,7 @@ static void	ft_expand_splited_args(char **splited_args)
 {
 	int		i;
 	bool	in_s_quotes;
-	bool	in_d_quotes_hello;
+	bool	in_d_quotes;
 
 	in_s_quotes = false;
 	in_d_quotes = false;
