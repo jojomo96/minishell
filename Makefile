@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/15 14:26:50 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/21 19:26:01 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ CFILES += ft_ast_create.c \
 CFILES += ft_ast_move_arguments.c \
 			ft_traverse_and_process.c \
 			ft_expand_arguments.c \
+			ft_expand_wildcard.c \
 
 # EXECUTION
 CFILES += ft_execute.c \

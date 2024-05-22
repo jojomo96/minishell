@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 13:01:23 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 09:18:21 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_get_exit_code(void)
 
 bool	isDelimiter(char c)
 {
-	return (!ft_isalnum(c) && c != '_' && c != '*');
+	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.' );
 }
 
 static void	ft_handel_env_variable(char *str)
@@ -58,6 +58,15 @@ static void	ft_expand_splited_args(char **splited_args)
 			ft_handel_env_variable(splited_args[i]);
 		i++;
 	}
+
+
+	i = 0;
+	while (splited_args[i])
+	{
+		expand_wildcard(splited_args[i]);
+		i++;
+	}
+
 }
 
 static char	**ft_expand_arguments_in_strarr(char **arr)
