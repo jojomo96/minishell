@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/14 20:57:28 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:14:04 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ static int	export_error(char **tmp)
 	if (!tmp)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
 	if (!ft_valid_env_key(tmp[0]))
+	{
+		if (tmp[0] && tmp[0][0] == '-')
+			return (ft_print_error_env("invalid option", "export", tmp[0]), 2);
 		return (ft_print_error_env("not a valid identifier", "export", tmp[0]),
-			ft_strarr_free(tmp), 1);
+			1);
+	}
 	return (0);
 }
 
@@ -64,7 +68,7 @@ int	ft_export(t_shell *ms, char **argv, int fd_out)
 		{
 			tmp = ft_split(argv[i], '=');
 			if (export_error(tmp))
-				return (1);
+				return (ft_strarr_free(tmp), export_error(tmp));
 			ft_env_set_both(ms, tmp[0], tmp[1]);
 			ft_strarr_free(tmp);
 		}
