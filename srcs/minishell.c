@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 19:53:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 19:56:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ void	ft_handle_input_pipe(void)
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
-	input = ft_strtrim(line, "\n");
-	free(line);
-	ft_handle_input(input);
-	free(input);
+	while (line)
+	{
+		input = ft_strtrim(line, "\n");
+		free(line);
+		ft_handle_input(input);
+		free(input);
+		line = get_next_line(STDIN_FILENO);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -81,8 +85,9 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	ft_signals_init();
-	ft_history_init();
 	ms = ft_get_shell();
+	ms->history_file = ft_strjoin(getcwd(NULL, 0), HISTORY_FILE);
+	ft_history_init();
 	if (argc != 1 || ft_shell_init(ms, envp))
 		return (1);
 	if (isatty(STDIN_FILENO))

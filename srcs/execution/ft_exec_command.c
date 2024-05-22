@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:56:00 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:46:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,17 @@ char	*ft_get_path_from_env(char *path_env, char *arg)
 	return (NULL);
 }
 
+// static void	make_lower(unsigned int i, char *str)
+// {
+// 	str[i] = ft_tolower(str[i]);
+// }
+
 // gets the path of the command
 char	*ft_get_path(t_shell *ms, char *arg)
 {
 	char	*path_env;
 
+	// ft_striteri(arg, &make_lower);
 	if (ft_isdir(arg) && ft_strcmp(arg, ".") != 0 && ft_strcmp(arg, "..") != 0)
 	{
 		errno = EISDIR;
@@ -89,7 +95,7 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 		fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &ft_close_fds);
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
 		if (!path)
-			return (ft_print_error(node->u_data.leaf.argv[0], strerror(errno),
+			return (ft_print_error(strerror(errno), node->u_data.leaf.argv[0],
 					NULL), exit(127), 1);
 		if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
 			return (ft_print_error(strerror(errno), NULL, NULL), 1);

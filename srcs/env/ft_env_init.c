@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:33:04 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/03 11:02:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:58:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int	ft_env_init(char ***env)
 		return (status);
 	if (ft_env_index(*env, "PWD") == -1)
 		status = ft_env_init_pwd(env);
+	ft_env_remove(env, "OLDPWD");
 	return (status);
 }

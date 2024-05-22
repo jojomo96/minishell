@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:56:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:20:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ft_exec_pipe(t_shell *ms, t_ast_node *node)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
 	set_left_fd(node, pipe_fd[1]);
 	set_right_fd(node, pipe_fd[0]);
-	ft_putendl_fd("pipe", STDERR_FILENO);
 	fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &debug_print_node);
 	if (left->type == AST_TYPE_LEAF)
 		status = ft_exec_pipe_leaf(ms, left);

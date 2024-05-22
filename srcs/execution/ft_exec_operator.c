@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:19:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/15 11:52:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:00:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	ft_exec_or(t_shell *ms, t_ast_node *node)
 	right = node->u_data.s_node.right;
 	status = ft_execute(ms, left);
 	if (left->type == AST_TYPE_LEAF && left->u_data.leaf.pid != -1)
+	{
 		waitpid(left->u_data.leaf.pid, &status, 0);
+		left->u_data.leaf.pid = -1;
+	}
 	left->exit_status = WEXITSTATUS(status);
 	ms->exit_code = left->exit_status;
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)

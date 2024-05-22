@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:08:14 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/21 18:21:06 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 19:22:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_history_add(char *input)
 	if (!input || strlen(input) == 0)
 		return ;
 	add_history(input);
-	fd = open(HISTORY_FILE, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	fd = open(ft_get_shell()->history_file, O_WRONLY | O_APPEND | O_CREAT,
+			0644);
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: could not open history file\n", STDERR_FILENO);
@@ -56,7 +57,7 @@ void	ft_history_init(void)
 	int		fd;
 	char	*line;
 
-	fd = open(HISTORY_FILE, O_RDONLY | O_CREAT, 0644);
+	fd = open(ft_get_shell()->history_file, O_RDONLY | O_CREAT, 0644);
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: could not open history file\n", STDERR_FILENO);

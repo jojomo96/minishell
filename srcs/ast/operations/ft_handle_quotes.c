@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_quotes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:59:01 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/14 13:01:04 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:29:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_toggle_quotes(char *arr, bool *in_s_quotes, bool *in_d_quotes)
 	{
 		*in_s_quotes = !*in_s_quotes;
 	}
-	if (arr[0] == '\"')
+	if (arr[0] == '\"' && !*in_s_quotes)
 	{
 		*in_d_quotes = !*in_d_quotes;
 	}
