@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 19:07:30 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 19:40:40 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 bool	isDelimiter(char c)
 {
-	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.'); // maybe remove .
+	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.');
+		// maybe remove .
 }
 
-static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes, bool is_last_arg)
+static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
+		bool is_last_arg)
 {
 	char	*str;
 	char	*new_value;
@@ -53,8 +55,10 @@ static void	ft_expand_splited_args(char **splited_args)
 	{
 		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
 		if (splited_args[i][0] == '$' && !in_s_quotes)
-			ft_handle_env_variable(&splited_args[i], in_d_quotes, splited_args[i + 1] == NULL);
-		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes)
+			ft_handle_env_variable(&splited_args[i], in_d_quotes, splited_args[i
+				+ 1] == NULL);
+		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes
+			&& splited_args[i][1] == '\0')
 		{
 			free(splited_args[i]);
 			splited_args[i] = ft_fetch_env_var("HOME");

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:53:28 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/15 11:27:54 by test             ###   ########.fr       */
+/*   Updated: 2024/05/22 19:52:53 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static void	ft_ast_find_leftmost_leaf(t_ast_node *origin, t_ast_node **dst)
 	if (*dst == NULL)
 	{
 		origin->u_data.s_node.left = ft_ast_new_node("", 0, 0);
+		origin->u_data.s_node.left->u_data.leaf.argv = malloc(sizeof(char *) * 2);
+		origin->u_data.s_node.left->u_data.leaf.argv[0] = ft_strdup("");
+		origin->u_data.s_node.left->u_data.leaf.argv[1] = NULL;
 		*dst = origin->u_data.s_node.left;
 	}
 	while (*dst && (*dst)->type == AST_TYPE_NODE
