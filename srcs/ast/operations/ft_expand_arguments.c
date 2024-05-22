@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 11:14:56 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 11:14:56 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_expand_splited_args(char **splited_args)
 {
 	int		i;
 	bool	in_s_quotes;
-	bool	in_d_quotes;
+	bool	in_d_quotes_hello;
 
 	in_s_quotes = false;
 	in_d_quotes = false;
