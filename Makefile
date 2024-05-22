@@ -6,12 +6,12 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/22 16:36:32 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/22 20:14:28 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+CFLAGS = -Wall -Wextra -Werror
 MAKEFLAGS += --no-print-directory
 NAME := minishell
 # DIRECTORIES
@@ -201,6 +201,11 @@ re: fclean all
 
 norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
+
+debug: CFLAGS += -g 
+debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+debug: CFLAGS += -DDEBUG=1
+debug: clean all
 
 .PHONY: all clean fclean re norm ascii
 
