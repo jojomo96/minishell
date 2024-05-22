@@ -6,18 +6,21 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:44:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/10 10:09:04 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/22 12:54:49 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_starts_with_operator(const char *input)
+static int	ft_starts_with_operator(const char *input, bool in_s_quotes,
+		bool in_d_quotes)
 {
 	const char	*double_char_operators[] = {"<<", ">>", "&&", "||", NULL};
 	const char	*single_char_operators[] = {"<", ">", "|", "(", ")", NULL};
 	int			i;
 
+	if (in_s_quotes || in_d_quotes)
+		return (0);
 	i = 0;
 	while (double_char_operators[i])
 	{
@@ -38,17 +41,26 @@ static int	ft_starts_with_operator(const char *input)
 static void	ft_extract_tokens(t_ast_node **nodes, char *input, int *position,
 		int *node_count)
 {
-	int	start;
-	int	end;
+	int		start;
+	int		end;
+	bool	in_s_quotes;
+	bool	in_d_quotes;
 
+	in_s_quotes = false;
+	in_d_quotes = false;
 	start = *position;
 	end = start;
-	if (ft_starts_with_operator(input + start))
-		end += ft_starts_with_operator(input + start);
+	ft_toggle_quotes(input + start, &in_s_quotes, &in_d_quotes);
+	if (ft_starts_with_operator(input + start, in_s_quotes, in_d_quotes))
+		end += ft_starts_with_operator(input + start, in_s_quotes, in_d_quotes);
 	else
 	{
-		while (input[end] && !ft_starts_with_operator(&input[end]))
+		while (input[end] && !ft_starts_with_operator(&input[end], in_s_quotes,
+				in_d_quotes))
+		{
 			end++;
+			ft_toggle_quotes(input + end, &in_s_quotes, &in_d_quotes);
+		}
 	}
 	nodes[*node_count] = ft_ast_new_node(input, start, end - start);
 	(*node_count)++;
