@@ -6,84 +6,13 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 17:57:50 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:03:32 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Function to split a string by spaces and add the parts to the result array
-void	split_and_add(char *str, char **result, int *index)
-{
-	char	*start;
-	char	*end;
-	bool	in_s_quotes;
-	bool	in_d_quotes;
 
-	in_s_quotes = false;
-	in_d_quotes = false;
-	start = str;
-	while (*start != '\0')
-	{
-		while (*start == ' ')
-			start++;
-		if (*start == '\0')
-			break;
-		end = start;
-		while (*end != '\0')
-		{
-			ft_toggle_quotes(end, &in_s_quotes, &in_d_quotes);
-			if (!in_s_quotes && !in_d_quotes && ft_isspace(*end))
-				break ;
-			end++;
-		}
-		if (*end == '\0')
-		{
-			result[(*index)++] = start;
-			break ;
-		}
-		*end = '\0';
-		result[(*index)++] = start;
-		start = end + 1;
-	}
-}
-int	determine_size(char **array)
-{
-	int	size;
-
-	size = 0;
-	while (array[size] != NULL)
-	{
-		size++;
-	}
-	return (size);
-}
-
-// Function to process the array of char * and replace it with a new one
-void	process_array(char ***array)
-{
-	int		i;
-	int		index;
-	int		size;
-	char	**result;
-
-	i = 0;
-	index = 0;
-	size = determine_size(*array);
-	result = (char **)ft_malloc(size * 10 * sizeof(char *));
-	if (!result)
-	{
-		perror("Failed to allocate memory");
-		return ;
-	}
-	while (i < size)
-	{
-		split_and_add((*array)[i], result, &index);
-		i++;
-	}
-	result[index] = NULL;
-	*array = result;
-}
 
 bool	isDelimiter(char c)
 {
@@ -160,7 +89,7 @@ static char	**ft_expand_arguments_in_strarr(char **arr)
 		debug_message_1("Expanded argument: ", arr[i]);
 		i++;
 	}
-	process_array(&arr);
+	ft_split_on_space(&arr);
 	i = 0;
 	while (arr[i]!=NULL)
 	{
