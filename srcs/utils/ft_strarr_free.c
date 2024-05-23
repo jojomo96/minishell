@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:03:27 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/13 15:57:51 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/23 16:53:23 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_strarr_free(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		free(arr[i]);
+		ft_free(arr[i]);
 		i++;
 	}
-	free(arr);
+	ft_free(arr);
 }
