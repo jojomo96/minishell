@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 17:07:12 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/23 17:57:50 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	process_array(char ***array)
 	i = 0;
 	index = 0;
 	size = determine_size(*array);
-	result = (char **)malloc(size * 10 * sizeof(char *));
+	result = (char **)ft_malloc(size * 10 * sizeof(char *));
 	if (!result)
 	{
 		perror("Failed to allocate memory");
@@ -148,24 +148,16 @@ static char	**ft_expand_arguments_in_strarr(char **arr)
 {
 	char	**splited_args;
 	int		i;
-	int		j;
 
 	i = 0;
 	while (arr[i])
 	{
 		splited_args = ft_split_on_delim(arr[i], &isDelimiter);
-		j = 0;
-		while (splited_args[j])
-		{
-			if (DEBUG)
-				printf("DEBUG splited arguments[%d]: %s\n", j, splited_args[j]);
-			j++;
-		}
+		debug_print_strarr(splited_args);
 		ft_expand_splited_args(splited_args);
 		ft_free(arr[i]);
 		arr[i] = ft_strarr_join(splited_args);
-		if (DEBUG)
-			printf("DEBUG expanded arguments[%d]: %s\n", i, arr[i]);
+		debug_message_1("Expanded argument: ", arr[i]);
 		i++;
 	}
 	process_array(&arr);
