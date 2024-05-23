@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/23 11:24:50 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/23 18:03:56 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_split_on_delim.c \
 			ft_strarr_join.c \
 			ft_handle_quotes.c \
+			ft_split_on_space.c \
 
 # ERRORS
 CFILES += ft_print_error.c
@@ -121,6 +122,7 @@ CFILES += debug_printgc.c \
 			ft_debug_ast.c \
 			debug_message.c \
 			debug_print_node.c \
+			debug_print_strarr.c \
 
 # SIGNALS
 CFILES += ft_signals.c \
@@ -202,7 +204,7 @@ re: fclean all
 norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
-debug: CFLAGS += -g 
+debug: CFLAGS += -g
 debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
