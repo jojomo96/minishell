@@ -6,18 +6,16 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 18:03:32 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:14:59 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-bool	isDelimiter(char c)
+//TODO maybe remove . from is_delimiter
+bool	is_delimiter(char c)
 {
 	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.');
-	// maybe remove .
 }
 
 static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
@@ -73,7 +71,7 @@ static void	ft_expand_splited_args(char **splited_args)
 		expand_wildcard(&splited_args[i++]);
 }
 
-static char	**ft_expand_arguments_in_strarr(char **arr)
+static char	**ft_expand_arg_in_strarr(char **arr)
 {
 	char	**splited_args;
 	int		i;
@@ -81,7 +79,7 @@ static char	**ft_expand_arguments_in_strarr(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		splited_args = ft_split_on_delim(arr[i], &isDelimiter);
+		splited_args = ft_split_on_delim(arr[i], &is_delimiter);
 		debug_print_strarr(splited_args);
 		ft_expand_splited_args(splited_args);
 		ft_free(arr[i]);
@@ -91,9 +89,9 @@ static char	**ft_expand_arguments_in_strarr(char **arr)
 	}
 	ft_split_on_space(&arr);
 	i = 0;
-	while (arr[i]!=NULL)
+	while (arr[i] != NULL)
 	{
-		splited_args = ft_split_on_delim(arr[i], &isDelimiter);
+		splited_args = ft_split_on_delim(arr[i], &is_delimiter);
 		ft_remove_outer_quotes(splited_args);
 		arr[i] = ft_strarr_join(splited_args);
 		i++;
@@ -107,5 +105,5 @@ void	ft_expand_arguments(t_ast_node *node)
 		return ;
 	if (node->u_data.leaf.argv == NULL)
 		return ;
-	node->u_data.leaf.argv = ft_expand_arguments_in_strarr(node->u_data.leaf.argv);
+	node->u_data.leaf.argv = ft_expand_arg_in_strarr(node->u_data.leaf.argv);
 }
