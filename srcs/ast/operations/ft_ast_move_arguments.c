@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ast_move_arguments.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:53:28 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 19:52:53 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:55:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void	ft_ast_find_leftmost_leaf(t_ast_node *origin, t_ast_node **dst)
 	if (*dst == NULL)
 	{
 		origin->u_data.s_node.left = ft_ast_new_node("", 0, 0);
-		origin->u_data.s_node.left->u_data.leaf.argv = malloc(sizeof(char *) * 2);
-		origin->u_data.s_node.left->u_data.leaf.argv[0] = ft_strdup("");
-		origin->u_data.s_node.left->u_data.leaf.argv[1] = NULL;
+		origin->u_data.s_node.left->u_data.leaf.argv = ft_malloc(sizeof(char *)
+				* 1);
+		origin->u_data.s_node.left->u_data.leaf.argv[0] = NULL;
 		*dst = origin->u_data.s_node.left;
 	}
 	while (*dst && (*dst)->type == AST_TYPE_NODE

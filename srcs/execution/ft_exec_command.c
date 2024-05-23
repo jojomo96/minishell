@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 17:46:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:18:58 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_get_path(t_shell *ms, char *arg)
 		errno = EISDIR;
 		return (NULL);
 	}
-	if (ft_strncmp(arg, "./", 2) == 0 || ft_strncmp(arg, "/", 3) == 0
+	if (ft_strncmp(arg, "./", 2) == 0 || ft_strncmp(arg, "/", 1) == 0
 		|| ft_strncmp(arg, "../", 3) == 0 || access(arg, F_OK) == 0)
 		return (ft_strdup(arg));
 	path_env = ft_env_get(ms->env, "PATH");
