@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/22 20:14:28 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/23 11:24:50 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,7 +207,10 @@ debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=a
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
-.PHONY: all clean fclean re norm ascii
+tree: CFLAGS += -DOPEN_AST=1
+tree: debug
+
+.PHONY: all clean fclean re norm ascii debug tree
 
 # colors:
 GREEN = \033[0;32m

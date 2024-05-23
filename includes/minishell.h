@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 19:10:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:21:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@
 
 # ifndef DEBUG
 #  define DEBUG 0
+# endif
+
+# ifndef OPEN_AST
+#  define OPEN_AST 0
 # endif
 
 # define SHELL_NAME "minishell"
