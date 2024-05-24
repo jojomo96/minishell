@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:25:16 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 11:05:00 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 14:51:12 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ static int	process_star(const char *f, const char *p)
 
 static int	process_quotes(const char **f, const char **p)
 {
+	char	quote;
+
+	quote = **p;
 	(*p)++;
-	while (**p && **p != '"')
+	while (**p && **p != quote)
 	{
 		if (**p != **f)
 			return (0);
 		(*p)++;
 		(*f)++;
 	}
-	if (**p == '"')
+	if (**p == quote)
 		(*p)++;
 	return (1);
 }
@@ -69,7 +72,7 @@ int	ft_match_pattern(const char *filename, const char *pattern)
 	{
 		if (*p == '*')
 			return (process_star(f, p));
-		else if (*p == '"')
+		else if (*p == '"' || *p == '\'')
 		{
 			if (!process_quotes(&f, &p))
 				return (0);

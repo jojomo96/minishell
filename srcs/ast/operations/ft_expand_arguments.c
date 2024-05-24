@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 10:17:43 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:25:35 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // TODO maybe remove . from is_delimiter
 bool	is_delimiter(char c)
 {
-	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.');
+	return (!ft_isalnum(c) && c != '_' && c != '*');
 }
 
 static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
@@ -85,13 +85,13 @@ static char	**ft_expand_arg_in_strarr(char **arr)
 	}
 	ft_split_on_space(&arr);
 	ft_expand_wildcard(arr);
+	ft_split_on_space(&arr);
 	i = 0;
 	while (arr[i] != NULL)
 	{
 		splited_args = ft_split_on_delim(arr[i], &is_delimiter);
 		ft_remove_outer_quotes(splited_args);
-		arr[i] = ft_strarr_join(splited_args);
-		i++;
+		arr[i++] = ft_strarr_join(splited_args);
 	}
 	return (arr);
 }

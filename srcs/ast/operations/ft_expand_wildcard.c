@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:07:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 12:03:05 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 14:58:01 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	expand_wildcard(char **pattern, t_wildcard_data *data)
 		perror("opendir");
 		return ;
 	}
-	if (*pattern[0] == '.')
+	if (*pattern[0] == '.' || ft_strncmp(*pattern, "\".\"", 3) == 0
+		|| ft_strncmp(*pattern, "'.'", 3) == 0)
 		data->show_hidden = true;
 	while (ft_readdir(data->dir, &data->entry) != NULL)
 	{
