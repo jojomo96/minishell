@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 20:00:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:55:47 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 int	ft_execute(t_shell *ms, t_ast_node *node)
 {
 	errno = 0;
+	if (node->type == AST_TYPE_LEAF && node->u_data.leaf.argv[0]
+		&& !ft_strcmp(node->u_data.leaf.argv[0], "\"\"")
+		&& node->u_data.leaf.argv[1] == NULL)
+	{
+		ms->exit_code = 127;
+		node->exit_status = 127;
+		ft_print_error("command not found", "", 0);
+		return (127);
+	}
 	ft_expand_arguments(node);
 	return (ft_execute_node(ms, node));
 }
 
-// add expander
 int	ft_execute_node(t_shell *ms, t_ast_node *node)
 {
 	if (node->type == AST_TYPE_LEAF && (node->u_data.leaf.argv[0] == NULL

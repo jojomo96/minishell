@@ -50,29 +50,44 @@ char	*ft_get_path_from_env(char *path_env, char *arg)
 	return (NULL);
 }
 
-// static void	make_lower(unsigned int i, char *str)
-// {
-// 	str[i] = ft_tolower(str[i]);
-// }
-
 // gets the path of the command
 char	*ft_get_path(t_shell *ms, char *arg)
 {
 	char	*path_env;
 
-	// ft_striteri(arg, &make_lower);
 	if (ft_isdir(arg) && ft_strcmp(arg, ".") != 0 && ft_strcmp(arg, "..") != 0)
 	{
 		errno = EISDIR;
 		return (NULL);
 	}
-	if (ft_strncmp(arg, "./", 2) == 0 || ft_strncmp(arg, "/", 3) == 0
+	if (ft_strncmp(arg, "./", 2) == 0 || ft_strncmp(arg, "/", 1) == 0
 		|| ft_strncmp(arg, "../", 3) == 0 || access(arg, F_OK) == 0)
 		return (ft_strdup(arg));
 	path_env = ft_env_get(ms->env, "PATH");
 	if (!path_env)
 		return (NULL);
 	return (ft_get_path_from_env(path_env, arg));
+}
+
+static void	handle_execve_err(char *path, char *arg, t_shell *ms)
+{
+	if (ft_strcmp(arg, ".") == 0)
+	{
+		ft_print_error("filename argument required", arg, NULL);
+		ft_putendl_fd(".: usage: . filename [arguments]", STDERR_FILENO);
+		ft_destroy_shell(ms, 0);
+		exit(2);
+	}
+	if (path && ft_strcmp(path, arg) == 0 && !(ft_strncmp(arg, "./", 2) == 0
+			|| ft_strncmp(arg, "/", 1) == 0 || ft_strncmp(arg, "../", 3) == 0))
+		ft_print_error("command not found", arg, NULL);
+	else
+		ft_print_error(strerror(errno), arg, NULL);
+	ft_destroy_shell(ms, 0);
+	strerror(errno);
+	if (errno == EACCES || errno == EISDIR)
+		exit(126);
+	exit(127);
 }
 
 // executes external commands
@@ -95,10 +110,9 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 		fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &ft_close_fds);
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
 		if (!path)
-			return (ft_print_error(strerror(errno), node->u_data.leaf.argv[0],
-					NULL), exit(127), 1);
+			return (handle_execve_err(path, node->u_data.leaf.argv[0], ms), 1);
 		if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
-			return (ft_print_error(strerror(errno), NULL, NULL), 1);
+			return (handle_execve_err(path, node->u_data.leaf.argv[0], ms), 1);
 		return (debug_message(path), free(path), exit(1), 1);
 	}
 	return (0);
