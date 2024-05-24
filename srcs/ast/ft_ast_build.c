@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:05:31 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 17:36:53 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 19:03:44 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,24 @@ static void	ft_split_nodes(t_ast_node **nodes, t_ast_node ***left_nodes,
 	(*right_nodes)[right_nodes_count] = NULL;
 }
 
-static void	ft_remove_surrounding_parenthesis(t_ast_node ***nodes)
+static bool	ft_remove_surrounding_parenthesis(t_ast_node ***nodes)
 {
-    int pre_size;
-    t_ast_node **new_nodes;
-    t_ast_node **temp;
+	int			pre_size;
+	t_ast_node	**new_nodes;
+	t_ast_node	**temp;
 
-    pre_size = 0;
-    while ((*nodes)[pre_size])
-        pre_size++;
-    if (pre_size < 2)
-        return;
-    new_nodes = ft_malloc(sizeof(t_ast_node *) * (pre_size - 1)); // Allocate pre_size - 1 elements
-    ft_memcpy(new_nodes, *nodes + 1, sizeof(t_ast_node *) * (pre_size - 2)); // Copy pre_size - 2 elements
-    printf("pre_size: %d\n", pre_size);
-    new_nodes[pre_size - 2] = NULL; // Set the last element to NULL
-    temp = *nodes;
-    *nodes = new_nodes;
-    ft_free(temp);
+	pre_size = 0;
+	while ((*nodes)[pre_size])
+		pre_size++;
+	if (pre_size < 2)
+		return (false);
+	new_nodes = ft_malloc(sizeof(t_ast_node *) * (pre_size - 1));
+	ft_memcpy(new_nodes, *nodes + 1, sizeof(t_ast_node *) * (pre_size - 2));
+	new_nodes[pre_size - 2] = NULL;
+	temp = *nodes;
+	*nodes = new_nodes;
+	ft_free(temp);
+	return (true);
 }
 
 void	ft_handle_ast_type_leaf_or_perentisis(t_ast_node **ast,
@@ -67,7 +67,11 @@ void	ft_handle_ast_type_leaf_or_perentisis(t_ast_node **ast,
 		*ast = nodes[0];
 	else if (nodes[0] && nodes[0]->type == AST_TYPE_PARANTHESIS)
 	{
-		ft_remove_surrounding_parenthesis(&nodes);
+		if (!ft_remove_surrounding_parenthesis(&nodes) || nodes[0] == NULL)
+		{
+			ft_print_syntax_error(")");
+			return ;
+		}
 		build_ast(ast, nodes);
 	}
 }
@@ -99,5 +103,3 @@ void	build_ast(t_ast_node **ast, t_ast_node **nodes)
 		*ast = nodes[highest_precedence_index];
 	}
 }
-
-
