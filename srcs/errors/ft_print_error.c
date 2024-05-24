@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:58:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 13:38:01 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 19:14:26 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,15 @@ void	ft_print_error_env(char *error, char *arg1, char *key)
 
 void	ft_print_syntax_error(char *arg)
 {
+	if (ft_get_shell()->has_error)
+		return ;
 	ft_putstrcolon_fd(SHELL_NAME, STDERR_FILENO);
 	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
+	if (arg[0] == ')' || arg[0] == '(')
+		ft_get_shell()->exit_code = 2;
+	else
+		ft_get_shell()->exit_code = 1;
+	ft_get_shell()->has_error = true;
 }

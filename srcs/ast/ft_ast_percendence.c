@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ast_percendence.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:55:21 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 17:05:49 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 18:54:39 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

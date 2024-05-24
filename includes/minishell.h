@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 12:01:20 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 19:07:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_shell
 	char		**exp;
 	t_ast_node	*ast;
 	char		*history_file;
+	bool		has_error;
 }				t_shell;
 
 #endif
