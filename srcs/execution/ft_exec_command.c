@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 14:30:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:40:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,11 @@ char	*ft_get_path_from_env(char *path_env, char *arg)
 	return (NULL);
 }
 
-// static void	make_lower(unsigned int i, char *str)
-// {
-// 	str[i] = ft_tolower(str[i]);
-// }
-
 // gets the path of the command
 char	*ft_get_path(t_shell *ms, char *arg)
 {
 	char	*path_env;
 
-	// ft_striteri(arg, &make_lower);
 	if (ft_isdir(arg) && ft_strcmp(arg, ".") != 0 && ft_strcmp(arg, "..") != 0)
 	{
 		errno = EISDIR;
