@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:21:31 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 09:49:40 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 18:19:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int		ft_valid_env_key(char *key);
 int		ft_env_set(char ***env, char *key, char *val);
 int		ft_env_set_both(t_shell *ms, char *key, char *val);
 char	*ft_fetch_env_var(char *name);
+int		ft_env_split(char *entry);
 
 #endif
