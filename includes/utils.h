@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/23 18:03:16 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:01:11 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ typedef struct s_split_state
 	char	*buffer;
 	bool	found_exit_code;
 }			t_split_state;
+
+typedef struct s_wildcard_data
+{
+	DIR				*dir;
+	struct dirent	*entry;
+	bool			show_hidden;
+	char			*result;
+	int				count;
+}			t_wildcard_data;
 
 char		**ft_strarr_cpy(char **arr);
 void		ft_strarr_free(char **arr);
