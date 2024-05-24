@@ -6,11 +6,23 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:54:01 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/12 10:38:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 18:03:21 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	handle_invalid_env_key(char *key)
+{
+	if (key[0] == '-')
+	{
+		ft_print_error_env("invalid option", "unset", key);
+		return (2);
+	}
+	else
+		ft_print_error_env("not a valid identifier", "unset", key);
+	return (1);
+}
 
 int	ft_unset(t_shell *ms, char **argv)
 {
@@ -23,10 +35,7 @@ int	ft_unset(t_shell *ms, char **argv)
 	while (argv[i])
 	{
 		if (!ft_valid_env_key(argv[i]))
-		{
-			ft_print_error_env("not a valid identifier", "unset", argv[i]);
-			exit_code = 1;
-		}
+			exit_code = handle_invalid_env_key(argv[i]);
 		else
 		{
 			ft_env_remove(&ms->env, argv[i]);

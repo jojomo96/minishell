@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 18:14:04 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 18:30:06 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,28 @@ static void	ft_export_print(char **exp, int fd_out)
 	}
 }
 
-static int	export_error(char **tmp)
+static int	export_error(char *entry, int pos, bool print_error)
 {
-	if (!tmp)
-		return (ft_print_error(strerror(errno), NULL, NULL), 1);
-	if (!ft_valid_env_key(tmp[0]))
+	(void)pos;
+	if (!ft_valid_env_key(entry))
 	{
-		if (tmp[0] && tmp[0][0] == '-')
-			return (ft_print_error_env("invalid option", "export", tmp[0]), 2);
-		return (ft_print_error_env("not a valid identifier", "export", tmp[0]),
-			1);
+		if (entry[0] == '-')
+		{
+			if (print_error)
+				ft_print_error_env("invalid option", "export", entry);
+			return (2);
+		}
+		if (print_error)
+			ft_print_error_env("not a valid identifier", "export", entry);
+		return (1);
 	}
 	return (0);
 }
 
 int	ft_export(t_shell *ms, char **argv, int fd_out)
 {
-	int		i;
-	char	**tmp;
+	int	i;
+	int	pos;
 
 	debug_message("executing builtin: export");
 	if (argv[1] == NULL)
@@ -66,11 +70,10 @@ int	ft_export(t_shell *ms, char **argv, int fd_out)
 	{
 		if (ft_strchr(argv[i], '='))
 		{
-			tmp = ft_split(argv[i], '=');
-			if (export_error(tmp))
-				return (ft_strarr_free(tmp), export_error(tmp));
-			ft_env_set_both(ms, tmp[0], tmp[1]);
-			ft_strarr_free(tmp);
+			pos = ft_env_split(argv[i]);
+			if (export_error(argv[i], pos, true))
+				return (export_error(argv[i], pos, false));
+			ft_env_set_both(ms, argv[i], argv[i] + pos);
 		}
 		else if (!ft_valid_env_key(argv[i]))
 			return (ft_print_error_env("not a valid identifier", "export",
