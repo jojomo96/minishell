@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 17:46:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:55:01 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_get_path(t_shell *ms, char *arg)
 		errno = EISDIR;
 		return (NULL);
 	}
-	if (ft_strncmp(arg, "./", 2) == 0 || ft_strncmp(arg, "/", 3) == 0
+	if (ft_strncmp(arg, "./", 2) == 0 || ft_strncmp(arg, "/", 1) == 0
 		|| ft_strncmp(arg, "../", 3) == 0 || access(arg, F_OK) == 0)
 		return (ft_strdup(arg));
 	path_env = ft_env_get(ms->env, "PATH");
@@ -96,9 +96,10 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
 		if (!path)
 			return (ft_print_error(strerror(errno), node->u_data.leaf.argv[0],
-					NULL), exit(127), 1);
+					NULL), ft_destroy_shell(ms, 0), exit(127), 1);
 		if (execve(path, node->u_data.leaf.argv, ms->env) == -1)
-			return (ft_print_error(strerror(errno), NULL, NULL), 1);
+			return (ft_print_error(strerror(errno), NULL, NULL),
+				ft_destroy_shell(ms, 0), exit(127), 1);
 		return (debug_message(path), free(path), exit(1), 1);
 	}
 	return (0);
