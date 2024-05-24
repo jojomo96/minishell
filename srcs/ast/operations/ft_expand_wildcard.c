@@ -6,65 +6,11 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:07:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 10:17:41 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:07:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	match_pattern(const char *filename, const char *pattern)
-{
-	const char	*f = filename;
-	const char	*p = pattern;
-
-	while (*f && *p)
-	{
-		if (*p == '*')
-		{
-			p++;
-			if (!*p)
-				return (1);
-			while (*f)
-			{
-				if (match_pattern(f, p))
-					return (1);
-				f++;
-			}
-			return (0);
-		}
-		else if (*p == '"')
-		{
-			p++;
-			while (*p && *p != '"')
-			{
-				if (*p != *f)
-					return (0);
-				p++;
-				f++;
-			}
-			if (*p == '"')
-				p++;
-		}
-		else if (*p == '?')
-		{
-			if (!*f)
-				return (0);
-			p++;
-			f++;
-		}
-		else
-		{
-			if (*p != *f)
-				return (0);
-			p++;
-			f++;
-		}
-	}
-	// Handle trailing '*'
-	if (*p == '*')
-		p++;
-	return (!*f && !*p);
-}
 
 static bool	ft_processe_file(char **result, const char *filename,
 		const char *pattern)
@@ -72,7 +18,7 @@ static bool	ft_processe_file(char **result, const char *filename,
 	char	*tmp;
 
 	tmp = ft_strjoin(filename, " ");
-	if (match_pattern(filename, pattern))
+	if (ft_match_pattern(filename, pattern))
 	{
 		*result = ft_strjoin(*result, tmp);
 		free(tmp);
@@ -125,7 +71,7 @@ void	ft_expand_wildcard(char **arr)
 	i = 0;
 	while (arr[i] != NULL)
 	{
-		if (ft_strchr(arr[i], '*') != NULL)
+		if (ft_strchr(arr[i], '*') != NULL || ft_strchr(arr[i], '?') != NULL)
 			expand_wildcard(&arr[i]);
 		i++;
 	}

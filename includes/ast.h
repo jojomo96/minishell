@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 10:16:49 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 10:27:12 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void							ft_remove_outer_quotes(char **arr);
 void							ft_toggle_quotes(char *arr, bool *in_s_quotes,
 									bool *in_d_quotes);
 void							ft_expand_wildcard(char **arr);
+int								ft_match_pattern(const char *filename,
+									const char *pattern);
 
 #endif
