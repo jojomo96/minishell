@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/23 11:21:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:01:20 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+/* EXTERNAL INCLUDES */
+# include <dirent.h>
+# include <fcntl.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 /* INCLUDES */
 # include "../libft/libft.h"
 # include "ast.h"
@@ -27,17 +38,7 @@
 # include "shellutils.h"
 # include "signals.h"
 # include "utils.h"
-/* EXTERNAL INCLUDES */
-# include <dirent.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <unistd.h>
+
 /* READLINE INCLUDES */
 # include <readline/history.h>
 # include <readline/readline.h>

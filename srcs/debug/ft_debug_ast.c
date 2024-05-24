@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 08:11:00 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/09 16:41:46 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:06:50 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_print_debug_node(t_ast_node *node)
 {
 	int	i;
+
 	if (node->type == AST_TYPE_LEAF)
 	{
 		i = 0;
@@ -28,7 +29,7 @@ void	ft_print_debug_node(t_ast_node *node)
 	}
 	else if (node->type == AST_TYPE_NODE)
 		printf("Node:		%s\n",
-					op_type_to_string(node->u_data.s_node.op_type));
+			op_type_to_string(node->u_data.s_node.op_type));
 	else if (node->type == AST_TYPE_PARANTHESIS)
 	{
 		if (node->u_data.type == AST_PARANTHESIS_OPEN)

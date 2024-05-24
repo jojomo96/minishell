@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:28 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 17:54:36 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 12:06:20 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,12 @@ void	debug_print_strarr(char **arr)
 
 	if (DEBUG)
 		debug_message("Debug Print Start:");
-
 	i = 0;
 	while (arr[i])
 	{
 		debug_message_1("String at index", arr[i]);
 		i++;
 	}
-
 	if (DEBUG)
 		debug_message("Debug Print End.");
 }
-
