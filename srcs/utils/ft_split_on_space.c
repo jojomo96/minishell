@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:00:00 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 18:11:57 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 14:51:54 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,26 @@
 
 static void	find_next_space(char **end, bool *in_s_quotes, bool *in_d_quotes)
 {
+	char	*last_space;
+
+	last_space = NULL;
 	while (**end != '\0')
 	{
 		ft_toggle_quotes(*end, in_s_quotes, in_d_quotes);
-		if (!*in_s_quotes && !*in_d_quotes && ft_isspace(**end))
-			break ;
+		if (!*in_s_quotes && !*in_d_quotes)
+		{
+			if (ft_isspace(**end))
+				last_space = *end;
+			else if (last_space != NULL)
+			{
+				*end = last_space;
+				return ;
+			}
+		}
 		(*end)++;
 	}
+	if (last_space != NULL)
+		*end = last_space;
 }
 
 static void	split_and_add(char *str, char **result, int *index)
@@ -35,8 +48,6 @@ static void	split_and_add(char *str, char **result, int *index)
 	start = str;
 	while (*start != '\0')
 	{
-		while (*start == ' ')
-			start++;
 		if (*start == '\0')
 			break ;
 		end = start;
