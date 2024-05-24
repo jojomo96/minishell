@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:06:52 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 11:42:46 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:49:44 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,27 @@ void	fr_traverse_and_process(t_ast_node *root, t_ast_node_type node_type,
 	}
 	if (root->type == node_type)
 		process(root);
+}
+
+bool	ft_traverse_and_process_and_return(t_ast_node *root,
+		t_ast_node_type node_type, bool (*process)(t_ast_node *))
+{
+	bool	ret;
+
+	if (root == NULL)
+		return (false);
+	if (root->type == AST_TYPE_NODE)
+	{
+		ret = ft_traverse_and_process_and_return(root->u_data.s_node.left,
+				node_type, process);
+		if (ret)
+			return (true);
+		ret = ft_traverse_and_process_and_return(root->u_data.s_node.right,
+				node_type, process);
+		if (ret)
+			return (true);
+	}
+	if (root->type == node_type)
+		return (process(root));
+	return (false);
 }
