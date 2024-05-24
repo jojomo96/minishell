@@ -6,13 +6,13 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 18:14:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 10:17:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO maybe remove . from is_delimiter
+// TODO maybe remove . from is_delimiter
 bool	is_delimiter(char c)
 {
 	return (!ft_isalnum(c) && c != '_' && c != '*' && c != '.');
@@ -65,10 +65,6 @@ static void	ft_expand_splited_args(char **splited_args)
 		}
 		i++;
 	}
-	i = 0;
-	while (splited_args[i] && ft_strnstr(splited_args[i], "*",
-			ft_strlen(splited_args[i])) != NULL)
-		expand_wildcard(&splited_args[i++]);
 }
 
 static char	**ft_expand_arg_in_strarr(char **arr)
@@ -88,6 +84,7 @@ static char	**ft_expand_arg_in_strarr(char **arr)
 		i++;
 	}
 	ft_split_on_space(&arr);
+	ft_expand_wildcard(arr);
 	i = 0;
 	while (arr[i] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:07:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 14:55:06 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 10:17:41 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	match_pattern(const char *filename, const char *pattern)
 	return (!*f && !*p);
 }
 
-static bool ft_processe_file(char **result, const char *filename, const char *pattern)
+static bool	ft_processe_file(char **result, const char *filename,
+		const char *pattern)
 {
 	char	*tmp;
 
@@ -112,7 +113,20 @@ void	expand_wildcard(char **pattern)
 		free(result);
 	else
 	{
-		free(*pattern);
+		ft_free(*pattern);
 		*pattern = result;
+	}
+}
+
+void	ft_expand_wildcard(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		if (ft_strchr(arr[i], '*') != NULL)
+			expand_wildcard(&arr[i]);
+		i++;
 	}
 }
