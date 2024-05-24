@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/24 10:26:33 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/24 18:19:26 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ CFILES += ft_env_index.c \
 			ft_valid_env_key.c \
 			ft_env_set.c \
 			ft_env_set_both.c \
+			ft_env_split.c \
 
 # SHELL UTILS
 CFILES += ft_shell_destroy.c \

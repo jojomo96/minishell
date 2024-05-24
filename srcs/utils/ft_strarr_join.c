@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strarr_join.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:50:04 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/13 16:00:40 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/24 18:44:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,35 @@ char	*ft_strarr_join(char **arr)
 	temp = arr;
 	while (*temp)
 		ft_strlcat(result, *temp++, total_length);
+	if (total_length)
+		ft_strarr_free(arr);
+	return (result);
+}
+
+char	*ft_strarr_join_del(char **arr, char del)
+{
+	int		total_length;
+	char	**temp;
+	char	*result;
+	char	del_str[2];
+
+	del_str[0] = del;
+	del_str[1] = '\0';
+	if (arr == NULL)
+		return (NULL);
+	total_length = 1;
+	temp = arr;
+	while (*temp)
+		total_length += ft_strlen(*temp++) + 1;
+	result = (char *)ft_malloc(total_length);
+	*result = '\0';
+	temp = arr;
+	while (*temp)
+	{
+		ft_strlcat(result, *temp++, total_length);
+		if (*temp)
+			ft_strlcat(result, del_str, total_length);
+	}
 	if (total_length)
 		ft_strarr_free(arr);
 	return (result);
