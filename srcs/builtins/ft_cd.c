@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:02:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 19:35:21 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 22:09:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	ft_cd(t_shell *ms, char **argv, int fd_out)
 	path = argv[1];
 	if (argv[1] && argv[2])
 	{
-		printf("argv[2]: %s\n", argv[2]);
 		ft_print_error("too many arguments", "cd", NULL);
 		return (1);
 	}
