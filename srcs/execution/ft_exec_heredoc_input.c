@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:57:35 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 17:27:48 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 20:10:04 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static void	ft_read_input_from_terminal(char *delim, int fd,
 
 	while (1)
 	{
+		if (g_interrupted)
+			break ;
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, delim))
+		if (!line || !ft_strcmp(line, delim) || g_interrupted)
 		{
 			free(line);
 			break ;
@@ -49,7 +51,7 @@ static void	ft_read_input_from_terminal(char *delim, int fd,
 		}
 		write(fd, line, strlen(line));
 		write(fd, "\n", 1);
-		free(line);
+		ft_free(line);
 	}
 }
 
@@ -58,7 +60,7 @@ static void	ft_read_input_from_pipe(char *delim, int fd, bool expand_arguments)
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
-	while (line)
+	while (line && !g_interrupted)
 	{
 		ft_remove_newline(line);
 		if (!ft_strcmp(line, delim))
@@ -73,7 +75,7 @@ static void	ft_read_input_from_pipe(char *delim, int fd, bool expand_arguments)
 		}
 		write(fd, line, strlen(line));
 		write(fd, "\n", 1);
-		free(line);
+		ft_free(line);
 		line = get_next_line(STDIN_FILENO);
 	}
 }
