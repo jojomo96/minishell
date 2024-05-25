@@ -29,3 +29,4 @@ Thumbs.db
 *.svg
 
 .minishell_history
+.minishell_heredoc*

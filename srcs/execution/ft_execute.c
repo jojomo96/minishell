@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 11:55:47 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 10:30:01 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_execute_node(t_shell *ms, t_ast_node *node)
 		return (ft_exec_redirect_out(ms, node));
 	if (node->u_data.s_node.op_type == OP_APPEND_OUT)
 		return (ft_exec_append_out(ms, node));
-	// if (node->u_data.s_node.op_type == OP_HEREDOC)
-	// 	return (ft_exec_heredoc(ms, node));
+	if (node->u_data.s_node.op_type == OP_HEREDOC)
+		return (ft_exec_heredoc(ms, node));
 	return (0);
 }

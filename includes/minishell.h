@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 19:07:43 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 11:58:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@
 # define ANSI_HIDE "\033[8m"
 # define ANSI_RESET "\033[0m"
 
+# define HEREDOC_FILE "/tmp/.minishell_heredoc_"
+
 typedef struct s_shell
 {
 	int			exit_code;
@@ -68,6 +70,8 @@ typedef struct s_shell
 	char		**exp;
 	t_ast_node	*ast;
 	char		*history_file;
+	char		*heredoc_file;
+	int			heredoc_index;
 	bool		has_error;
 }				t_shell;
 

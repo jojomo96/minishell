@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/25 11:58:30 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/25 12:54:58 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_DIRS += srcs/debug
 
 OBJ_DIR := obj
 INC_DIR := includes
+TMP_DIR := tmp
 
 # FILES
 vpath %.c $(SRC_DIRS)
@@ -120,6 +121,7 @@ CFILES += ft_execute.c \
 			ft_redirect_in.c \
 			ft_wait.c \
 			ft_exec_pipe.c \
+			ft_exec_heredoc.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
@@ -164,9 +166,9 @@ LIBFT_FLAGS := -L$(LIBFT_DIR) -lft
 INCLUDES += -I$(LIBFT_DIR)
 
 # RULES
-all: ascii $(NAME)
+all: ascii clean_tmp $(NAME)
 
-$(NAME): $(LIBFT) $(OFILES)
+$(NAME): $(LIBFT) $(OFILES) | $(TMP_DIR)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
 	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) -lreadline
 	@if [ -f $(NAME) ]; then \
@@ -187,6 +189,14 @@ $(OBJ_DIR):
 	@echo "$(YELLOW)Creating obj directory...$(NC)"
 	@mkdir -p $(OBJ_DIR)
 
+clean_tmp:
+	@echo "$(YELLOW)Deleting tmp directory...$(NC)"
+	@rm -rf $(TMP_DIR)
+
+$(TMP_DIR):
+	@echo "$(YELLOW)Creating tmp directory...$(NC)"
+	@mkdir -p $(TMP_DIR)
+
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -194,6 +204,7 @@ $(LIBFT):
 clean:
 	@echo "$(RED)Removing object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
+	@rm -rf $(TMP_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
@@ -216,7 +227,7 @@ debug: clean all
 tree: CFLAGS += -DOPEN_AST=1
 tree: debug
 
-.PHONY: all clean fclean re norm ascii debug tree
+.PHONY: all clean fclean re norm ascii debug tree clean_tmp
 
 # colors:
 GREEN = \033[0;32m

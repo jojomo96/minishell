@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 12:20:14 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:36:03 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	set_right_fd(t_ast_node *node, int fd)
 	right = node->u_data.s_node.right;
 	while (right->type != AST_TYPE_LEAF)
 		right = right->u_data.s_node.left;
-	right->u_data.leaf.fd_in = fd;
+	if (right->u_data.leaf.fd_in == STDIN_FILENO)
+		right->u_data.leaf.fd_in = fd;
 	return (0);
 }
 

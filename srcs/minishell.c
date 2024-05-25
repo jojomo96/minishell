@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 19:52:58 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 14:24:28 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_handle_input(char *input)
 	if (ft_get_shell()->has_error)
 		return (ft_free(nodes), 1);
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
+	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_preprocess_heredoc);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
 	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
@@ -117,6 +118,8 @@ int	main(int argc, char **argv, char **envp)
 	ft_signals_init();
 	ms = ft_get_shell();
 	ms->history_file = ft_strjoin(getcwd(NULL, 0), HISTORY_FILE);
+	ms->heredoc_file = ft_strjoin(getcwd(NULL, 0), HEREDOC_FILE);
+	ms->heredoc_index = -1;
 	ft_history_init();
 	if (argc != 1 || ft_shell_init(ms, envp))
 		return (1);

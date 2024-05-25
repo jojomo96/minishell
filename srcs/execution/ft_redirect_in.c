@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect_in.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:56:46 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 12:34:10 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:55:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	set_left_fd(t_ast_node *node, int fd)
+int	ft_set_left_fd_in(t_ast_node *node, int fd)
 {
 	t_ast_node	*left;
 
@@ -44,7 +44,7 @@ int	ft_exec_redirect_in(t_shell *ms, t_ast_node *node)
 	fd = open(node->u_data.s_node.right->u_data.leaf.argv[0], O_RDONLY);
 	if (fd == -1)
 		return (red_set_exit_err(node, true, true), 1);
-	set_left_fd(node, fd);
+	ft_set_left_fd_in(node, fd);
 	if (node->u_data.s_node.left->type == AST_TYPE_LEAF && node->u_data.\
 		s_node.left->u_data.leaf.fd_in != fd && close(fd) != -1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_in;
