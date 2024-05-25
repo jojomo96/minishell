@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:41:12 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/21 20:46:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 10:29:40 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_exec_redirect_in(t_shell *ms, t_ast_node *node);
 int		ft_exec_redirect_out(t_shell *ms, t_ast_node *node);
 int		ft_exec_append_out(t_shell *ms, t_ast_node *node);
 int		ft_exec_pipe(t_shell *ms, t_ast_node *node);
+int		ft_exec_heredoc(t_shell *ms, t_ast_node *node);
 
 void	ft_wait_node(t_ast_node *node);
 

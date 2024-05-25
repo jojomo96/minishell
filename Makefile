@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/24 17:48:04 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/25 11:10:02 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,7 @@ CFILES += ft_execute.c \
 			ft_redirect.c \
 			ft_wait.c \
 			ft_exec_pipe.c \
+			ft_exec_heredoc.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
@@ -201,6 +202,9 @@ fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@echo "$(RED)Removing history file...$(NC)"
 	@rm -f .minishell_history
+	@echo "$(RED)Removing heredoc files...$(NC)"
+	@rm -f .heredoc
+
 
 re: fclean all
 

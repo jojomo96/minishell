@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:16:18 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/22 19:15:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 10:58:47 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 void	ft_history_add(char *input);
 void	ft_history_init(void);
+void	ft_remove_newline(char *line);
 
 #endif
