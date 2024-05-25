@@ -3,21 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:29:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 10:30:01 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 22:07:41 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	is_just_quotes(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] && str[i] == '\'')
+	{
+		while (str[i] && str[i] == '\'')
+			i++;
+		if (str[i] == '\0')
+			return (0);
+	}
+	else if (str[i] && str[i] == '\"')
+	{
+		i++;
+		while (str[i] && str[i] == '\"')
+			i++;
+		if (str[i] == '\0')
+			return (0);
+	}
+	return (1);
+}
+
 int	ft_execute(t_shell *ms, t_ast_node *node)
 {
 	errno = 0;
 	if (node->type == AST_TYPE_LEAF && node->u_data.leaf.argv[0]
-		&& !ft_strcmp(node->u_data.leaf.argv[0], "\"\"")
-		&& node->u_data.leaf.argv[1] == NULL)
+		&& is_just_quotes(node->u_data.leaf.argv[0]) == 0)
 	{
 		ms->exit_code = 127;
 		node->exit_status = 127;
