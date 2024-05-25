@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 16:50:48 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 21:50:03 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ static void	ft_expand_splited_args(char **splited_args)
 	{
 		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
 		if (splited_args[i][0] == '$' && !in_s_quotes)
+		{
 			ft_handle_env_variable(&splited_args[i], in_d_quotes, splited_args[i
 				+ 1] == NULL);
+			// ft_add_quotes(&splited_args[i]);
+		}
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes
 			&& splited_args[i][1] == '\0')
 		{
@@ -77,9 +80,9 @@ static char	**ft_expand_arg_in_strarr(char **arr)
 		debug_message_1("Expanded argument: ", arr[i]);
 		i++;
 	}
-	ft_split_on_space(&arr);
+	ft_split_on_space(&arr, false);
 	ft_expand_wildcard(arr);
-	ft_split_on_space(&arr);
+	ft_split_on_space(&arr, true);
 	ft_remove_outer_quotes_in_array(&arr);
 	return (arr);
 }

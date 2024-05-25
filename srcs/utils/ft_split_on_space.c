@@ -6,21 +6,41 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:00:00 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 14:51:54 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 21:31:18 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	find_next_space(char **end, bool *in_s_quotes, bool *in_d_quotes)
+static void	find_next_space(char **end)
+{
+	bool	in_s_quotes;
+	bool	in_d_quotes;
+
+	in_s_quotes = false;
+	in_d_quotes = false;
+	while (**end != '\0')
+	{
+		ft_toggle_quotes(*end, &in_s_quotes, &in_d_quotes);
+		if (!in_s_quotes && !in_d_quotes && ft_isspace(**end))
+			break ;
+		(*end)++;
+	}
+}
+
+static void	find_last_space(char **end)
 {
 	char	*last_space;
+	bool	in_s_quotes;
+	bool	in_d_quotes;
 
+	in_s_quotes = false;
+	in_d_quotes = false;
 	last_space = NULL;
 	while (**end != '\0')
 	{
-		ft_toggle_quotes(*end, in_s_quotes, in_d_quotes);
-		if (!*in_s_quotes && !*in_d_quotes)
+		ft_toggle_quotes(*end, &in_s_quotes, &in_d_quotes);
+		if (!in_s_quotes && !in_d_quotes)
 		{
 			if (ft_isspace(**end))
 				last_space = *end;
@@ -36,22 +56,21 @@ static void	find_next_space(char **end, bool *in_s_quotes, bool *in_d_quotes)
 		*end = last_space;
 }
 
-static void	split_and_add(char *str, char **result, int *index)
+static void	split_and_add(char *str, char **result, int *index, bool find_last)
 {
 	char	*start;
 	char	*end;
-	bool	in_s_quotes;
-	bool	in_d_quotes;
 
-	in_s_quotes = false;
-	in_d_quotes = false;
 	start = str;
 	while (*start != '\0')
 	{
 		if (*start == '\0')
 			break ;
 		end = start;
-		find_next_space(&end, &in_s_quotes, &in_d_quotes);
+		if (find_last)
+			find_last_space(&end);
+		else
+			find_next_space(&end);
 		if (*end == '\0')
 		{
 			result[(*index)++] = start;
@@ -75,7 +94,7 @@ static int	determine_size(char **array)
 	return (size);
 }
 
-void	ft_split_on_space(char ***array)
+void	ft_split_on_space(char ***array, bool find_last_space)
 {
 	int		i;
 	int		index;
@@ -93,7 +112,7 @@ void	ft_split_on_space(char ***array)
 	}
 	while (i < size)
 	{
-		split_and_add((*array)[i], result, &index);
+		split_and_add((*array)[i], result, &index, find_last_space);
 		i++;
 	}
 	result[index] = NULL;
