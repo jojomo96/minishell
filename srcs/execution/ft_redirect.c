@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:09 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 12:01:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:08:12 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ int	ft_exec_redirect_out(t_shell *ms, t_ast_node *node)
 	set_left_fd(node, fd);
 	if (fd == -1)
 		return (red_set_exit_err(node, true, true), 1);
-	if (node->u_data.s_node.left->type == AST_TYPE_LEAF && node->u_data.\
-		s_node.left->u_data.leaf.fd_out != fd && close(fd) != -1)
+	if (node->u_data.s_node.left->type == AST_TYPE_LEAF
+		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd && close(fd) !=
+		-1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_out;
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (close(fd), red_set_exit_err(node, false, true), 1);
@@ -109,12 +110,12 @@ int	ft_exec_append_out(t_shell *ms, t_ast_node *node)
 	set_left_fd(node, fd);
 	if (fd == -1)
 		return (red_set_exit_err(node, true, true), 1);
-	if (node->u_data.s_node.left->type == AST_TYPE_LEAF && node->u_data.\
-		s_node.left->u_data.leaf.fd_out != fd && close(fd) != -1)
+	if (node->u_data.s_node.left->type == AST_TYPE_LEAF
+		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd
+		&& close(fd) != -1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_out;
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (close(fd), red_set_exit_err(node, false, true), 1);
-	close(fd);
 	ret = ft_execute(ms, node->u_data.s_node.left);
 	if (dup2(std_out, STDOUT_FILENO) == -1)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);
@@ -123,4 +124,3 @@ int	ft_exec_append_out(t_shell *ms, t_ast_node *node)
 		red_set_exit_err(node, false, false);
 	return (ret);
 }
-
