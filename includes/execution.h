@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:41:12 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 12:55:05 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 13:09:23 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ int		ft_exec_redirect_out(t_shell *ms, t_ast_node *node);
 int		ft_exec_append_out(t_shell *ms, t_ast_node *node);
 int		ft_exec_pipe(t_shell *ms, t_ast_node *node);
 int		ft_exec_heredoc(t_shell *ms, t_ast_node *node);
+void	ft_preprocess_heredoc(t_ast_node *node);
 
 int		handle_ambigous_redirect(t_ast_node *node);
 void	red_set_exit_err(t_ast_node *node, bool print_content, bool print);
+int		ft_set_left_fd_in(t_ast_node *node, int fd);
 
 void	ft_wait_node(t_ast_node *node);
 

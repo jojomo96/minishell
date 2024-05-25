@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 11:32:10 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 13:06:57 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_handle_input(char *input)
 	if (ft_get_shell()->has_error)
 		return (ft_free(nodes), 1);
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
+	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_preprocess_heredoc);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
 	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
