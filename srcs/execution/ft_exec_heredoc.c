@@ -6,58 +6,11 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:08:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 14:59:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 15:57:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void static	ft_handle_heredoc(char *delim, char *file_name)
-{
-	char	*line;
-	int		fd;
-
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-	{
-		ft_print_error(strerror(errno), 0, 0);
-		return ;
-	}
-	if (isatty(STDIN_FILENO))
-	{
-		while (1)
-		{
-			line = readline("> ");
-			if (!line || !ft_strcmp(line, delim))
-			{
-				free(line);
-				break ;
-			}
-			ft_remove_newline(line);
-			write(fd, line, strlen(line));
-			write(fd, "\n", 1);
-			free(line);
-		}
-	}
-	else
-	{
-		line = get_next_line(STDIN_FILENO);
-		while (line)
-		{
-			ft_remove_newline(line);
-			if (!ft_strcmp(line, delim))
-			{
-				free(line);
-				break ;
-			}
-			write(fd, line, strlen(line));
-			write(fd, "\n", 1);
-			free(line);
-			line = get_next_line(STDIN_FILENO);
-		}
-	}
-	close(fd);
-}
 
 int	ft_exec_heredoc(t_shell *ms, t_ast_node *node)
 {
@@ -115,7 +68,7 @@ void	ft_preprocess_heredoc(t_ast_node *node)
 	ft_switch_to_heredoc_mode();
 	ms->heredoc_index += 1;
 	file_name = ft_strjoin(ms->heredoc_file, ft_itoa(ms->heredoc_index));
-	ft_handle_heredoc(node->u_data.s_node.right->u_data.leaf.argv[0],
+	ft_heredoc_read_input(node->u_data.s_node.right->u_data.leaf.argv[0],
 		file_name);
 	node->u_data.s_node.right->u_data.leaf.heredoc_filename = file_name;
 	set_left_filename(node, file_name);
