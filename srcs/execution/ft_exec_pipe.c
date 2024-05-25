@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 15:05:18 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:19:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static int	set_right_fd(t_ast_node *node, int fd)
 		right = right->u_data.s_node.left;
 	if (right->u_data.leaf.fd_in == STDIN_FILENO
 		&& !right->u_data.leaf.heredoc_filename)
+	{
 		right->u_data.leaf.fd_in = fd;
+		right->u_data.leaf.fd_from_pipe = true;
+	}
 	return (0);
 }
 
@@ -38,6 +41,7 @@ static int	set_left_fd(t_ast_node *node, int fd)
 			left = left->u_data.s_node.right;
 	}
 	left->u_data.leaf.fd_out = fd;
+	left->u_data.leaf.fd_from_pipe = true;
 	return (0);
 }
 

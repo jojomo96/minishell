@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ast_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 12:49:27 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 20:18:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	ft_leaf_init(t_ast_leaf *leaf)
 	leaf->fd_in = STDIN_FILENO;
 	leaf->fd_out = STDOUT_FILENO;
 	leaf->pid = -1;
+	leaf->fd_from_pipe = false;
 	leaf->heredoc_filename = NULL;
 }
 
