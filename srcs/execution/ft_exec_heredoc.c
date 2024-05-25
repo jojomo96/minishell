@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:08:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 14:51:17 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 14:59:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,18 @@ int	ft_exec_heredoc(t_shell *ms, t_ast_node *node)
 	return (ret);
 }
 
+static void	set_left_filename(t_ast_node *node, char *file_name)
+{
+	t_ast_node	*left;
+
+	left = node->u_data.s_node.left;
+	while (left->type != AST_TYPE_LEAF)
+	{
+		left = left->u_data.s_node.right;
+	}
+	left->u_data.leaf.heredoc_filename = file_name;
+}
+
 void	ft_preprocess_heredoc(t_ast_node *node)
 {
 	char	*file_name;
@@ -106,6 +118,6 @@ void	ft_preprocess_heredoc(t_ast_node *node)
 	ft_handle_heredoc(node->u_data.s_node.right->u_data.leaf.argv[0],
 		file_name);
 	node->u_data.s_node.right->u_data.leaf.heredoc_filename = file_name;
-	//TODO faile name to left child maybe
+	set_left_filename(node, file_name);
 	ft_switch_to_normal_mode();
 }
