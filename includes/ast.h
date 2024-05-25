@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 20:17:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:45:51 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ bool							is_delimiter(char c);
 void							remove_outer_quotes(char **arr);
 void							ft_handle_env_variable(char **str_ptr,
 									bool in_d_quotes, bool is_last_arg);
+void							ft_add_quotes(char **str);
 
 #endif

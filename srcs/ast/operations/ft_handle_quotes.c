@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:59:01 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 16:44:05 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 21:45:51 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,25 @@ void	ft_toggle_quotes(char *arr, bool *in_s_quotes, bool *in_d_quotes)
 	{
 		*in_d_quotes = !*in_d_quotes;
 	}
+}
+
+void	ft_add_quotes(char **str)
+{
+	size_t	len;
+	size_t	i;
+	char	*new_str;
+
+	len = ft_strlen(*str);
+	new_str = (char *)ft_malloc(len + 3);
+	new_str[0] = '"';
+	i = 0;
+	while (i < len)
+	{
+		new_str[i + 1] = (*str)[i];
+		i++;
+	}
+	new_str[len + 1] = '"';
+	new_str[len + 2] = '\0';
+	ft_free(*str);
+	*str = new_str;
 }
