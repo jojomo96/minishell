@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 12:49:03 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 20:17:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_ast_leaf
 	char						**argv;
 	int							fd_in;
 	int							fd_out;
+	bool						fd_from_pipe;
 	pid_t						pid;
 	char						*heredoc_filename;
 }								t_ast_leaf;

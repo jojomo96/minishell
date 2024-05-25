@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:56:46 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 16:34:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:25:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_set_left_fd_in(t_ast_node *node, int fd)
 		else
 			left = left->u_data.s_node.left;
 	}
-	if (left->u_data.leaf.fd_in == STDIN_FILENO)
+	if (left->u_data.leaf.fd_in == STDIN_FILENO
+		|| left->u_data.leaf.fd_from_pipe)
 	{
 		left->u_data.leaf.fd_in = fd;
 		return (1);
