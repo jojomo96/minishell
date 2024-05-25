@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 14:36:03 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 15:05:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	set_right_fd(t_ast_node *node, int fd)
 	right = node->u_data.s_node.right;
 	while (right->type != AST_TYPE_LEAF)
 		right = right->u_data.s_node.left;
-	if (right->u_data.leaf.fd_in == STDIN_FILENO)
+	if (right->u_data.leaf.fd_in == STDIN_FILENO
+		&& !right->u_data.leaf.heredoc_filename)
 		right->u_data.leaf.fd_in = fd;
 	return (0);
 }
@@ -30,7 +31,12 @@ static int	set_left_fd(t_ast_node *node, int fd)
 
 	left = node->u_data.s_node.left;
 	while (left->type != AST_TYPE_LEAF)
-		left = left->u_data.s_node.right;
+	{
+		if (left->u_data.s_node.op_type == OP_HEREDOC)
+			left = left->u_data.s_node.left;
+		else
+			left = left->u_data.s_node.right;
+	}
 	left->u_data.leaf.fd_out = fd;
 	return (0);
 }
