@@ -88,7 +88,7 @@ void							fr_traverse_and_process(t_ast_node *node,
 									t_ast_node_type node_type,
 									void (*process)(t_ast_node *));
 void							ft_expand_arguments(t_ast_node *node);
-void							ft_remove_outer_quotes(char **arr);
+void							ft_remove_outer_quotes_in_array(char ***arr);
 void							ft_toggle_quotes(char *arr, bool *in_s_quotes,
 									bool *in_d_quotes);
 void							ft_expand_wildcard(char **arr);
@@ -98,5 +98,9 @@ bool							ft_ast_validate(t_ast_node *node);
 bool							ft_traverse_process_return(t_ast_node *root,
 									t_ast_node_type node_type,
 									bool (*process)(t_ast_node *));
+bool							is_delimiter(char c);
+void							remove_outer_quotes(char **arr);
+void							ft_handle_env_variable(char **str_ptr,
+									bool in_d_quotes, bool is_last_arg);
 
 #endif
