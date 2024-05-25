@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:33:53 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/22 15:10:27 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 17:24:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_exec_leaf(t_shell *ms, t_ast_node *node)
 	builtin = ft_is_builtin(node->u_data.leaf.argv[0]);
 	if (builtin)
 		ms->exit_code = ft_exec_builtin(ms, builtin, node->u_data.leaf.argv,
-				STDOUT_FILENO);
+				node->u_data.leaf.fd_out);
 	else
 		ms->exit_code = ft_exec_command(ms, node);
 	return (ms->exit_code);
