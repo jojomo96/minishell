@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 17:27:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:25:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	set_right_fd(t_ast_node *node, int fd)
 		if (right->u_data.s_node.op_type == OP_AND)
 		{
 			set_right_fd(right, fd);
-			right = right->u_data.s_node.right;
+			right = right->u_data.s_node.left;
 		}
 		else
 			right = right->u_data.s_node.left;

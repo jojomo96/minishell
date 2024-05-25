@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 14:39:32 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 19:51:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	ft_close_fds(t_ast_node *node)
 		close(node->u_data.leaf.fd_in);
 	if (node->u_data.leaf.fd_out != STDOUT_FILENO)
 		close(node->u_data.leaf.fd_out);
+	debug_message_1("Closing file descriptors for command:",
+		node->u_data.leaf.argv[0]);
+	debug_message_1("fd_in:", ft_itoa(node->u_data.leaf.fd_in));
+	debug_message_1("fd_out:", ft_itoa(node->u_data.leaf.fd_out));
 }
 
 // gets the path of the command from the PATH environment variable
@@ -95,8 +99,12 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 {
 	char	*path;
 	pid_t	pid;
+	int		std_out;
+	int		std_in;
 
 	debug_message_1("Executing command:", node->u_data.leaf.argv[0]);
+	std_out = dup(STDOUT_FILENO);
+	std_in = dup(STDIN_FILENO);
 	pid = fork();
 	node->u_data.leaf.pid = pid;
 	if (pid == -1)
@@ -104,9 +112,15 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 	if (pid == 0)
 	{
 		if (node->u_data.leaf.fd_in != STDIN_FILENO)
+		{
 			dup2(node->u_data.leaf.fd_in, STDIN_FILENO);
+			close(std_in);
+		}
 		if (node->u_data.leaf.fd_out != STDOUT_FILENO)
+		{
 			dup2(node->u_data.leaf.fd_out, STDOUT_FILENO);
+			close(std_out);
+		}
 		fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &ft_close_fds);
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
 		if (!path)
