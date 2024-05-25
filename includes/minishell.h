@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 11:58:43 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 20:05:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/ioctl.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -63,16 +64,18 @@
 
 # define HEREDOC_FILE "/tmp/.minishell_heredoc_"
 
+extern volatile sig_atomic_t	g_interrupted;
+
 typedef struct s_shell
 {
-	int			exit_code;
-	char		**env;
-	char		**exp;
-	t_ast_node	*ast;
-	char		*history_file;
-	char		*heredoc_file;
-	int			heredoc_index;
-	bool		has_error;
-}				t_shell;
+	int							exit_code;
+	char						**env;
+	char						**exp;
+	t_ast_node					*ast;
+	char						*history_file;
+	char						*heredoc_file;
+	int							heredoc_index;
+	bool						has_error;
+}								t_shell;
 
 #endif

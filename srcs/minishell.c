@@ -6,11 +6,13 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 14:24:28 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 19:52:46 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t	g_interrupted = 0;
 
 bool	check_quotes(char *input)
 {
@@ -58,7 +60,10 @@ int	ft_handle_input(char *input)
 	if (ft_get_shell()->has_error)
 		return (ft_free(nodes), 1);
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_ast_move_arguments);
+	g_interrupted = 0;
 	fr_traverse_and_process(ast, AST_TYPE_NODE, &ft_preprocess_heredoc);
+	if (g_interrupted)
+		return (ft_free(nodes), 1);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
 	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
@@ -104,7 +109,8 @@ void	ft_handle_input_pipe(void)
 	{
 		input = ft_strtrim(line, "\n");
 		free(line);
-		ft_handle_input(input);
+		if (ft_handle_input(input))
+			break ;
 		free(input);
 		line = get_next_line(STDIN_FILENO);
 	}
