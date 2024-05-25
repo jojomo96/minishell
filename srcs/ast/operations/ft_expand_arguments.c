@@ -6,13 +6,13 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 16:27:40 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 16:50:48 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
+void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 		bool is_last_arg)
 {
 	char	*str;
@@ -80,7 +80,7 @@ static char	**ft_expand_arg_in_strarr(char **arr)
 	ft_split_on_space(&arr);
 	ft_expand_wildcard(arr);
 	ft_split_on_space(&arr);
-	ft_remove_outer_quotes(&arr);
+	ft_remove_outer_quotes_in_array(&arr);
 	return (arr);
 }
 

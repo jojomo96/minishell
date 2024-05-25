@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:59:01 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 16:33:13 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 16:44:05 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_delimiter(char c)
 	return (!ft_isalnum(c) && c != '_' && c != '*');
 }
 
-static void	remove_outer_quotes(char **arr)
+void	remove_outer_quotes(char **arr)
 {
 	bool	in_s_quotes;
 	bool	in_d_quotes;
@@ -42,7 +42,7 @@ static void	remove_outer_quotes(char **arr)
 	}
 }
 
-void	ft_remove_outer_quotes(char ***arr)
+void	ft_remove_outer_quotes_in_array(char ***arr)
 {
 	int		i;
 	char	**splited_args;
