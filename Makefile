@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/25 11:10:02 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/25 12:06:51 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_DIRS += srcs/debug
 
 OBJ_DIR := obj
 INC_DIR := includes
+TMP_DIR := tmp
 
 # FILES
 vpath %.c $(SRC_DIRS)
@@ -164,9 +165,9 @@ LIBFT_FLAGS := -L$(LIBFT_DIR) -lft
 INCLUDES += -I$(LIBFT_DIR)
 
 # RULES
-all: ascii $(NAME)
+all: ascii clean_tmp $(NAME)
 
-$(NAME): $(LIBFT) $(OFILES)
+$(NAME): $(LIBFT) $(OFILES) | $(TMP_DIR)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
 	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) -lreadline
 	@if [ -f $(NAME) ]; then \
@@ -187,6 +188,14 @@ $(OBJ_DIR):
 	@echo "$(YELLOW)Creating obj directory...$(NC)"
 	@mkdir -p $(OBJ_DIR)
 
+clean_tmp:
+	@echo "$(YELLOW)Deleting tmp directory...$(NC)"
+	@rm -rf $(TMP_DIR)
+
+$(TMP_DIR):
+	@echo "$(YELLOW)Creating tmp directory...$(NC)"
+	@mkdir -p $(TMP_DIR)
+
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -194,6 +203,7 @@ $(LIBFT):
 clean:
 	@echo "$(RED)Removing object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
+	@rm -rf $(TMP_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
@@ -202,9 +212,6 @@ fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@echo "$(RED)Removing history file...$(NC)"
 	@rm -f .minishell_history
-	@echo "$(RED)Removing heredoc files...$(NC)"
-	@rm -f .heredoc
-
 
 re: fclean all
 
@@ -219,7 +226,7 @@ debug: clean all
 tree: CFLAGS += -DOPEN_AST=1
 tree: debug
 
-.PHONY: all clean fclean re norm ascii debug tree
+.PHONY: all clean fclean re norm ascii debug tree clean_tmp
 
 # colors:
 GREEN = \033[0;32m

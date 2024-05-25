@@ -6,18 +6,18 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:08:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 11:06:39 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 12:52:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void static	ft_handle_heredoc(char *delim)
+void static	ft_handle_heredoc(char *delim, char	*file_name)
 {
 	char	*line;
 	int		fd;
 
-	fd = open(ft_get_shell()->heredoc_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		ft_print_error(strerror(errno), 0, 0);
@@ -39,12 +39,12 @@ void static	ft_handle_heredoc(char *delim)
 	close(fd);
 }
 
-static int	ft_execute_command(t_shell *ms, t_ast_node *node)
+static int	ft_execute_command(t_shell *ms, t_ast_node *node, char *file_name)
 {
 	int	fd;
 	int	standard_input;
 
-	fd = open(ft_get_shell()->heredoc_file, O_RDONLY);
+	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_print_error(strerror(errno), 0, 0);
@@ -66,10 +66,32 @@ static int	ft_execute_command(t_shell *ms, t_ast_node *node)
 
 int	ft_exec_heredoc(t_shell *ms, t_ast_node *node)
 {
+	char *file_name;
+
 	debug_message("Executing heredoc");
-	ft_switch_to_heredoc_mode();
-	ft_handle_heredoc(node->u_data.s_node.right->u_data.leaf.argv[0]);
-	ft_execute_command(ms, node->u_data.s_node.left);
+
+
+	ft_execute_command(ms, node->u_data.s_node.left, file_name);
+	free(file_name);
 	ft_switch_to_normal_mode();
 	return (0);
+}
+
+int	ft_preprocess_heredoc(t_shell *ms, t_ast_node *node)
+{
+	char	*file_name;
+
+	if (node->u_data.s_node.op_type != OP_HEREDOC)
+		return (0);
+	debug_message("Preprocessing heredoc");
+	debug_message_1("	with right node:",
+		node->u_data.s_node.right->u_data.leaf.argv[0]);
+
+	ft_switch_to_heredoc_mode();
+	ms->heredoc_index += 1;
+	file_name = ft_strjoin(ms->heredoc_file, ft_itoa(ms->heredoc_index));
+	ft_handle_heredoc(node->u_data.s_node.right->u_data.leaf.argv[0], file_name);
+	node->u_data.s_node.right->u_data.leaf.heredoc_filename = file_name;
+	ft_switch_to_normal_mode();
+	return (1);
 }

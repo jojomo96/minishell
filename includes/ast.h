@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 19:52:47 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 12:49:03 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_ast_leaf
 	int							fd_in;
 	int							fd_out;
 	pid_t						pid;
+	char						*heredoc_filename;
 }								t_ast_leaf;
 
 struct							s_ast_node
