@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 21:50:03 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 22:15:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 		new_value = ft_strdup("$");
 	else if (str[1] == '?')
 		new_value = ft_itoa(ft_get_shell()->exit_code);
+	else if (str[1] == '/')
+		new_value = ft_strdup("$/");
 	else
 		new_value = ft_fetch_env_var(str + 1);
 	free(str);
