@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 20:19:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:22:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	ft_exec_pipe(t_shell *ms, t_ast_node *node)
 		status = ft_execute(ms, right);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
+	node->exit_status = status;
 	return (status);
 }
