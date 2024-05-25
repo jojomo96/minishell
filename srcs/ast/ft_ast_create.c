@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 20:18:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:27:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_leaf_init(t_ast_leaf *leaf)
 static void	ft_set_node_type(t_ast_node *new_node, int is_operator,
 		t_operation_type op_type, char *content)
 {
-	new_node->exit_status = 0;
+	new_node->exit_status = -1;
 	if (is_operator == 1)
 	{
 		new_node->type = AST_TYPE_NODE;
