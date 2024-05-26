@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:09 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 16:08:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:33:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	set_left_fd(t_ast_node *node, int fd)
 	left = node->u_data.s_node.left;
 	while (left->type != AST_TYPE_LEAF)
 	{
-		if (left->type == AST_TYPE_NODE && left->u_data.type == OP_AND)
+		if (left->type == AST_TYPE_NODE
+			&& left->u_data.s_node.op_type == OP_AND)
 			left = left->u_data.s_node.right;
 		else
 			left = left->u_data.s_node.left;
@@ -111,8 +112,8 @@ int	ft_exec_append_out(t_shell *ms, t_ast_node *node)
 	if (fd == -1)
 		return (red_set_exit_err(node, true, true), 1);
 	if (node->u_data.s_node.left->type == AST_TYPE_LEAF
-		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd
-		&& close(fd) != -1)
+		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd && close(fd) !=
+		-1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_out;
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (close(fd), red_set_exit_err(node, false, true), 1);

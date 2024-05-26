@@ -6,19 +6,13 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 15:25:35 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 22:15:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO maybe remove . from is_delimiter
-bool	is_delimiter(char c)
-{
-	return (!ft_isalnum(c) && c != '_' && c != '*');
-}
-
-static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
+void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 		bool is_last_arg)
 {
 	char	*str;
@@ -33,6 +27,8 @@ static void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 		new_value = ft_strdup("$");
 	else if (str[1] == '?')
 		new_value = ft_itoa(ft_get_shell()->exit_code);
+	else if (str[1] == '/')
+		new_value = ft_strdup("$/");
 	else
 		new_value = ft_fetch_env_var(str + 1);
 	free(str);
@@ -55,8 +51,11 @@ static void	ft_expand_splited_args(char **splited_args)
 	{
 		ft_toggle_quotes(splited_args[i], &in_s_quotes, &in_d_quotes);
 		if (splited_args[i][0] == '$' && !in_s_quotes)
+		{
 			ft_handle_env_variable(&splited_args[i], in_d_quotes, splited_args[i
 				+ 1] == NULL);
+			// ft_add_quotes(&splited_args[i]);
+		}
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes
 			&& splited_args[i][1] == '\0')
 		{
@@ -83,16 +82,10 @@ static char	**ft_expand_arg_in_strarr(char **arr)
 		debug_message_1("Expanded argument: ", arr[i]);
 		i++;
 	}
-	ft_split_on_space(&arr);
+	ft_split_on_space(&arr, false);
 	ft_expand_wildcard(arr);
-	ft_split_on_space(&arr);
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		splited_args = ft_split_on_delim(arr[i], &is_delimiter);
-		ft_remove_outer_quotes(splited_args);
-		arr[i++] = ft_strarr_join(splited_args);
-	}
+	ft_split_on_space(&arr, true);
+	ft_remove_outer_quotes_in_array(&arr);
 	return (arr);
 }
 

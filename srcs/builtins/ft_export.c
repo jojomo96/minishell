@@ -6,11 +6,22 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 18:30:06 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:46:35 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	export_putstr(char *str, int fd_out)
+{
+	while (*str)
+	{
+		if (*str == '\"' || *str == '\\' || *str == '$')
+			ft_putchar_fd('\\', fd_out);
+		ft_putchar_fd(*str, fd_out);
+		str++;
+	}
+}
 
 static void	ft_export_print(char **exp, int fd_out)
 {
@@ -29,7 +40,7 @@ static void	ft_export_print(char **exp, int fd_out)
 		if (split[1])
 		{
 			ft_putstr_fd("=\"", fd_out);
-			ft_putstr_fd(split[1], fd_out);
+			export_putstr(split[1], fd_out);
 			ft_putstr_fd("\"\n", fd_out);
 		}
 		else

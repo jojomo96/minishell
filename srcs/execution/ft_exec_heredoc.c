@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:08:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 15:57:46 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:53:01 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_preprocess_heredoc(t_ast_node *node)
 	t_shell	*ms;
 
 	ms = ft_get_shell();
-	if (node->u_data.s_node.op_type != OP_HEREDOC)
+	if (node->u_data.s_node.op_type != OP_HEREDOC || g_interrupted)
 		return ;
 	debug_message("Preprocessing heredoc");
 	debug_message_1("	with right node:",

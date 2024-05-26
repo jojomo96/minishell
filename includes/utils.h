@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 18:37:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:26:11 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int					ft_strarr_len(char **arr);
 char				**ft_split_on_delim(const char *str, bool(delim)(char c));
 char				*ft_strarr_join(char **arr);
 char				*ft_strarr_join_del(char **arr, char del);
-void				ft_split_on_space(char ***array);
+void				ft_split_on_space(char ***array, bool find_last);
+void				ft_remove_all_quotes(char *str);
 
 #endif

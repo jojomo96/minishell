@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/23 16:52:18 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/25 22:19:37 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ bool	is_exit_code(char *str, int idx)
 {
 	if (idx - 1 < 0)
 		return (false);
-	if (str[idx] == '?' && str[idx - 1] == '$')
+	if ((str[idx] == '?' && str[idx - 1] == '$') || (str[idx] == '/' && str[idx
+				- 1] == '$'))
 		return (true);
 	return (false);
 }
