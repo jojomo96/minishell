@@ -56,7 +56,7 @@
 # define PROMPT_SUCCESS "\033[36m✅\033[1m minishell ➜ \033[0m\033[0m"
 # define PROMPT_ERROR "\033[36m❌\033[1m minishell ➜ \033[0m\033[0m"
 # define PROMPT_DEFAULT "\033[36m👋\033[1m minishell ➜ \033[0m\033[0m"
-# define PROMPT_EXIT "\033[A\033[2K\033[36m👋\033[1m minishell ➜ \
+# define PROMPT_EXIT "\033[A\033[2K\033[36m👋\033[1m minishell ➜\
 	\033[0m\033[0mexit\n"
 
 # define ANSI_HIDE "\033[8m"
