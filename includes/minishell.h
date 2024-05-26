@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 18:21:06 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 20:09:31 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 # endif
 
 # define SHELL_NAME "minishell"
-# define PROMPT_SUCCESS "\033[36m✅\033[1m minishell ➜ \033[0m\033[0m"
-# define PROMPT_ERROR "\033[36m❌\033[1m minishell ➜ \033[0m\033[0m"
-# define PROMPT_DEFAULT "\033[36m👋\033[1m minishell ➜ \033[0m\033[0m"
+# define PROMPT_SUCCESS "\r\033[K\033[36m✅\033[1m minishell ➜ \033[0m\033[0m"
+# define PROMPT_ERROR "\r\033[K\033[36m❌\033[1m minishell ➜ \033[0m\033[0m"
+# define PROMPT_DEFAULT "\r\033[K\033[36m👋\033[1m minishell ➜ \033[0m\033[0m"
 # define PROMPT_EXIT "\033[A\033[2K\033[36m👋\033[1m minishell ➜\
 	\033[0m\033[0mexit\n"
 
