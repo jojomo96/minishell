@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:55:34 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 14:09:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:40:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_gc_add(void *address)
 	if (new_block == NULL)
 	{
 		ft_print_error(strerror(errno), 0, 0);
-		return ;
+		return (ft_destroy_shell(ft_get_shell(), 1), (void)0);
 	}
 	new_block->address = address;
 	new_block->next = *head;
