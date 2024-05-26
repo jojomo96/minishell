@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 19:28:41 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 22:11:59 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	ft_destroy_shell(t_shell *ms, int should_exit)
 		free(ms->ms_dir);
 	ft_gc_freeall();
 	if (should_exit)
+	{
+		rl_clear_history();
 		exit(ms->exit_code);
+	}
 	return (ms->exit_code);
 }
