@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 18:28:09 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 19:03:36 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 20:04:56 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	print_username(void)
 
 void	ft_print_logo(void)
 {
-	const char	*jmoritz = "https://github.com/flomero";
-	const char	*flfische = "https://github.com/jojomo96";
+	const char	*jmoritz = "https://github.com/jojomo96";
+	const char	*flfische = "https://github.com/flomero";
 
 	printf("\033[H\033[J");
 	printf("\033[36m"

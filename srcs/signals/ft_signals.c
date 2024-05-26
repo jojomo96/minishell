@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 11:45:10 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/15 12:30:13 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 20:04:07 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,4 @@ void	ft_signals_init(void)
 {
 	rl_catch_signals = 0;
 	ft_switch_to_normal_mode();
-	if (false)
-		ft_switch_to_heredoc_mode();
 }
