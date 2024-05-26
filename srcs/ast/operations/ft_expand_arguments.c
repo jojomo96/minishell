@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_arguments.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 22:15:56 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 13:58:51 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 		new_value = ft_strdup("$/");
 	else
 		new_value = ft_fetch_env_var(str + 1);
-	free(str);
+	ft_free(str);
 	if (new_value != NULL)
 		*str_ptr = new_value;
 	else
@@ -59,7 +59,7 @@ static void	ft_expand_splited_args(char **splited_args)
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes
 			&& splited_args[i][1] == '\0')
 		{
-			free(splited_args[i]);
+			ft_free(splited_args[i]);
 			splited_args[i] = ft_fetch_env_var("HOME");
 		}
 		i++;

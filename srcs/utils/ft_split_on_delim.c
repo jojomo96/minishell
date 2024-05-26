@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_on_delim.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 22:19:37 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 13:52:49 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ char	**ft_split_on_delim(const char *str, bool(delim)(char c))
 	if (state->buffer_idx != 0)
 	{
 		state->buffer[state->buffer_idx] = '\0';
-		state->result[state->result_idx++] = ft_strdup(state->buffer);
+		state->result[state->result_idx++] \
+			= ft_gc_add_safe(ft_strdup(state->buffer));
 	}
 	ft_free(state->buffer);
 	state->result[state->result_idx] = NULL;
