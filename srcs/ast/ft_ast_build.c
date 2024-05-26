@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:05:31 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 17:52:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 17:59:53 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	build_ast(t_ast_node **ast, t_ast_node **nodes, bool last_was_subshell)
 	right_nodes = NULL;
 	highest_precedence_index = 0;
 	is_in_parenthesis = 0;
-	highest_precedence_index = find_highest_precedence_index(nodes,
+	highest_precedence_index = find_max_precedence_index(nodes,
 			&is_in_parenthesis);
 	if (highest_precedence_index == -1)
 		ft_handle_ast_type_leaf_or_perentisis(ast, nodes, last_was_subshell);

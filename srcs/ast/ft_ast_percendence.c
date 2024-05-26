@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:55:21 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 18:54:39 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 17:59:53 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_handle_parenthesis(t_ast_node *node, int *is_in_parenthesis)
 		ft_print_syntax_error(")");
 }
 
-int	find_highest_precedence_index(t_ast_node **nodes, int *is_in_parenthesis)
+int	find_max_precedence_index(t_ast_node **nodes, int *is_in_parenthesis)
 {
 	int	index;
 	int	highest_precedence;
