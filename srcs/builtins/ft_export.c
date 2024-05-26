@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 13:32:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 13:41:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ static int	ft_export_plus(t_shell *ms, char *entry)
 	char	*old_value;
 
 	i = 0;
-	while (entry[i] && entry[i] != '+' && entry[i + 1] != '=')
+	while (entry[i] && entry[i] != '+')
 		i++;
+	if (entry[i + 1] != '=')
+		return (ft_print_error_env(ENV_INV, "hallo", entry), 1);
 	entry[i] = '\0';
 	entry[i + 1] = '\0';
 	value = entry + i + 2;
@@ -107,7 +109,7 @@ int	ft_export(t_shell *ms, char **argv, int fd_out)
 		{
 			pos = ft_env_split(argv[i]);
 			if (pos == -1)
-				return (ft_export_plus(ms, argv[i]), 0);
+				return (ft_export_plus(ms, argv[i]));
 			if (export_error(argv[i], pos, true))
 				return (export_error(argv[i], pos, false));
 			ft_env_set_both(ms, argv[i], argv[i] + pos);
