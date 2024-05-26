@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/26 14:34:26 by flfische         ###   ########.fr        #
+#    Updated: 2024/05/26 17:41:45 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,6 +126,7 @@ CFILES += ft_execute.c \
 			ft_exec_pipe.c \
 			ft_exec_heredoc.c \
 			ft_exec_heredoc_input.c \
+			ft_get_exit_status.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
@@ -133,6 +134,7 @@ CFILES += debug_printgc.c \
 			debug_message.c \
 			debug_print_node.c \
 			debug_print_strarr.c \
+			debug_print_ast.c \
 
 # SIGNALS
 CFILES += ft_signals.c \

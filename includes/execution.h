@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:41:12 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 14:59:20 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 17:07:43 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ int		ft_set_left_fd_in(t_ast_node *node, int fd);
 void	ft_wait_node(t_ast_node *node);
 
 void	ft_close_fds(t_ast_node *node);
-
+int		ft_get_exit_status(int status);
 #endif

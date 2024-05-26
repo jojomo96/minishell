@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:08:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 15:01:18 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:42:06 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_exec_heredoc(t_shell *ms, t_ast_node *node)
 	if (fd < 0)
 		return (ft_print_error(strerror(errno), 0, 0), 1);
 	ft_set_left_fd_in(node, fd);
-	// expand file content
 	if (node->u_data.s_node.left->type == AST_TYPE_LEAF
 		&& node->u_data.s_node.left->u_data.leaf.fd_in != fd && close(fd) != -1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_in;
@@ -36,7 +35,7 @@ int	ft_exec_heredoc(t_shell *ms, t_ast_node *node)
 		return (0);
 	}
 	ret = ft_execute(ms, node->u_data.s_node.left);
-	// unlink
+	unlink(node->u_data.s_node.right->u_data.leaf.heredoc_filename);
 	dup2(standard_input, STDIN_FILENO);
 	close(standard_input);
 	return (ret);
