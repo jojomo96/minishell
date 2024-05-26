@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/26 18:28:03 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/26 20:34:31 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -173,9 +173,9 @@ LIBFT_FLAGS := -L$(LIBFT_DIR) -lft
 INCLUDES += -I$(LIBFT_DIR)
 
 # RULES
-all: ascii clean_tmp $(NAME)
+all: ascii $(NAME)
 
-$(NAME): $(LIBFT) $(OFILES) | $(TMP_DIR)
+$(NAME): $(LIBFT) $(OFILES)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
 	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) -lreadline
 	@if [ -f $(NAME) ]; then \
@@ -186,7 +186,7 @@ $(NAME): $(LIBFT) $(OFILES) | $(TMP_DIR)
 		echo "$(RED)$(NAME) failed to compile$(NC)"; \
 	fi
 
-$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR) $(TMP_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC) "
@@ -257,6 +257,7 @@ ascii:
 	@echo "|  ||| \||__)|  ||__|__|__ "
 	@echo "                           "
 	@echo "$(NC)"
+	@echo "------------------------------------------------"
 
 BAR_WIDTH = 50
 TOTAL_SRCS = $(words $(CFILES))
