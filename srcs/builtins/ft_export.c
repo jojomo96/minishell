@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 12:22:54 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:27:59 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	ft_export_print(char **exp, int fd_out)
 	{
 		split = ft_split(exp[i], '=');
 		if (!split)
-			return (ft_print_error(strerror(errno), NULL, NULL));
+			return (ft_print_error(strerror(errno), NULL, NULL),
+				ft_destroy_shell(ft_get_shell(), 1), (void)0);
 		ft_putstr_fd("declare -x ", fd_out);
 		ft_putstr_fd(split[0], fd_out);
 		if (split[1])
