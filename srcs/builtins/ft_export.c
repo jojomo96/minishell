@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 12:27:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:03:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,32 @@ static int	export_error(char *entry, int pos, bool print_error)
 	return (0);
 }
 
+static int	ft_export_plus(t_shell *ms, char *entry)
+{
+	int		i;
+	char	*value;
+	char	*old_value;
+
+	i = 0;
+	while (entry[i] && entry[i] != '+')
+		i++;
+	if (entry[i + 1] != '=')
+		return (ft_print_error_env(ENV_INV, "hallo", entry), 1);
+	entry[i] = '\0';
+	entry[i + 1] = '\0';
+	value = entry + i + 2;
+	old_value = ft_env_get(ms->exp, entry);
+	if (old_value)
+	{
+		value = ft_strjoin(old_value, value);
+		ft_env_set_both(ms, entry, value);
+		free(value);
+	}
+	else
+		ft_env_set_both(ms, entry, value);
+	return (0);
+}
+
 int	ft_export(t_shell *ms, char **argv, int fd_out)
 {
 	int	i;
@@ -96,13 +122,14 @@ int	ft_export(t_shell *ms, char **argv, int fd_out)
 		if (ft_strchr(argv[i], '='))
 		{
 			pos = ft_env_split(argv[i]);
+			if (pos == -1)
+				return (ft_export_plus(ms, argv[i]));
 			if (export_error(argv[i], pos, true))
 				return (export_error(argv[i], pos, false));
 			ft_env_set_both(ms, argv[i], argv[i] + pos);
 		}
 		else if (!ft_valid_env_key(argv[i]))
-			return (ft_print_error_env("not a valid identifier", "export",
-					argv[i]), 1);
+			return (ft_print_error_env(ENV_INV, "export", argv[i]), 1);
 		else
 			ft_env_set(&ms->exp, argv[i], NULL);
 		i++;

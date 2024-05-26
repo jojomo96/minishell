@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:21:31 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/24 18:19:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 13:32:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define ENVIRONMENT_H
 
 # include "minishell.h"
+
+# define ENV_INV "not a valid identifier"
 
 int		ft_env_index(char **env, char *key);
 int		ft_env_add(char ***env, char *key, char *val);

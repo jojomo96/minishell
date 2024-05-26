@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:00:00 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 21:31:18 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 13:30:51 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,20 @@ static void	split_and_add(char *str, char **result, int *index, bool find_last)
 static int	determine_size(char **array)
 {
 	int	size;
+	int	i;
+	int	j;
 
 	size = 0;
-	while (array[size] != NULL)
+	i = 0;
+	while (array[i] != NULL)
 	{
-		size++;
+		j = 0;
+		while (array[i][j] != '\0')
+		{
+			size++;
+			j++;
+		}
+		i++;
 	}
 	return (size);
 }
@@ -99,12 +108,16 @@ void	ft_split_on_space(char ***array, bool find_last_space)
 	int		i;
 	int		index;
 	int		size;
+	int		size_malloc;
 	char	**result;
 
 	i = 0;
 	index = 0;
-	size = determine_size(*array);
-	result = (char **)ft_malloc(size * 10 * sizeof(char *));
+	size = 0;
+	while ((*array)[size] != NULL)
+		size++;
+	size_malloc = determine_size(*array);
+	result = (char **)ft_malloc(size_malloc * 10 * sizeof(char *));
 	if (!result)
 	{
 		perror("Failed to allocate memory");

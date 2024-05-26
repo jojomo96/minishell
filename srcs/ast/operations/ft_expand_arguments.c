@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 13:58:51 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:02:47 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_expand_splited_args(char **splited_args)
 		{
 			ft_handle_env_variable(&splited_args[i], in_d_quotes, splited_args[i
 				+ 1] == NULL);
-			// ft_add_quotes(&splited_args[i]);
+			ft_encase_outer_quotes_in_array(&splited_args[i]);
 		}
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes
 			&& splited_args[i][1] == '\0')
