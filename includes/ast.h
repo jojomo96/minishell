@@ -55,6 +55,7 @@ struct							s_ast_node
 {
 	t_ast_node_type				type;
 	int							exit_status;
+	bool						is_subshell;
 	union
 	{
 		t_ast_leaf				leaf;
@@ -73,7 +74,7 @@ t_ast_node						*ft_ast_new_node(const char *input,
 void							ft_ast_free_node(t_ast_node *node);
 
 t_ast_node						**ft_tokenize_input(char *input);
-void							build_ast(t_ast_node **ast, t_ast_node **nodes);
+void							build_ast(t_ast_node **ast, t_ast_node **nodes, bool last_was_subshell);
 int								find_highest_precedence_index(t_ast_node **nodes,
 									int *is_in_parenthesis);
 

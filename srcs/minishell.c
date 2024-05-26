@@ -53,7 +53,7 @@ int	ft_handle_input(char *input)
 	if (nodes[0] == NULL)
 		return (ft_free(nodes), 0);
 	ast = NULL;
-	build_ast(&ast, nodes);
+	build_ast(&ast, nodes, false);
 	if (!ast)
 		return (ft_free(nodes), 0);
 	if (ft_traverse_process_return(ast, AST_TYPE_NODE, &ft_ast_validate))

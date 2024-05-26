@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_leaf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:33:53 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 18:29:00 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:50:21 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	ft_exec_leaf(t_shell *ms, t_ast_node *node)
 	int	builtin;
 
 	builtin = ft_is_builtin(node->u_data.leaf.argv[0]);
-	if (builtin && node->u_data.leaf.fd_out == STDOUT_FILENO)
+	if (builtin == BUILTIN_EXIT && node->is_subshell)
+		ms->exit_code = ft_exec_builtin_fork(ms, node, builtin);
+	else if (builtin && node->u_data.leaf.fd_out == STDOUT_FILENO)
 		ms->exit_code = ft_exec_builtin(ms, builtin, node->u_data.leaf.argv,
 				node->u_data.leaf.fd_out);
 	else if (builtin)
