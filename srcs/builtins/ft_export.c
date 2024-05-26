@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 16:46:35 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:22:54 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ static void	export_putstr(char *str, int fd_out)
 		ft_putchar_fd(*str, fd_out);
 		str++;
 	}
+}
+
+static void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 static void	ft_export_print(char **exp, int fd_out)
@@ -46,7 +59,7 @@ static void	ft_export_print(char **exp, int fd_out)
 		else
 			ft_putstr_fd("\n", fd_out);
 		i++;
-		ft_strarr_free(split);
+		free_split(split);
 	}
 }
 
