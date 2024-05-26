@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:09 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 15:25:51 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:14:24 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	handle_ambigous_redirect(t_ast_node *node)
 {
 	char	*initial_val;
 
-	initial_val = ft_gc_safe(ft_strdup(node->u_data.s_node.right->u_data.leaf.argv[0]));
+	initial_val = ft_gc_safe(ft_strdup(\
+		node->u_data.s_node.right->u_data.leaf.argv[0]));
 	ft_expand_arguments(node->u_data.s_node.right);
 	if (node->u_data.s_node.right->u_data.leaf.argv[1] != NULL)
 	{
@@ -83,8 +84,8 @@ int	ft_exec_redirect_out(t_shell *ms, t_ast_node *node)
 	if (fd == -1)
 		return (red_set_exit_err(node, true, true), 1);
 	if (node->u_data.s_node.left->type == AST_TYPE_LEAF
-		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd && close(fd) !=
-		-1)
+		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd
+		&& close(fd) != -1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_out;
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (close(fd), red_set_exit_err(node, false, true), 1);
@@ -112,8 +113,8 @@ int	ft_exec_append_out(t_shell *ms, t_ast_node *node)
 	if (fd == -1)
 		return (red_set_exit_err(node, true, true), 1);
 	if (node->u_data.s_node.left->type == AST_TYPE_LEAF
-		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd && close(fd) !=
-		-1)
+		&& node->u_data.s_node.left->u_data.leaf.fd_out != fd
+		&& close(fd) != -1)
 		fd = node->u_data.s_node.left->u_data.leaf.fd_out;
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (close(fd), red_set_exit_err(node, false, true), 1);

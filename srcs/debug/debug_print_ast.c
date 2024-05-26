@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:35:57 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 17:37:36 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 18:12:46 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,17 @@
 // 	strcat(graph, "        color = black;\n");
 // 	strcat(graph, "        style = \"filled\";\n");
 // 	strcat(graph, "        fillcolor = \"lightgrey\";\n");
-// 	strcat(graph,
-// 		"        key [label=<<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" cellborder=\"0\">\n");
-// 	strcat(graph,
-// 		"               <tr><td align=\"right\" port=\"i1\"> </td><td bgcolor=\"red\">Left</td></tr>\n");
-// 	strcat(graph,
-// 		"               <tr><td align=\"right\" port=\"i2\"> </td><td bgcolor=\"green\">Right</td></tr>\n");
+//
+//
+// 	strcat(graph, "        key [label=<<table border=\"0\"
+//		cellpadding=\"2\" cellspacing=\"0\" cellborder=\"0\">\n");
+//
+// 	strcat(graph, "               <tr><td align=\"right\"
+//	 port=\"i1\"> </td><td bgcolor=\"red\">Left</td></tr>\n");
+//
+// 	strcat(graph, "               <tr><td align=\"right\" port=\"i2\">
+//   </td><td bgcolor=\"green\">Right</td></tr>\n");
+//
 // 	strcat(graph, "             </table>> shape=none];\n");
 // 	strcat(graph, "        rankdir=LR;\n");
 // 	strcat(graph, "        node [style=invis];\n");
@@ -165,7 +170,10 @@
 // 		exit(EXIT_FAILURE);
 // 	}
 // 	url_encode(encoded_graph, graph);
-// 	printf("\e]8;;https://dreampuf.github.io/GraphvizOnline/#%s\e\\Tree\e]8;;\e\\\n",
+//
+// 	printf("\e]8;;https://dreampuf.github.io/
+//GraphvizOnline/#%s\e\\Tree\e]8;;\e\\\n",
+//
 // 		encoded_graph);
 // 	url = ft_strjoin("https://dreampuf.github.io/GraphvizOnline/#",
 // 			encoded_graph);
