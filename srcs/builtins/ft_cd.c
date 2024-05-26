@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:02:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 12:14:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:27:41 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ static int	ft_change_dir(char *path, t_shell *ms)
 		return (-1);
 	}
 	path = getcwd(NULL, 0);
+	if (!path)
+	{
+		ft_print_error(strerror(errno), "cd", NULL);
+		return (-1);
+	}
 	ret = ft_change_pwd_env(path, ms);
 	if (ret == -1)
 		return (-1);
