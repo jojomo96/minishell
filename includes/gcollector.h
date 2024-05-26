@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gcollector.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:40:38 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 14:09:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:06:58 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,5 @@ void					ft_gc_set(t_memblock *new_head);
 void					ft_gc_add(void *address);
 void					ft_gc_freeall(void);
 void					*ft_gc_safe(void *address);
-
-// DEBUG
-void					ft_gc_debug_print(void);
 
 #endif
