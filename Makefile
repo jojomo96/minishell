@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/26 17:08:00 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/26 17:36:43 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,7 @@ CFILES += debug_printgc.c \
 			debug_message.c \
 			debug_print_node.c \
 			debug_print_strarr.c \
+			debug_print_ast.c \
 
 # SIGNALS
 CFILES += ft_signals.c \
