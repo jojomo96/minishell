@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:02:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 11:58:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:14:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_change_pwd_env(char *new_pwd, t_shell *ms)
 	if (!old_pwd)
 		return (-1);
 	ret = ft_env_set_both(ms, "OLDPWD", old_pwd);
-	free(old_pwd);
+	ft_free(old_pwd);
 	if (ret == -1)
 		return (-1);
 	ret = ft_env_set_both(ms, "PWD", new_pwd);
@@ -66,7 +66,7 @@ static int	ft_cd_to_env(char *key, t_shell *ms)
 		return (1);
 	}
 	ret = ft_change_dir(path, ms);
-	free(path);
+	ft_free(path);
 	if (ret == -1)
 		return (1);
 	return (0);
