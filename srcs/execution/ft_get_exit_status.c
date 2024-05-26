@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wait.c                                          :+:      :+:    :+:   */
+/*   ft_get_exit_status.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 20:18:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 17:09:38 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/05/26 14:54:02 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/05/26 17:24:08 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_wait_node(t_ast_node *node)
+int	ft_get_exit_status(int status)
 {
-	int	status;
-
-	if (node->exit_status != -1)
-		ft_get_shell()->exit_code = node->exit_status;
-	if (node->type == AST_TYPE_LEAF)
+	if (WIFSIGNALED(status) && status == SIGTERM)
 	{
-		if (node->u_data.leaf.pid == -1)
-			return ;
-		waitpid(node->u_data.leaf.pid, &status, 0);
-		node->u_data.leaf.pid = -1;
-		node->exit_status = ft_get_exit_status(status);
-		ft_get_shell()->exit_code = node->exit_status;
+		ft_putstr_fd("Terminated: ", STDERR_FILENO);
+		ft_putnbr_fd(WTERMSIG(status), STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+		return (128 + WTERMSIG(status));
 	}
+	return (WEXITSTATUS(status));
 }

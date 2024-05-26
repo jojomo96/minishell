@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/26 12:00:48 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/26 17:08:00 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,7 @@ CFILES += ft_execute.c \
 			ft_exec_pipe.c \
 			ft_exec_heredoc.c \
 			ft_exec_heredoc_input.c \
+			ft_get_exit_status.c \
 
 # DEBUG
 CFILES += debug_printgc.c \
