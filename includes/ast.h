@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 14:33:38 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:06:52 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ t_ast_node						*ft_ast_new_node(const char *input,
 void							ft_ast_free_node(t_ast_node *node);
 
 t_ast_node						**ft_tokenize_input(char *input);
-void							build_ast(t_ast_node **ast, t_ast_node **nodes, bool last_was_subshell);
-int								find_highest_precedence_index(t_ast_node **nodes,
+void							build_ast(t_ast_node **ast, t_ast_node **nodes,
+									bool last_was_subshell);
+int								find_max_precedence_index(t_ast_node **nodes,
 									int *is_in_parenthesis);
 
 // utils
@@ -103,7 +104,6 @@ bool							is_delimiter(char c);
 void							remove_outer_quotes(char **arr);
 void							ft_handle_env_variable(char **str_ptr,
 									bool in_d_quotes, bool is_last_arg);
-void							ft_add_quotes(char **str);
 void							encase_outer_quotes(char **arr);
 void							ft_encase_outer_quotes_in_array(char **arr);
 char							*ft_dupe_quotes(char *str);

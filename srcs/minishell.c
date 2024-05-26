@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 17:41:56 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:31:24 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ bool	check_quotes(char *input)
 }
 
 // write_ast_to_dot_file(ast);
-int	ft_handle_input(char *input)
+int	ft_handle_input(char *input, t_ast_node *ast)
 {
 	t_ast_node	**nodes;
-	t_ast_node	*ast;
 
 	ft_get_shell()->has_error = false;
 	if (check_quotes(input))
@@ -52,7 +51,6 @@ int	ft_handle_input(char *input)
 		return (1);
 	if (nodes[0] == NULL)
 		return (ft_free(nodes), 0);
-	ast = NULL;
 	build_ast(&ast, nodes, false);
 	if (!ast)
 		return (ft_free(nodes), 0);
@@ -67,8 +65,7 @@ int	ft_handle_input(char *input)
 		return (ft_free(nodes), 1);
 	ft_get_shell()->ast = ast;
 	ft_execute(ft_get_shell(), ast);
-	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
-	return (0);
+	return (fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node), 0);
 }
 
 void	ft_handle_input_loop(t_shell *ms)
@@ -77,6 +74,7 @@ void	ft_handle_input_loop(t_shell *ms)
 	bool	is_first;
 
 	is_first = true;
+	ft_print_logo();
 	while (1)
 	{
 		if (is_first)
@@ -94,7 +92,7 @@ void	ft_handle_input_loop(t_shell *ms)
 			ft_destroy_shell(ms, 1);
 		}
 		ft_history_add(input);
-		ft_handle_input(input);
+		ft_handle_input(input, ft_get_shell()->ast);
 		free(input);
 	}
 }
@@ -109,7 +107,7 @@ void	ft_handle_input_pipe(void)
 	{
 		input = ft_strtrim(line, "\n");
 		free(line);
-		if (ft_handle_input(input))
+		if (ft_handle_input(input, ft_get_shell()->ast))
 			break ;
 		free(input);
 		line = get_next_line(STDIN_FILENO);
