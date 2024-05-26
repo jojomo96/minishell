@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 18:28:09 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 19:02:45 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 19:03:36 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ void	ft_print_logo(void)
 		";;\a\033[0m\n\n", flfische, jmoritz);
 	print_username();
 }
-
