@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:05:31 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 19:03:44 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 17:52:59 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ static bool	ft_remove_surrounding_parenthesis(t_ast_node ***nodes)
 }
 
 void	ft_handle_ast_type_leaf_or_perentisis(t_ast_node **ast,
-		t_ast_node **nodes)
+		t_ast_node **nodes, bool last_was_subshell)
 {
 	if (nodes[0] && nodes[0]->type == AST_TYPE_LEAF)
+	{
 		*ast = nodes[0];
+		nodes[0]->is_subshell = last_was_subshell;
+	}
 	else if (nodes[0] && nodes[0]->type == AST_TYPE_PARANTHESIS)
 	{
 		if (!ft_remove_surrounding_parenthesis(&nodes) || nodes[0] == NULL)
@@ -72,12 +75,12 @@ void	ft_handle_ast_type_leaf_or_perentisis(t_ast_node **ast,
 			ft_print_syntax_error(")");
 			return ;
 		}
-		build_ast(ast, nodes);
+		build_ast(ast, nodes, true);
 	}
 }
 
 // Use this function to build your AST
-void	build_ast(t_ast_node **ast, t_ast_node **nodes)
+void	build_ast(t_ast_node **ast, t_ast_node **nodes, bool last_was_subshell)
 {
 	int			highest_precedence_index;
 	int			is_in_parenthesis;
@@ -91,15 +94,16 @@ void	build_ast(t_ast_node **ast, t_ast_node **nodes)
 	highest_precedence_index = find_highest_precedence_index(nodes,
 			&is_in_parenthesis);
 	if (highest_precedence_index == -1)
-		ft_handle_ast_type_leaf_or_perentisis(ast, nodes);
+		ft_handle_ast_type_leaf_or_perentisis(ast, nodes, last_was_subshell);
 	else
 	{
 		ft_split_nodes(nodes, &left_nodes, &right_nodes,
 			highest_precedence_index);
 		build_ast(&nodes[highest_precedence_index]->u_data.s_node.left,
-			left_nodes);
+			left_nodes, false);
 		build_ast(&nodes[highest_precedence_index]->u_data.s_node.right,
-			right_nodes);
+			right_nodes, false);
 		*ast = nodes[highest_precedence_index];
+		nodes[highest_precedence_index]->is_subshell = last_was_subshell;
 	}
 }

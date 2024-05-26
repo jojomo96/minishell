@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ast_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:29:51 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 21:27:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:46:05 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_ast_node	*ft_ast_new_node(const char *input, size_t start,
 	int					is_operator;
 
 	new_node = (t_ast_node *)ft_malloc(sizeof(t_ast_node));
+	new_node->is_subshell = false;
 	content = (char *)ft_malloc(sizeof(char) * (value_length + 1));
 	ft_strlcpy(content, input + start, value_length + 1);
 	ft_get_operation_type(content, &is_operator, &op_type);
