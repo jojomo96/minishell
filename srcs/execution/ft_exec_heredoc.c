@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:08:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 18:53:01 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 15:01:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	ft_preprocess_heredoc(t_ast_node *node)
 			node->u_data.s_node.right->u_data.leaf.argv[0]);
 	ft_switch_to_heredoc_mode();
 	ms->heredoc_index += 1;
-	file_name = ft_strjoin(ms->heredoc_file, ft_itoa(ms->heredoc_index));
+	file_name = ft_gc_safe(ft_strjoin(ms->heredoc_file,
+				ft_gc_safe(ft_itoa(ms->heredoc_index))));
 	ft_heredoc_read_input(node->u_data.s_node.right->u_data.leaf.argv[0],
 		file_name);
 	node->u_data.s_node.right->u_data.leaf.heredoc_filename = file_name;

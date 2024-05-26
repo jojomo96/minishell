@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:09 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 16:33:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:25:51 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	handle_ambigous_redirect(t_ast_node *node)
 {
 	char	*initial_val;
 
-	initial_val = ft_strdup(node->u_data.s_node.right->u_data.leaf.argv[0]);
+	initial_val = ft_gc_safe(ft_strdup(node->u_data.s_node.right->u_data.leaf.argv[0]));
 	ft_expand_arguments(node->u_data.s_node.right);
 	if (node->u_data.s_node.right->u_data.leaf.argv[1] != NULL)
 	{
@@ -61,10 +61,10 @@ int	handle_ambigous_redirect(t_ast_node *node)
 		node->u_data.s_node.right->exit_status = 1;
 		node->u_data.s_node.left->exit_status = 1;
 		ft_get_shell()->exit_code = 1;
-		free(initial_val);
+		ft_free(initial_val);
 		return (1);
 	}
-	free(initial_val);
+	ft_free(initial_val);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 14:40:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:22:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 	if (new_value != NULL)
 		*str_ptr = new_value;
 	else
-		*str_ptr = ft_strdup("");
+		*str_ptr = ft_gc_safe(ft_strdup(""));
 }
 
 static void	ft_expand_splited_args(char **splited_args)
