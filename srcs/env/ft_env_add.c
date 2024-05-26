@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:18:30 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/06 18:10:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 20:21:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	ft_env_add(char ***env, char *key, char *val)
 	i = 0;
 	while (old_env[i])
 		i++;
-	new_env = ft_calloc(i + 2, sizeof(char *));
-	if (!new_env)
-		return (free(entry), -1);
+	new_env = ft_malloc((i + 2) * sizeof(char *));
 	i = 0;
 	while (old_env[i])
 	{
@@ -43,7 +41,8 @@ int	ft_env_add(char ***env, char *key, char *val)
 		i++;
 	}
 	new_env[i] = entry;
-	free(*env);
+	new_env[i + 1] = NULL;
+	ft_free(*env);
 	*env = new_env;
 	return (0);
 }

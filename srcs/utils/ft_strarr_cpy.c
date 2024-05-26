@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:12:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 18:36:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:27:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ char	**ft_strarr_cpy(char **arr)
 	i = 0;
 	while (arr[i])
 		i++;
-	cpy = ft_calloc(i + 1, sizeof(char *));
+	cpy = ft_malloc((i + 1) * sizeof(char *));
 	if (!cpy)
 		return (NULL);
 	i = 0;
 	while (arr[i])
 	{
-		cpy[i] = ft_strdup(arr[i]);
+		cpy[i] = ft_gc_safe(ft_strdup(arr[i]));
 		if (!cpy[i])
 		{
 			ft_strarr_free(cpy);
