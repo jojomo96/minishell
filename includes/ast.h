@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 17:46:12 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 14:33:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void							ft_handle_env_variable(char **str_ptr,
 									bool in_d_quotes, bool is_last_arg);
 void							ft_add_quotes(char **str);
 void							encase_outer_quotes(char **arr);
-void	ft_encase_outer_quotes_in_array(char **arr);
+void							ft_encase_outer_quotes_in_array(char **arr);
+char							*ft_dupe_quotes(char *str);
 
 #endif

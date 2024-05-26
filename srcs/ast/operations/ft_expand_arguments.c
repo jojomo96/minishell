@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_arguments.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:54:50 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 12:23:49 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 15:22:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	ft_handle_env_variable(char **str_ptr, bool in_d_quotes,
 		return ;
 	str = *str_ptr;
 	if (str[1] == '\0' && !in_d_quotes && !is_last_arg)
-		new_value = ft_strdup("");
+		new_value = ft_gc_safe(ft_strdup(""));
 	else if (str[1] == '\0' && (in_d_quotes || is_last_arg))
-		new_value = ft_strdup("$");
+		new_value = ft_gc_safe(ft_strdup("$"));
 	else if (str[1] == '?')
-		new_value = ft_itoa(ft_get_shell()->exit_code);
+		new_value = ft_gc_safe(ft_itoa(ft_get_shell()->exit_code));
 	else if (str[1] == '/')
-		new_value = ft_strdup("$/");
+		new_value = ft_gc_safe(ft_strdup("$/"));
 	else
 		new_value = ft_fetch_env_var(str + 1);
-	free(str);
+	ft_free(str);
 	if (new_value != NULL)
 		*str_ptr = new_value;
 	else
-		*str_ptr = ft_strdup("");
+		*str_ptr = ft_gc_safe(ft_strdup(""));
 }
 
 static void	ft_expand_splited_args(char **splited_args)
@@ -59,7 +59,7 @@ static void	ft_expand_splited_args(char **splited_args)
 		else if (splited_args[i][0] == '~' && !in_s_quotes && !in_d_quotes
 			&& splited_args[i][1] == '\0')
 		{
-			free(splited_args[i]);
+			ft_free(splited_args[i]);
 			splited_args[i] = ft_fetch_env_var("HOME");
 		}
 		i++;

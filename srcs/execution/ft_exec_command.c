@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 11:19:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:07:08 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	ft_close_fds(t_ast_node *node)
 		close(node->u_data.leaf.fd_out);
 	debug_message_1("Closing file descriptors for command:",
 		node->u_data.leaf.argv[0]);
-	debug_message_1("fd_in:", ft_itoa(node->u_data.leaf.fd_in));
-	debug_message_1("fd_out:", ft_itoa(node->u_data.leaf.fd_out));
 }
 
 // gets the path of the command from the PATH environment variable
@@ -99,12 +97,8 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 {
 	char	*path;
 	pid_t	pid;
-	int		std_out;
-	int		std_in;
 
 	debug_message_1("Executing command:", node->u_data.leaf.argv[0]);
-	std_out = dup(STDOUT_FILENO);
-	std_in = dup(STDIN_FILENO);
 	pid = fork();
 	node->u_data.leaf.pid = pid;
 	if (pid == -1)

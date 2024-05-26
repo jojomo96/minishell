@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 13:41:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:03:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ static void	export_putstr(char *str, int fd_out)
 	}
 }
 
+static void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 static void	ft_export_print(char **exp, int fd_out)
 {
 	int		i;
@@ -34,7 +47,8 @@ static void	ft_export_print(char **exp, int fd_out)
 	{
 		split = ft_split(exp[i], '=');
 		if (!split)
-			return (ft_print_error(strerror(errno), NULL, NULL));
+			return (ft_print_error(strerror(errno), NULL, NULL),
+				ft_destroy_shell(ft_get_shell(), 1), (void)0);
 		ft_putstr_fd("declare -x ", fd_out);
 		ft_putstr_fd(split[0], fd_out);
 		if (split[1])
@@ -46,7 +60,7 @@ static void	ft_export_print(char **exp, int fd_out)
 		else
 			ft_putstr_fd("\n", fd_out);
 		i++;
-		ft_strarr_free(split);
+		free_split(split);
 	}
 }
 

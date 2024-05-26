@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_wildcard.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:07:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/24 14:58:01 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 14:20:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_wildcard_data	*ft_init_wildcard_data(void)
 	data->dir = NULL;
 	data->entry = NULL;
 	data->show_hidden = false;
-	data->result = ft_strdup("");
+	data->result = ft_gc_safe(ft_strdup(""));
 	data->count = 0;
 	return (data);
 }
@@ -30,14 +30,14 @@ static bool	ft_processe_file(char **result, const char *filename,
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(filename, " ");
+	tmp = ft_gc_safe(ft_strjoin(filename, " "));
 	if (ft_match_pattern(filename, pattern))
 	{
-		*result = ft_strjoin(*result, tmp);
-		free(tmp);
+		*result = ft_gc_safe(ft_strjoin(*result, tmp));
+		ft_free(tmp);
 		return (true);
 	}
-	free(tmp);
+	ft_free(tmp);
 	return (false);
 }
 
@@ -67,7 +67,7 @@ void	expand_wildcard(char **pattern, t_wildcard_data *data)
 	}
 	closedir(data->dir);
 	if (data->count == 0)
-		free(data->result);
+		ft_free(data->result);
 	else
 	{
 		ft_free(*pattern);

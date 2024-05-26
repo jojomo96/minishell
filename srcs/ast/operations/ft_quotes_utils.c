@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_shell_destroy.c                                 :+:      :+:    :+:   */
+/*   ft_quotes_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 17:31:53 by flfische         ###   ########.fr       */
+/*   Created: 2024/05/26 14:28:43 by flfische          #+#    #+#             */
+/*   Updated: 2024/05/26 14:32:49 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_destroy_shell(t_shell *ms, int should_exit)
+void	ft_encase_outer_quotes_in_array(char **arr)
 {
-	debug_message("Destroying minishell");
-	if (ms->env)
-		ft_strarr_free(ms->env);
-	if (ms->exp)
-		ft_strarr_free(ms->exp);
-	if (ms->history_file)
-		free(ms->history_file);
-	if (ms->heredoc_file)
-		free(ms->heredoc_file);
-	if (ms->ms_dir)
-		free(ms->ms_dir);
-	ft_gc_freeall();
-	if (should_exit)
-		exit(ms->exit_code);
-	return (ms->exit_code);
+	char	**splited_args;
+
+	splited_args = ft_split_on_delim(*arr, &is_delimiter);
+	encase_outer_quotes(splited_args);
+	*arr = ft_strarr_join(splited_args);
+}
+
+char	*ft_dupe_quotes(char *str)
+{
+	char	*new_str;
+
+	new_str = ft_strdup(str);
+	ft_gc_safe(new_str);
+	return (new_str);
 }
