@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 18:07:26 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 18:31:24 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_handle_input_loop(t_shell *ms)
 	bool	is_first;
 
 	is_first = true;
+	ft_print_logo();
 	while (1)
 	{
 		if (is_first)

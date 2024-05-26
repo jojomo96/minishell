@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:49:17 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 18:14:46 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 18:30:07 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void				ft_remove_all_quotes(char *str);
 char				*ft_strjoin_free(char *s1, char *s2, int to_free);
 t_in_quotes			ft_init_quotes(void);
 void				free_split(char **split);
+void				ft_print_logo(void);
 
 #endif
