@@ -6,7 +6,7 @@
 #    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/25 17:26:11 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/26 12:00:48 by jmoritz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_handle_quotes.c \
 			ft_split_on_space.c \
 			ft_remove_all_quotes.c \
+			ft_strjoin_free.c \
 
 # ERRORS
 CFILES += ft_print_error.c

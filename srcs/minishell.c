@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 19:52:46 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 11:41:21 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	ft_handle_input(char *input)
 	if (g_interrupted)
 		return (ft_free(nodes), 1);
 	ft_get_shell()->ast = ast;
+	write_ast_to_dot_file(ast);
 	ft_execute(ft_get_shell(), ast);
 	fr_traverse_and_process(ast, AST_TYPE_LEAF, &ft_wait_node);
-	write_ast_to_dot_file(ast);
 	return (0);
 }
 
