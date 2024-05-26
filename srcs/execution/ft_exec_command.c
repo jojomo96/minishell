@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 19:51:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:19:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,9 @@ int	ft_exec_command(t_shell *ms, t_ast_node *node)
 	if (pid == 0)
 	{
 		if (node->u_data.leaf.fd_in != STDIN_FILENO)
-		{
 			dup2(node->u_data.leaf.fd_in, STDIN_FILENO);
-			close(std_in);
-		}
 		if (node->u_data.leaf.fd_out != STDOUT_FILENO)
-		{
 			dup2(node->u_data.leaf.fd_out, STDOUT_FILENO);
-			close(std_out);
-		}
 		fr_traverse_and_process(ms->ast, AST_TYPE_LEAF, &ft_close_fds);
 		path = ft_get_path(ms, node->u_data.leaf.argv[0]);
 		if (!path)
