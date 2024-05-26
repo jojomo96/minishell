@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:52:29 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/09 16:06:48 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 17:31:51 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_malloc(size_t size)
 	if (pointer == NULL)
 	{
 		ft_print_error(strerror(errno), 0, 0);
-		ft_gc_freeall();
+		ft_destroy_shell(ft_get_shell(), 1);
 		exit(1);
 	}
 	ft_gc_add(pointer);

@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:03:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 18:01:12 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 18:07:03 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_shell
 	char						*heredoc_file;
 	int							heredoc_index;
 	bool						has_error;
+	char						*ms_dir;
 }								t_shell;
 
 #endif

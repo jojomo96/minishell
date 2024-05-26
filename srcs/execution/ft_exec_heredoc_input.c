@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_heredoc_input.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:57:35 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/25 20:10:04 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 15:40:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void	ft_read_input_from_terminal(char *delim, int fd,
 	{
 		if (g_interrupted)
 			break ;
-		line = readline("> ");
+		line = ft_gc_safe(readline("> "));
 		if (!line || !ft_strcmp(line, delim) || g_interrupted)
 		{
-			free(line);
+			ft_free(line);
 			break ;
 		}
 		ft_remove_newline(line);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 17:59:27 by flfische          #+#    #+#              #
-#    Updated: 2024/05/26 17:36:43 by jmoritz          ###   ########.fr        #
+#    Updated: 2024/05/26 17:41:45 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ CFILES += ft_strarr_cpy.c \
 			ft_split_on_delim.c \
 			ft_strarr_join.c \
 			ft_handle_quotes.c \
+			ft_quotes_utils.c \
 			ft_split_on_space.c \
 			ft_remove_all_quotes.c \
 			ft_strjoin_free.c \

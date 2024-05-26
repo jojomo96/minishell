@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 18:04:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 18:07:26 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	ft_signals_init();
 	ms = ft_get_shell();
-	ms->history_file = ft_strjoin(getcwd(NULL, 0), HISTORY_FILE);
-	ms->heredoc_file = ft_strjoin(getcwd(NULL, 0), HEREDOC_FILE);
+	ms->ms_dir = getcwd(NULL, 0);
+	ms->history_file = ft_strjoin(ms->ms_dir, HISTORY_FILE);
+	ms->heredoc_file = ft_strjoin(ms->ms_dir, HEREDOC_FILE);
 	ms->heredoc_index = -1;
 	ft_history_init();
 	if (argc != 1 || ft_shell_init(ms, envp))

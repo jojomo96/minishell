@@ -6,7 +6,7 @@
 /*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:15:29 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 17:59:53 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 18:06:52 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void							ft_handle_env_variable(char **str_ptr,
 									bool in_d_quotes, bool is_last_arg);
 void							encase_outer_quotes(char **arr);
 void							ft_encase_outer_quotes_in_array(char **arr);
+char							*ft_dupe_quotes(char *str);
 
 #endif
