@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_quotes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:59:01 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 12:28:32 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 14:35:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_delimiter(char c)
 {
-	return (!ft_isalnum(c) && c != '_' && c != '*' );
+	return (!ft_isalnum(c) && c != '_' && c != '*');
 }
 
 void	remove_outer_quotes(char **arr)
@@ -83,29 +83,19 @@ void	encase_outer_quotes(char **arr)
 		if (arr[i][0] == '\'' && !quotes.in_d_quotes)
 		{
 			if (quotes.in_s_quotes)
-				arr[i] = ft_strjoin_free(arr[i], ft_strdup("\""), 1);
+				arr[i] = ft_strjoin_free(arr[i], ft_dupe_quotes("\""), 1);
 			else
-				arr[i] = ft_strjoin_free(ft_strdup("\""), arr[i], 2);
+				arr[i] = ft_strjoin_free(ft_dupe_quotes("\""), arr[i], 2);
 			quotes.in_s_quotes = !quotes.in_s_quotes;
 		}
 		else if (arr[i][0] == '\"' && !quotes.in_s_quotes)
 		{
 			if (quotes.in_d_quotes)
-				arr[i] = ft_strjoin_free(arr[i], ft_strdup("\'"), 1);
+				arr[i] = ft_strjoin_free(arr[i], ft_dupe_quotes("\'"), 1);
 			else
-				arr[i] = ft_strjoin_free(ft_strdup("\'"), arr[i], 2);
+				arr[i] = ft_strjoin_free(ft_dupe_quotes("\'"), arr[i], 2);
 			quotes.in_d_quotes = !quotes.in_d_quotes;
 		}
 		i++;
 	}
 }
-
-void	ft_encase_outer_quotes_in_array(char **arr)
-{
-	char	**splited_args;
-
-	splited_args = ft_split_on_delim(*arr, &is_delimiter);
-	encase_outer_quotes(splited_args);
-	*arr = ft_strarr_join(splited_args);
-}
-
