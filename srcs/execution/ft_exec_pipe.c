@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:28:56 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 21:22:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 10:40:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@ static int	set_right_fd(t_ast_node *node, int fd)
 
 	right = node->u_data.s_node.right;
 	while (right->type != AST_TYPE_LEAF)
-		right = right->u_data.s_node.left;
+	{
+		if (right->u_data.s_node.op_type == OP_AND)
+		{
+			set_right_fd(right, fd);
+			right = right->u_data.s_node.left;
+		}
+		else
+			right = right->u_data.s_node.left;
+	}
 	if (right->u_data.leaf.fd_in == STDIN_FILENO
 		&& !right->u_data.leaf.heredoc_filename)
 	{
@@ -37,6 +45,11 @@ static int	set_left_fd(t_ast_node *node, int fd)
 	{
 		if (left->u_data.s_node.op_type == OP_HEREDOC)
 			left = left->u_data.s_node.left;
+		else if (left->u_data.s_node.op_type == OP_AND)
+		{
+			set_left_fd(left, fd);
+			left = left->u_data.s_node.right;
+		}
 		else
 			left = left->u_data.s_node.right;
 	}
