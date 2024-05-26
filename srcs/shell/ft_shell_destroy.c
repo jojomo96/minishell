@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:32:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/25 10:23:23 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 12:00:21 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_destroy_shell(t_shell *ms, int should_exit)
 	ft_strarr_free(ms->exp);
 	free(ms->history_file);
 	free(ms->heredoc_file);
+	free(ms->ms_dir);
 	ft_gc_freeall();
 	if (should_exit)
 		exit(ms->exit_code);
