@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:15:11 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 13:52:49 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:09:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ static void	ft_handle_split(t_split_state *state, char *str)
 	state->found_exit_code = false;
 	state->buffer[state->buffer_idx] = '\0';
 	if (state->buffer_idx != 0)
-		state->result[state->result_idx++] = ft_strdup(state->buffer);
+		state->result[state->result_idx++] \
+			= ft_gc_safe(ft_strdup(state->buffer));
 	state->buffer_idx = 0;
 	while (str[state->str_idx] == '\'' || str[state->str_idx] == '\"'
 		|| str[state->str_idx] == ' ')
 	{
 		state->buffer[state->buffer_idx] = str[state->str_idx];
 		state->buffer[++state->buffer_idx] = '\0';
-		state->result[state->result_idx++] = ft_strdup(state->buffer);
+		state->result[state->result_idx++] \
+			= ft_gc_safe(ft_strdup(state->buffer));
 		state->buffer_idx = 0;
 		state->str_idx++;
 	}
@@ -67,8 +69,8 @@ bool	is_exit_code(char *str, int idx)
 {
 	if (idx - 1 < 0)
 		return (false);
-	if ((str[idx] == '?' && str[idx - 1] == '$') || (str[idx] == '/' && str[idx
-				- 1] == '$'))
+	if ((str[idx] == '?' && str[idx - 1] == '$')
+		|| (str[idx] == '/' && str[idx - 1] == '$'))
 		return (true);
 	return (false);
 }
@@ -95,7 +97,7 @@ char	**ft_split_on_delim(const char *str, bool(delim)(char c))
 	{
 		state->buffer[state->buffer_idx] = '\0';
 		state->result[state->result_idx++] \
-			= ft_gc_add_safe(ft_strdup(state->buffer));
+			= ft_gc_safe(ft_strdup(state->buffer));
 	}
 	ft_free(state->buffer);
 	state->result[state->result_idx] = NULL;

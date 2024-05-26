@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:33:04 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 12:06:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:09:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	ft_handle_shlvl(char ***env)
 	else
 	{
 		new_shlvl = ft_itoa(shlvl);
-		ft_gc_add_safe(new_shlvl);
+		ft_gc_safe(new_shlvl);
 	}
 	if (new_shlvl == NULL)
 		return (ft_print_error(strerror(errno), NULL, NULL), 1);

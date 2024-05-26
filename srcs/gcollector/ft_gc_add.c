@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:55:34 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 12:10:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:09:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_gc_add(void *address)
 	*head = new_block;
 }
 
-void	*ft_gc_add_safe(void *address)
+void	*ft_gc_safe(void *address)
 {
 	if (address == NULL)
 	{
