@@ -20,6 +20,8 @@ $ make
 $ ./minishell
 ```
 
+![shell screenshot](/.imgs/shell.png)
+
 # Features
 - A Prompt just like Bash with working history
 - History is saved during sessions
@@ -45,3 +47,11 @@ $ ./minishell
 # Debug
 - run `make debug` to enable debug prints
 - run `make tree` to enable outputting of the AST to dot-format
+
+## Example of AST Visulization
+
+```bash
+(echo ok1 && echo ok2) || cd /fail3 && echo ok4 || echo ok5 || echo ok6 | grep ok1 >> out
+```
+
+![Ast Visualization](/.imgs/ast.png)
