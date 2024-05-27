@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:40:57 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 18:13:09 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 20:04:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ static int	ft_export_plus(t_shell *ms, char *entry)
 	old_value = ft_env_get(ms->exp, entry);
 	if (old_value)
 	{
-		value = ft_strjoin(old_value, value);
+		value = ft_gc_safe(ft_strjoin(old_value, value));
 		ft_env_set_both(ms, entry, value);
-		free(value);
+		ft_free(value);
 	}
 	else
 		ft_env_set_both(ms, entry, value);

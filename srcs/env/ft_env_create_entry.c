@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:41:47 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/06 18:09:49 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:26:52 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*ft_env_create_entry(char *key, char *val)
 
 	i = 0;
 	if (val == NULL)
-		return (ft_strdup(key));
-	entry = malloc(ft_strlen(key) + ft_strlen(val) + 2);
+		return (ft_gc_safe(ft_strdup(key)));
+	entry = ft_malloc(ft_strlen(key) + ft_strlen(val) + 2);
 	if (!entry)
 		return (NULL);
 	while (*key)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_heredoc_input.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz < jmoritz@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:57:35 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/05/26 20:28:40 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/05/26 21:38:41 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ static void	ft_read_input_from_pipe(char *delim, int fd, bool expand_arguments)
 	line = get_next_line(STDIN_FILENO);
 	while (line && !g_interrupted)
 	{
+		ft_gc_safe(line);
 		ft_remove_newline(line);
 		if (!ft_strcmp(line, delim))
 		{
-			free(line);
+			ft_free(line);
 			break ;
 		}
 		if (expand_arguments)

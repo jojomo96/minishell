@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:53:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/05/26 14:07:08 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:35:51 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_get_path_from_env(char *path_env, char *arg)
 		free(path);
 		i++;
 	}
-	ft_strarr_free(paths);
+	free_split(paths);
 	return (NULL);
 }
 

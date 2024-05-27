@@ -28,5 +28,7 @@ Thumbs.db
 .venv
 *.svg
 
+readline.supp
+
 .minishell_history
 .minishell_heredoc*

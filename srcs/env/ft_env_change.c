@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:38:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 18:29:11 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:29:35 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_env_change(char ***env, char *key, char *val)
 	i = ft_env_index(arr, key);
 	if (i == -1)
 		return (-1);
-	free(arr[i]);
+	ft_free(arr[i]);
 	arr[i] = ft_env_create_entry(key, val);
 	if (!arr[i])
 		return (-1);

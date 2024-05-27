@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:07:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/26 18:25:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:29:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_env_remove(char ***env, char *key)
 	i = ft_env_index(arr, key);
 	if (i == -1)
 		return (0);
-	free(arr[i]);
+	ft_free(arr[i]);
 	while (arr[i])
 	{
 		arr[i] = arr[i + 1];
